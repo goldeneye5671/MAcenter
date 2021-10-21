@@ -1,7 +1,7 @@
 from email import contentmanager
 from .db import db
 
-class Studio_Reviews(db.Model):
+class Studio_Review(db.Model):
     __tablename__ = 'studio_reviews'
 
     id = db.Column(db.Integer, primary_key=True)
