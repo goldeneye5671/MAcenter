@@ -9,3 +9,9 @@ class Studio_Photo(db.Model):
     studio_id = db.Column(db.Integer, db.ForeignKey("studios.id"), nullable=False)
     studio = db.relationship("Studio", back_populates="studio_photos")
     
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'studio_id': self.studio_id,
+            'photo_url': self.photo_url
+        }

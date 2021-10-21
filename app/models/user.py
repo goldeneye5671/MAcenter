@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    
+    bio = db.Column(db.Text, nullable=False)
     
     rank_id = db.Column(db.Integer, db.ForeignKey("martial_art_ranks.id"),nullable=False)
     rank = db.relationship("Martial_Art_Rank", back_populates="user")
@@ -24,7 +24,9 @@ class User(db.Model, UserMixin):
     studio_id = db.Column(db.Integer, db.ForeignKey("studios.id"), nullable=False)
     studio = db.relationship("Studio", back_populates="user")
 
-    user_photos = db.relationship("user_photos", back_populates="user")
+    user_photos = db.relationship("user_photos", back_populates="owner")
+
+    # owner_of_studio_id = db.relationship("Studio", back_populates="user")
 
     @property
     def password(self):
@@ -40,6 +42,12 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'username': self.username,
-            'email': self.email
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email,
+            'bio': self.bio,
+            'martial_arts': [martial_art.to_dict() for martial_art in self.martial_art],
+            'ranks': [rank.to_dict() for rank in self.rank],
+            'studio_names': [studio.to_dict["name"] for studio in self.studio],
+            'photos': [photo.user_photos.to_dict() for photo in self.user_photos]
         }

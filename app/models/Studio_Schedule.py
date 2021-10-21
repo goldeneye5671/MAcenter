@@ -11,3 +11,12 @@ class Studio_Schedule(db.Model):
 
     studio_id = db.Column(db.Integer, db.ForeignKey("studios.id"), nullable=False)
     studio = db.relationship("Studio", back_populates="studio_schedules")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'class_name': self.class_name,
+            'class_day': self.class_day,
+            'start_time': self.start_time,
+            'end_time': self.end_time
+        }

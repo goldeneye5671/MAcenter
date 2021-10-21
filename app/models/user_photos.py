@@ -8,3 +8,10 @@ class User_Photo(db.Model):
     photo_url = db.Column(db.Text, nullable=False)
 
     user = db.relationship("User", back_populates="user_photos")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'photo_url': self.photo_url
+        }

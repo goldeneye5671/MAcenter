@@ -14,3 +14,12 @@ class Studio_Event(db.Model):
 
     studio_id = db.Column(db.Integer, db.ForeignKey("studios.id"), nullable=False)
     studio = db.relationship("Studio", back_populates="studio_events")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'event_date': self.event_date,
+            'location': self.location
+        }
