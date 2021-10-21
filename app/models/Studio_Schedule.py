@@ -7,5 +7,5 @@ class Studio_Schedule(db.Model):
     studio_id = db.Column(db.Integer, nullable=False)
     class_name = db.Column(db.String(256), nullable=False)
     class_day = db.Column(db.String(9), nullable=False)
-    start_time = db.Column(db.Timestamp, nullable=False)
-    end_time = db.Column(db.Timestamp, nullable=False)
+    start_time = db.Column(db.DateTime, nullable=False)
+    end_time = db.Column(db.DateTime, nullable=False)

@@ -1,7 +1,7 @@
 from unicodedata import name
 from .db import db
 
-class Martial_Art_Rank(db.model):
+class Martial_Art_Rank(db.Model):
     __tablename__ = "martial_art_ranks"
 
     id = db.Column(db.Integer, primary_key=True)
