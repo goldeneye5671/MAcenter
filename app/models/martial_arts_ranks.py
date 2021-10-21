@@ -1,6 +1,3 @@
-from unicodedata import name
-
-from app.models.user import User
 from .db import db
 
 class Martial_Art_Rank(db.Model):
@@ -14,3 +11,11 @@ class Martial_Art_Rank(db.Model):
     martial_art_ranks = db.relationship("Martial_Art", back_populates="ranks")
 
     user = db.relationship("User", back_populates="rank")
+
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'rank_number': self.rank_number
+        }

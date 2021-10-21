@@ -1,8 +1,8 @@
-"""Create Db
+"""Migrations with all connections
 
-Revision ID: eb8f35e1b065
+Revision ID: 0cdabc9de1e4
 Revises: 
-Create Date: 2021-10-21 09:58:44.332985
+Create Date: 2021-10-21 12:21:31.274325
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'eb8f35e1b065'
+revision = '0cdabc9de1e4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -96,6 +96,7 @@ def upgrade():
     sa.Column('last_name', sa.String(length=50), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
+    sa.Column('bio', sa.Text(), nullable=False),
     sa.Column('rank_id', sa.Integer(), nullable=False),
     sa.Column('martial_art_id', sa.Integer(), nullable=False),
     sa.Column('studio_id', sa.Integer(), nullable=False),

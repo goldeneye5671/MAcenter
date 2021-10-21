@@ -24,7 +24,7 @@ class User(db.Model, UserMixin):
     studio_id = db.Column(db.Integer, db.ForeignKey("studios.id"), nullable=False)
     studio = db.relationship("Studio", back_populates="user")
 
-    user_photos = db.relationship("user_photos", back_populates="owner")
+    user_photos = db.relationship("User_Photo", back_populates="user")
 
     # owner_of_studio_id = db.relationship("Studio", back_populates="user")
 
@@ -46,8 +46,8 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'email': self.email,
             'bio': self.bio,
-            'martial_arts': [martial_art.to_dict() for martial_art in self.martial_art],
-            'ranks': [rank.to_dict() for rank in self.rank],
-            'studio_names': [studio.to_dict["name"] for studio in self.studio],
+            'martial_art': {'id': self.martial_art.to_dict()['id'], 'name': self.martial_art.to_dict()['name']},
+            'ranks': self.rank.to_dict(),
+            'studio_names': {'id': self.studio.to_dict()['id'], 'name': self.studio.to_dict()['name']},
             'photos': [photo.user_photos.to_dict() for photo in self.user_photos]
         }

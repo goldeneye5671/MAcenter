@@ -26,12 +26,13 @@ class Studio(db.Model):
     
     studio_reviews = db.relationship("Studio_Review", back_populates="studio")
     studio_events = db.relationship("Studio_Event", back_populates="studio")
-    studio_photos = db.relationship("Studio_Photos", back_populates="studio")
+    studio_photos = db.relationship("Studio_Photo", back_populates="studio")
     studio_schedules = db.relationship("Studio_Schedule", back_populates="studio")
 
 
     def to_dict(self):
         return {
+            'id': self.id,
             'name': self.name,
             'martial_art': self.martial_art.to_dict(),
             'federation_id': self.federation_id,
