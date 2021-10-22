@@ -9,17 +9,17 @@ const REMOVE_USER = 'UserState/REMOVE_USER';
 //action creators
 
 const fetchUser = (user) => ({
-    action: FETCH_USER,
+    type: FETCH_USER,
     user
 });
 
 const fetchAllUsers = (allUsers) => ({
-    action: FETCH_ALL_USERS,
+    type: FETCH_ALL_USERS,
     allUsers
 });
 
 const updateUser = (user) => ({
-    action: UPDATE_USER,
+    type: UPDATE_USER,
     user
 });
 
@@ -34,6 +34,7 @@ export const fetchUserAction = (userId) => async(dispatch) => {
     const response = await fetch(`/api/users/${userId}`);
     if (response.ok){
         const userProfileInfo = await response.json();
+        console.log(userProfileInfo)
         await dispatch(fetchUser(userProfileInfo));
     } else {
         throw new Error("Response given back was not ok")
@@ -48,7 +49,7 @@ const userReducer = (state=initialState, action) => {
     switch (action.type) {
         case FETCH_USER: 
             const addUserState = {...state};
-            addUserState[action.user.id] = addUserState;
+            addUserState[action.user.id] = action.user;
             return addUserState;
         default: return state;
     }
