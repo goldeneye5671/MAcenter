@@ -8,7 +8,8 @@ function User() {
   const users = useSelector(state => state.users);
   const session = useSelector(state => state.session.user);
   const [loaded, setLoaded] = React.useState(false)
-  const { userId }  = useParams();
+  const [edit, setEdit] = React.useState(false)
+  const { userId } = useParams();
   
   const dispatch = useDispatch()
   
@@ -21,17 +22,26 @@ function User() {
       dispatch(fetchUserAction(userId))
       setLoaded(true)
     })();
-  }, [userId, loaded]);
+  }, [userId, loaded, dispatch]);
 
   if (loaded) {
     return (
       <> 
       {
         session ?
-          session?.id === userId ?
-            (<UserProfilePage user={session} />)
+          session?.id === parseInt(userId) ?
+            !edit && (
+                <>
+                <button onClick={e => setEdit(edit => edit=true)}>edit</button>
+                <UserProfilePage user={session} />
+                </>
+            )
           :
-            (<UserProfilePage user={users[userId]} />)
+            (
+              <>
+                <UserProfilePage user={users[userId]} />
+              </>
+            )
         :
           users[userId] ?
           
