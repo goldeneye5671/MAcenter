@@ -9,8 +9,16 @@ const CREATE_USER = 'UserState/CREATE_USER';
 //action creators
 
 const fetchUser = (userId) => ({
-    
-})
+    action: FETCH_USER,
+    userId
+});
+
+const fetchAllUsers = () => ({
+    action: FETCH_ALL_USERS,
+});
+
+
+
 
 //thunks
 
