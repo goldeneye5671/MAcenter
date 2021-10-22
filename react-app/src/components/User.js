@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserAction } from '../store/UserState';
 import { useParams } from 'react-router-dom';
 import UserProfilePage from './UserProfilePage/UserProfilePage';
+import EditUserProfilePage from './UserProfilePage/EditUserProfilePage';
 
 function User() {
   const users = useSelector(state => state.users);
@@ -30,12 +31,20 @@ function User() {
       {
         session ?
           session?.id === parseInt(userId) ?
-            !edit && (
+            !edit ?
+              (
+                  <>
+                  <button onClick={e => setEdit(edit => !edit)}>edit</button>
+                  <UserProfilePage user={session} />
+                  </>
+              )
+            :
+              (
                 <>
-                <button onClick={e => setEdit(edit => edit=true)}>edit</button>
-                <UserProfilePage user={session} />
+                  <button onClick={e => setEdit(edit => !edit)}> Cancel </button>
+                  <EditUserProfilePage user={session}/>
                 </>
-            )
+              )
           :
             (
               <>

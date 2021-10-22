@@ -34,7 +34,6 @@ export const fetchUserAction = (userId) => async(dispatch) => {
     const response = await fetch(`/api/users/${userId}`);
     if (response.ok){
         const userProfileInfo = await response.json();
-        console.log(userProfileInfo)
         await dispatch(fetchUser(userProfileInfo));
     } else {
         //if the userid doesnt exist 

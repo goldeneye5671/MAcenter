@@ -2,10 +2,12 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import userReducer from './UserState';
 import thunk from 'redux-thunk';
 import session from './session'
+import martialArtsReducer from './MartialArtState';
 
 const rootReducer = combineReducers({
   session,
-  users: userReducer
+  users: userReducer,
+  martialArts: martialArtsReducer
 });
 
 
