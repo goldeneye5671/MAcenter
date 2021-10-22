@@ -37,7 +37,8 @@ export const fetchUserAction = (userId) => async(dispatch) => {
         console.log(userProfileInfo)
         await dispatch(fetchUser(userProfileInfo));
     } else {
-        throw new Error("Response given back was not ok")
+        //if the userid doesnt exist 
+        return {};
     }
     
 }

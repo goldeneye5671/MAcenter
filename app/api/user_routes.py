@@ -17,7 +17,10 @@ def users():
 def user(id):
     if (request.method == "GET"):
         user = User.query.get(id)
-        return user.to_dict()
+        if user:
+            return user.to_dict()
+        else:
+            return {}
     elif (request.method == "PUT"):
         user = User.query.get(id)
         if (user):
