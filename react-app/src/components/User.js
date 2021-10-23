@@ -16,11 +16,12 @@ function User() {
   
   useEffect(() => {
     if (!userId) {
-      return;
       setLoaded(true);
+      return;
     }
     (async () => {
-      dispatch(fetchUserAction(userId))
+      dispatch(fetchUserAction(parseInt(userId)))
+      console.log(Object.keys(users).length);
       setLoaded(true)
     })();
   }, [userId, loaded, dispatch]);
@@ -30,7 +31,7 @@ function User() {
       <> 
       {
         session ?
-          session?.id === parseInt(userId) ?
+           (session?.id === users[userId]?.id) ?
             !edit ?
               (
                   <>

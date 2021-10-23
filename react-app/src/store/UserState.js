@@ -30,6 +30,14 @@ const removeUser = (userId) => ({
 
 //thunks
 
+export const fetchAllUsersAction = () => async(dispatch) => {
+    const response = await fetch(`/api/users/`)
+    if (response.ok) {
+        const allUserProfileInfo = await response.json();
+        await dispatch(allUserProfileInfo)
+    }
+}
+
 export const fetchUserAction = (userId) => async(dispatch) => {
     const response = await fetch(`/api/users/${userId}`);
     if (response.ok){
@@ -37,11 +45,24 @@ export const fetchUserAction = (userId) => async(dispatch) => {
         await dispatch(fetchUser(userProfileInfo));
     } else {
         //if the userid doesnt exist 
-        return {};
     }
-    
 }
 
+export const updateUserAction = (userId, user) => async(dispatch) => {
+    const response = await fetch(`/api/users/${userId}`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        }
+    );
+    if (response.ok) {
+        const updatedUser = await response.json();
+        dispatch(updateUser(updatedUser));
+    }
+}
 
 //reducer
 const initialState = {}
@@ -51,6 +72,16 @@ const userReducer = (state=initialState, action) => {
             const addUserState = {...state};
             addUserState[action.user.id] = action.user;
             return addUserState;
+        case FETCH_ALL_USERS:
+            const addAllUsersState = {...state};
+            for (let user of action.allUsers) {
+                addAllUsersState[[user.id]] = user;
+            }
+            return addAllUsersState;
+        case UPDATE_USER:
+            const updateUserState = {...state};
+            updateUser[[action.user.id]] = action.user;
+            return updateUserState;
         default: return state;
     }
 }

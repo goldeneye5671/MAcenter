@@ -9,7 +9,7 @@ user_routes = Blueprint('users', __name__)
 # @login_required
 def users():
     users = User.query.all()
-    return {'users': [user.to_dict() for user in users]}
+    return jsonify([user.to_dict() for user in users])
 
 
 @user_routes.route('/<int:id>', methods=["GET", "PUT", "DELETE"])
@@ -19,8 +19,6 @@ def user(id):
         user = User.query.get(id)
         if user:
             return user.to_dict()
-        else:
-            return {}
     elif (request.method == "PUT"):
         user = User.query.get(id)
         if (user):

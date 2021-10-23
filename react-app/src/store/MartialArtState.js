@@ -53,7 +53,6 @@ const martialArtsReducer = (state=initialState, action) => {
         case FETCH_ALL_MARTIAL_ARTS: 
             const currentState = {...state};
             for (let art of action.allMartialArts) {
-                console.log(art)
                 currentState[[art.id]] = art;
             }
             return currentState;

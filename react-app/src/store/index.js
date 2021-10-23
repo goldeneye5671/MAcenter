@@ -3,11 +3,13 @@ import userReducer from './UserState';
 import thunk from 'redux-thunk';
 import session from './session'
 import martialArtsReducer from './MartialArtState';
+import studiosReducer from './StudioState';
 
 const rootReducer = combineReducers({
   session,
   users: userReducer,
-  martialArts: martialArtsReducer
+  martialArts: martialArtsReducer,
+  studios: studiosReducer
 });
 
 
