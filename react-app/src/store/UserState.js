@@ -43,8 +43,6 @@ export const fetchUserAction = (userId) => async(dispatch) => {
     if (response.ok){
         const userProfileInfo = await response.json();
         await dispatch(fetchUser(userProfileInfo));
-    } else {
-        //if the userid doesnt exist 
     }
 }
 

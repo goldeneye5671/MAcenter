@@ -23,12 +23,12 @@ export default function EditUserProfilePage({user}) {
     function submit(e) {
         e.preventDefault();
         const errors = [];
-        if (!first_name) {errors.push("Please provide a value to the field")};
-        if (!last_name) {errors.push("Please provide a value to the field")};
-        if (!email) {errors.push("Please provide a value to the field")};
-        if (!martial_art) {errors.push("Please provide a value to the field")};
-        if (!rank) {errors.push("Please provide a value to the field")};
-        if (!studio) {errors.push("Please provide a value to the field")};
+        if (!first_name) {errors.push("Please provide a value to the first name field")};
+        if (!last_name) {errors.push("Please provide a value to the last name field")};
+        if (!email) {errors.push("Please provide a value to the email field")};
+        if (!martial_art) {errors.push("Please provide a value to the password field")};
+        if (!rank) {errors.push("Please provide a value to the rank field")};
+        if (!studio) {errors.push("Please provide a value to the studio field")};
         if (errors.length) {
             setErrors(errors);
         } else {
@@ -57,7 +57,13 @@ export default function EditUserProfilePage({user}) {
     return (
         <form>
             <h1>edit form</h1>
-
+            {errors.length > 0 &&
+                <>
+                    <ul>
+                        {errors.map((error, index) => <li key={index}>{error}</li>)}
+                    </ul>
+                </>
+            }
             <label>First Name</label>
             <input value={first_name} onChange={e => set_first_name(e.target.value)}></input>
 

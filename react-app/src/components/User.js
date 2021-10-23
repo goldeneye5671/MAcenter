@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserAction } from '../store/UserState';
 import { useParams } from 'react-router-dom';
@@ -21,7 +21,6 @@ function User() {
     }
     (async () => {
       dispatch(fetchUserAction(parseInt(userId)))
-      console.log(Object.keys(users).length);
       setLoaded(true)
     })();
   }, [userId, loaded, dispatch]);
@@ -30,9 +29,8 @@ function User() {
     return (
       <> 
       {
-        session ?
-           (session?.id === users[userId]?.id) ?
-            !edit ?
+          session && session.id === parseInt(userId) ?
+              !edit ?
               (
                   <>
                   <button onClick={e => setEdit(edit => !edit)}>edit</button>
@@ -47,17 +45,13 @@ function User() {
                 </>
               )
           :
-            (
-              <>
+            users[userId] ?
+            <>
+                <h1>Hello</h1>
                 <UserProfilePage user={users[userId]} />
-              </>
-            )
-        :
-          users[userId] ?
-          
-            (<UserProfilePage user={users[userId]} />)
-          :
-            (<h1>User does not exist</h1>)
+            </>
+            :
+            <h1>User not found</h1>
       }
       </>
     );
