@@ -1,6 +1,7 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from .studio_join import studio_joins
 
 
 class User(db.Model, UserMixin):
@@ -25,13 +26,14 @@ class User(db.Model, UserMixin):
     martial_art_id = db.Column(db.Integer, db.ForeignKey("martial_arts.id"), nullable=False)
     martial_art = db.relationship("Martial_Art", back_populates="user")
 
+    owned_studio = db.relationship("Studio", back_populates="owner")
 
-    studio_id = db.Column(db.Integer, db.ForeignKey("studios.id"), nullable=False)
-    studio = db.relationship("Studio", back_populates="user")
+    studios = db.relationship("Studio", secondary=studio_joins, back_populates="users")
+
+
 
     user_photos = db.relationship("User_Photo", back_populates="user")
 
-    owner_of_studio_id = db.relationship("Studio", back_populates="user")
 
     @property
     def password(self):

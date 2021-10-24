@@ -1,6 +1,5 @@
-from ctypes import addressof
-from unicodedata import name
 from .db import db
+from .studio_join import studio_joins
 
 class Studio(db.Model):
 
@@ -16,14 +15,15 @@ class Studio(db.Model):
     studio_bio = db.Column(db.Text, nullable=False)
 
 
-    owner_id = db.Column(db.Integer, db.ForeignKey("users.id"),nullable=False)
-    owner = db.relationship("User", back_populates="owner_of_studio_id")
-    
     martial_art_id = db.Column(db.Integer, db.ForeignKey("martial_arts.id"), nullable=False)
     martial_art = db.relationship("Martial_Art", back_populates="studio")
-
-    user = db.relationship("User", back_populates="studio")
     
+    owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    owner = db.relationship("User", back_populates="owned_studio")
+
+    users = db.relationship("User", secondary=studio_joins, back_populates="studios")
+
+
     studio_reviews = db.relationship("Studio_Review", back_populates="studio")
     studio_events = db.relationship("Studio_Event", back_populates="studio")
     studio_photos = db.relationship("Studio_Photo", back_populates="studio")

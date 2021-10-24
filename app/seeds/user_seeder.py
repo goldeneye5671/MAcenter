@@ -12,7 +12,6 @@ def seed_users():
         bio = "I like to break things!",
         rank_id = 1,
         martial_art_id = 1,
-        studio_id = 1
     )
 
     u2 = User(
@@ -23,7 +22,6 @@ def seed_users():
         bio = "I like to break things!",
         rank_id = 1,
         martial_art_id = 1,
-        studio_id = 1
     )
 
     u3 = User(
@@ -34,7 +32,6 @@ def seed_users():
         bio = "I like to break things!",
         rank_id = 1,
         martial_art_id = 1,
-        studio_id = 1
     )
 
     u4 = User(
@@ -45,7 +42,6 @@ def seed_users():
         bio = "I like to break things!",
         rank_id = 1,
         martial_art_id = 1,
-        studio_id = 1
     )
 
     u5 = User(
@@ -56,7 +52,6 @@ def seed_users():
         bio = "I like to break things!",
         rank_id = 1,
         martial_art_id = 1,
-        studio_id = 1
     )
 
     u6 = User(
@@ -67,7 +62,6 @@ def seed_users():
         bio = "I like to break things!",
         rank_id = 1,
         martial_art_id = 1,
-        studio_id = 1
     )
 
     u7 = User(
@@ -78,7 +72,6 @@ def seed_users():
         bio = "I like to break things!",
         rank_id = 1,
         martial_art_id = 1,
-        studio_id = 1
     )
 
     u8 = User(
@@ -89,7 +82,6 @@ def seed_users():
         bio = "I like to break things!",
         rank_id = 1,
         martial_art_id = 1,
-        studio_id = 1
     )
 
     db.session.add(u1)
