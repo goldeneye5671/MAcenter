@@ -23,7 +23,7 @@ function User() {
       dispatch(fetchUserAction(parseInt(userId)))
       setLoaded(true)
     })();
-  }, [userId, loaded, dispatch]);
+  }, [userId, loaded, edit, dispatch]);
 
   if (loaded) {
     return (
@@ -34,14 +34,14 @@ function User() {
               (
                   <>
                   <button onClick={e => setEdit(edit => !edit)}>edit</button>
-                  <UserProfilePage user={session} />
+                  <UserProfilePage user={users[userId]} />
                   </>
               )
             :
               (
                 <>
                   <button onClick={e => setEdit(edit => !edit)}> Cancel </button>
-                  <EditUserProfilePage user={session}/>
+                  <EditUserProfilePage user={users[userId]} setEdit={setEdit}/>
                 </>
               )
           :

@@ -4,7 +4,7 @@ import { fetchAllMartialArtsAction } from '../../store/MartialArtState';
 import { fetchAllStudiosAction } from '../../store/StudioState';
 import { updateUserAction } from '../../store/UserState';
 
-export default function EditUserProfilePage({user}) {
+export default function EditUserProfilePage({user, setEdit}) {
     const [loaded, setLoaded] = React.useState(false)
     const [errors, setErrors] = React.useState([])
     const [first_name, set_first_name] = React.useState(user.first_name);
@@ -29,7 +29,8 @@ export default function EditUserProfilePage({user}) {
         if (!martial_art) {errors.push("Please provide a value to the password field")};
         if (!rank) {errors.push("Please provide a value to the rank field")};
         if (!studio) {errors.push("Please provide a value to the studio field")};
-        if (errors.length) {
+        if (!bio) {errors.push("Please provide a value to the bio field")}
+        if (errors.length > 0) {
             setErrors(errors);
         } else {
             const updatedUserInfo = {
@@ -42,6 +43,7 @@ export default function EditUserProfilePage({user}) {
                 studio_id: studio
             }
             dispatch(updateUserAction(user.id, updatedUserInfo))
+            setEdit(edit => !edit);
         }
     }
 
