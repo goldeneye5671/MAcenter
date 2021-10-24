@@ -55,7 +55,7 @@ class User(db.Model, UserMixin):
             'bio': self.bio,
             'martial_art': {'id': self.martial_art.to_dict()['id'], 'name': self.martial_art.to_dict()['name']},
             'ranks': self.rank.to_dict(),
-            'studio_names': {'id': self.studio.to_dict()['id'], 'name': self.studio.to_dict()['name']},
+            'studio_names': [{'id': studio.to_dict()['id'], 'name': studio.to_dict()['name']} for studio in self.studios],
             'photos': [photo.user_photos.to_dict() for photo in self.user_photos]
         }
         
