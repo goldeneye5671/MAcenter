@@ -29,5 +29,6 @@ class Martial_Art(db.Model):
             'art_type': self.art_type,
             'bio': self.bio,
             'difficulty_level': self.difficulty_level,
-            'region': self.region
+            'region': self.region,
+            'ranks': [rank.to_dict() for rank in self.ranks]
         }

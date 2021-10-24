@@ -1,37 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchUserAction } from '../store/UserState';
 import { useParams } from 'react-router-dom';
+import UserProfilePage from './UserProfilePage/UserProfilePage';
+import EditUserProfilePage from './UserProfilePage/EditUserProfilePage';
 
 function User() {
-  const [user, setUser] = useState({});
-  const { userId }  = useParams();
-
+  const users = useSelector(state => state.users);
+  const session = useSelector(state => state.session.user);
+  const [loaded, setLoaded] = React.useState(false)
+  const [edit, setEdit] = React.useState(false)
+  const { userId } = useParams();
+  
+  const dispatch = useDispatch()
+  
   useEffect(() => {
     if (!userId) {
+      setLoaded(true);
       return;
     }
     (async () => {
-      const response = await fetch(`/api/users/${userId}`);
-      const user = await response.json();
-      setUser(user);
+      dispatch(fetchUserAction(parseInt(userId)))
+      setLoaded(true)
     })();
-  }, [userId]);
+  }, [userId, loaded, edit, dispatch]);
 
-  if (!user) {
+  if (loaded) {
+    return (
+      <> 
+      {
+          session && session.id === parseInt(userId) ?
+              !edit ?
+              (
+                  <>
+                  <button onClick={e => setEdit(edit => !edit)}>edit</button>
+                  <UserProfilePage user={users[userId]} />
+                  </>
+              )
+            :
+              (
+                <>
+                  <button onClick={e => setEdit(edit => !edit)}> Cancel </button>
+                  <EditUserProfilePage user={users[userId]} setEdit={setEdit}/>
+                </>
+              )
+          :
+            users[userId] ?
+            <>
+                <h1>Hello</h1>
+                <UserProfilePage user={users[userId]} />
+            </>
+            :
+            <h1>User not found</h1>
+      }
+      </>
+    );
+  } else {
     return null;
   }
-
-  return (
-    <ul>
-      <li>
-        <strong>User Id</strong> {userId}
-      </li>
-      <li>
-        <strong>Username</strong> {user.username}
-      </li>
-      <li>
-        <strong>Email</strong> {user.email}
-      </li>
-    </ul>
-  );
 }
 export default User;

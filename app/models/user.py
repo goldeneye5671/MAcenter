@@ -7,10 +7,15 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
+
     first_name = db.Column(db.String(50), nullable=False)
+
     last_name = db.Column(db.String(50), nullable=False)
+    
     email = db.Column(db.String(255), nullable=False, unique=True)
+    
     hashed_password = db.Column(db.String(255), nullable=False)
+    
     bio = db.Column(db.Text, nullable=False)
     
     rank_id = db.Column(db.Integer, db.ForeignKey("martial_art_ranks.id"),nullable=False)
