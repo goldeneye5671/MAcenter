@@ -19,6 +19,8 @@ def user(id):
         user = User.query.get(id)
         if user:
             return user.to_dict()
+        else:
+            return jsonify({"message": "User not found"}), 404
     elif (request.method == "PUT"):
         user = User.query.get(id)
         if (user):
