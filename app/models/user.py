@@ -56,3 +56,4 @@ class User(db.Model, UserMixin):
             'studio_names': {'id': self.studio.to_dict()['id'], 'name': self.studio.to_dict()['name']},
             'photos': [photo.user_photos.to_dict() for photo in self.user_photos]
         }
+        
