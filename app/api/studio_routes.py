@@ -31,5 +31,6 @@ def all_studios():
     return jsonify([studio.to_dict() for studio in studios])
 
 @studio_routes.route('/<int:id>', methods=['GET', 'PUT', 'DELETE'])
-def one_studio():
-    pass
+def one_studio(id):
+    studio = Studio.query.get(id)
+    return studio.to_dict()

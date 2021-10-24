@@ -31,7 +31,7 @@ class User(db.Model, UserMixin):
 
     user_photos = db.relationship("User_Photo", back_populates="user")
 
-    # owner_of_studio_id = db.relationship("Studio", back_populates="user")
+    owner_of_studio_id = db.relationship("Studio", back_populates="user")
 
     @property
     def password(self):

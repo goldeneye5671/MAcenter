@@ -44,6 +44,13 @@ export const fetchAllStudiosAction = () => async(dispatch) => {
     }
 }
 
+export const fetchOneStudioAction = (studioId) => async(dispatch) => {
+    const response = await fetch(`/api/studios/${studioId}`);
+    if (response.ok) {
+        const oneStudio = await response.json();
+        await dispatch(fetchStudio(oneStudio));
+    }
+}
 //reducer
 
 const initialState = {};
@@ -55,7 +62,10 @@ const studiosReducer = (state=initialState, action) => {
                 currentState[[studio.id]] = studio;
             }
             return currentState;
-
+        case FETCH_STUDIO:
+            const nextState = {...state};
+            nextState[[action.studio.id]] = action.studio;
+            return currentState;
         default: return state;
     }
 }

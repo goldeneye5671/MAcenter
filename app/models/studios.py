@@ -16,8 +16,8 @@ class Studio(db.Model):
     studio_bio = db.Column(db.Text, nullable=False)
 
 
-    # owner_id = db.Column(db.Integer, db.ForeignKey("users.id"),nullable=False)
-    # owner = db.relationship("User", back_populates="owner_of_studio_id", uselist=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey("users.id"),nullable=False)
+    owner = db.relationship("User", back_populates="owner_of_studio_id")
     
     martial_art_id = db.Column(db.Integer, db.ForeignKey("martial_arts.id"), nullable=False)
     martial_art = db.relationship("Martial_Art", back_populates="studio")
