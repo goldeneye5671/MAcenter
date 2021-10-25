@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User, db
+from app.models import User, db, Studio
 
 user_routes = Blueprint('users', __name__)
 
@@ -25,13 +25,15 @@ def user(id):
         user = User.query.get(id)
         if (user):
             body = request.json
+            studio = Studio.query.get(body.get("studio_id", 0))
             user.first_name = body.get("first_name", user.first_name)
             user.last_name = body.get("last_name", user.last_name)
             user.email = body.get("email", user.email)
             user.bio = body.get("bio", user.bio)
             user.rank_id = body.get("rank_id", user.rank_id)
             user.martial_art_id = body.get("martial_art_id", user.martial_art_id)
-            user.studio_id = body.get("studio_id", user.studio_id)
+            # user.studio_id = body.get("studio_id", user.studio_id)
+            studios=[studio]
             db.session.commit()
             return user.to_dict()
         else:

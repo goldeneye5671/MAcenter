@@ -15,6 +15,7 @@ function User() {
   const dispatch = useDispatch()
   
   useEffect(() => {
+
     if (!userId) {
       setLoaded(true);
       return;

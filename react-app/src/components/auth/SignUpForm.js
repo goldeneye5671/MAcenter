@@ -7,20 +7,20 @@ import { fetchAllStudiosAction } from '../../store/StudioState';
 import { updateUserAction } from '../../store/UserState';
 
 export default function SignUpForm() {
+  const martialArts = useSelector(state => state.martialArts)
+  const studios = useSelector(state => state.studios);
+
     const [loaded, setLoaded] = React.useState(false)
     const [errors, setErrors] = React.useState([])
     const [first_name, set_first_name] = React.useState('');
     const [last_name, set_last_name] = React.useState('');
     const [email, set_email] = React.useState('');
     const [bio, setBio] = React.useState('');
-    const [martial_art, set_martial_art] = React.useState(1);
-    const [rank, set_rank] = React.useState(1);
-    const [studio, set_studio] = React.useState(1);
+    const [martial_art, set_martial_art] = React.useState();
+    const [rank, set_rank] = React.useState();
+    const [studio, set_studio] = React.useState();
     const [password, set_password] = React.useState('');
     const [verify_password, set_verify_password] = React.useState('');
-
-    const martialArts = useSelector(state => state.martialArts)
-    const studios = useSelector(state => state.studios);
 
     const dispatch = useDispatch()
 
@@ -67,7 +67,7 @@ export default function SignUpForm() {
             setLoaded(true);
 
         })()
-    }, [dispatch, errors])
+    }, [dispatch, errors, loaded])
 
     return (
         <form>
@@ -99,17 +99,20 @@ export default function SignUpForm() {
 
             <label>Martial Art</label>
             <select value={martial_art} onChange={e => set_martial_art(e.target.value)}>
+                <option>Select Martial Art</option>
                 {Object.values(martialArts).map( art => (<option value={art.id}>{art.name}</option>)
                 )}
             </select>
 
             <label>Rank</label>
             <select value={rank} onChange={e => set_rank(e.target.value)}>
+              <option>Select Rank</option>
                 {martialArts[martial_art]?.ranks?.map(rank => (<option value={rank.id}>{rank.name} Rank number {rank.number}</option>))}
             </select>
 
             <label>Studio</label>
             <select value={studio}>
+                <option>Select Studio</option>
                 {Object.values(studios).map(studio => (<option value={studio.id}>{studio.name}</option>))}
             </select>
             <button onClick={submit}>Sign Up!</button>

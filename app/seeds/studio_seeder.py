@@ -8,7 +8,8 @@ def seed_studios():
         phone_contact=610,
         email_contact="test@test.net",
         martial_art_id=1,
-        studio_bio="This is a test bio"
+        studio_bio="This is a test bio",
+        owner_id=1
     )
 
     db.session.add(demo_studio)

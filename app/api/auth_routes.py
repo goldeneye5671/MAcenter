@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, studio_join, Studio
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -63,6 +63,8 @@ def sign_up():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         userData = request.json
+        studio = Studio.query.filter(Studio.id == userData['studio_id']).first()
+        print("User data: ", userData)
         user = User(
             first_name=userData['first_name'],
             last_name=userData['last_name'],
@@ -70,8 +72,9 @@ def sign_up():
             bio=userData['bio'],
             martial_art_id = userData['martial_art_id'],
             rank_id = userData['rank_id'],
-            studio_id = userData['studio_id'],
-            password=userData['password']
+            # studio_id = userData['studio_id'],
+            password=userData['password'],
+            studios=[studio]
         )
         db.session.add(user)
         db.session.commit()

@@ -13,7 +13,7 @@ export default function EditUserProfilePage({user, setEdit}) {
     const [bio, setBio] = React.useState(user.bio);
     const [martial_art, set_martial_art] = React.useState(user.martial_art.id);
     const [rank, set_rank] = React.useState(user.ranks.id);
-    const [studio, set_studio] = React.useState(user.studio_names.id);
+    const [studio, set_studio] = React.useState(user.studio_names['0'].id);
 
     const martialArts = useSelector(state => state.martialArts)
     const studios = useSelector(state => state.studios);
@@ -52,9 +52,8 @@ export default function EditUserProfilePage({user, setEdit}) {
             dispatch(fetchAllMartialArtsAction());
             dispatch(fetchAllStudiosAction())
             setLoaded(true);
-
         })()
-    }, [dispatch, errors])
+    }, [loaded, dispatch, errors])
 
     return (
         <form>
