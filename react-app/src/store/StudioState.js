@@ -65,7 +65,7 @@ const studiosReducer = (state=initialState, action) => {
         case FETCH_STUDIO:
             const nextState = {...state};
             nextState[[action.studio.id]] = action.studio;
-            return currentState;
+            return nextState;
         default: return state;
     }
 }
