@@ -18,5 +18,5 @@ class Studio_Schedule(db.Model):
             'class_name': self.class_name,
             'class_day': self.class_day,
             'start_time': self.start_time,
-            'end_time': self.end_time
+            'end_time': self.end_time,
         }
