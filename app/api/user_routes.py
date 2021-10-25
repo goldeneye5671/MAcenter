@@ -25,7 +25,6 @@ def user(id):
         user = User.query.get(id)
         if (user):
             body = request.json
-            print("Request: ", body)
             studio = Studio.query.get(body.get("studio_id", 0))
             user.first_name = body.get("first_name", user.first_name)
             user.last_name = body.get("last_name", user.last_name)

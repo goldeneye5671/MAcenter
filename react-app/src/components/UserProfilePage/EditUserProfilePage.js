@@ -52,9 +52,8 @@ export default function EditUserProfilePage({user, setEdit}) {
             dispatch(fetchAllMartialArtsAction());
             dispatch(fetchAllStudiosAction())
             setLoaded(true);
-
         })()
-    }, [dispatch, errors])
+    }, [loaded, dispatch, errors])
 
     return (
         <form>
