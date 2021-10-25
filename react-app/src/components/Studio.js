@@ -32,7 +32,7 @@ export default function Studio() {
                         (
                             <>
                                 <button onClick={e => setEdit(!edit)}> edit </button>
-                                <StudioProfilePage />
+                                <StudioProfilePage owner={true}/>
                             </>
                         )
                         :
@@ -46,7 +46,7 @@ export default function Studio() {
                     (
                         <>
                             <h1>A studio</h1>
-                            <StudioProfilePage />
+                            <StudioProfilePage owner={false} />
                         </>
                     )
                 :

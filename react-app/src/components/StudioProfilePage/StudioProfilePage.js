@@ -9,7 +9,7 @@ import { useParams } from 'react-router'
 import { fetchOneStudioAction } from '../../store/StudioState'
 import StudioClassSchedules from './StudioClassSchedules'
 
-export default function StudioProfilePage() {
+export default function StudioProfilePage({owner}) {
     const [loaded, setLoaded] = React.useState(false);
     const [edit, setEdit] = React.useState(false);
     const dispatch = useDispatch();
