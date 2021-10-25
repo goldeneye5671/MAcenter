@@ -7,6 +7,7 @@ import StudioReviews from './StudioProfilePage/StudioReviews'
 import Map from './StudioProfilePage/Map'
 import { useParams } from 'react-router'
 import { fetchOneStudioAction } from '../store/StudioState'
+import StudioClassSchedules from './StudioProfilePage/StudioClassSchedules'
 
 export default function Studio() {
     const [loaded, setLoaded] = React.useState(false);
@@ -35,7 +36,8 @@ export default function Studio() {
                     <StudioReviews studio={studios[studioId]}/>
                 </div>
                 <div>
-                    <Map />
+                    <Map studio={studios[studioId]}/>
+                    <StudioClassSchedules studio={studios[studioId]} />
                     {/* <Address /> */}
                 </div>
             </div>

@@ -6,7 +6,7 @@ export default function StudioReviews({studio}) {
         <>
         <h4>Reviews</h4>
         <div>
-            {studio.studio_reviews.map(studio_review => <StudioReviewContainer studio_review={studio_review}/>)}
+            {studio?.studio_reviews?.map(studio_review => <StudioReviewContainer studio_review={studio_review}/>)}
         </div>
         </>
     )
