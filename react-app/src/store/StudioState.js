@@ -141,6 +141,7 @@ export const updateStudioEventAction = (eventId, event) => async(dispatch) => {
     });
     if (response.ok) {
         const updatedStudioEvent = await response.json();
+        console.log("returned from API", updatedStudioEvent)
         await dispatch(updateStudioEvent(updatedStudioEvent));
     }
 }

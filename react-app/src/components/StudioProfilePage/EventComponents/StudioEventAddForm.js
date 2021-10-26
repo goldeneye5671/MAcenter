@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { createStudioEventAction } from '../../store/StudioState';
+import { createStudioEventAction } from '../../../store/StudioState';
 
 export default function StudioEventAddForm({setEdit, edit, studio_id}) {
     const [title, set_title] = React.useState('');

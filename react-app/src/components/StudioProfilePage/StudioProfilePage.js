@@ -1,14 +1,14 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import BasicStudioInfo from './BasicStudioInfo'
-import Bio from './Bio'
-import StudioEvents from './StudioEvents'
-import StudioReviews from './StudioReviews'
-import Map from './Map'
+import BasicStudioInfo from './StudioInfo/BasicStudioInfo'
+import Bio from './StudioInfo/Bio'
+import StudioEvents from './EventComponents/StudioEvents'
+import StudioReviews from './ReviewComponents/StudioReviews'
+import Map from './StudioInfo/Map'
 import { useParams } from 'react-router'
 import { fetchOneStudioAction } from '../../store/StudioState'
-import StudioClassSchedules from './StudioClassSchedules'
-import StudioEventAddForm from './StudioEventAddForm'
+import StudioClassSchedules from './ClassComponents/StudioClassSchedules'
+import StudioEventAddForm from './EventComponents/StudioEventAddForm'
 
 export default function StudioProfilePage({owner}) {
     const [loaded, setLoaded] = React.useState(false);
@@ -35,7 +35,7 @@ export default function StudioProfilePage({owner}) {
                                 <button onClick={e => setEdit(!edit)}> Add Event </button>
                         )
                     }
-                    <StudioEvents studio={studio} owner={owner}/>
+                    <StudioEvents owner={owner}/>
                     <StudioReviews studio={studio}/>
                 </div>
                 <div>

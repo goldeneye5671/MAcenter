@@ -2,10 +2,9 @@ import React from 'react'
 
 import { useParams } from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
+import { removeStudioEventAction } from '../../../store/StudioState';
 
-export default function StudioEventContainer({studio_event_id}) {
-    const {studioId} = useParams();
-    const studio_event = useSelector(state => state.studios[studioId].studio_events[studio_event_id]);
+export default function StudioEventContainer({studio_event}) {
 
     return (
         <div>

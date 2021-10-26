@@ -11,6 +11,7 @@ from .api.auth_routes import auth_routes
 from .api.martial_art_routes import martial_art_routes
 from .api.studio_routes import studio_routes
 from .api.studio_events_routes import studio_events_routes
+from .api.studio_reviews_routes import studio_reviews_routes
 
 from .seeds import seed_commands
 
@@ -37,6 +38,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(martial_art_routes, url_prefix='/api/martial-arts')
 app.register_blueprint(studio_routes, url_prefix='/api/studios')
 app.register_blueprint(studio_events_routes, url_prefix='/api/studio-events')
+app.register_blueprint(studio_reviews_routes, url_prefix='/api/studio-reviews')
 db.init_app(app)
 Migrate(app, db)
 

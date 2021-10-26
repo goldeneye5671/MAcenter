@@ -4,6 +4,7 @@ class Studio_Review(db.Model):
     __tablename__ = 'studio_reviews'
 
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"),nullable=False)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
@@ -14,6 +15,7 @@ class Studio_Review(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'user_id': self.user_id,
             'title': self.title,
             'content': self.content,
             'rating': self.rating
