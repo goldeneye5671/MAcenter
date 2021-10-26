@@ -6,7 +6,13 @@ export default function StudioReviews({studio}) {
         <>
         <h4>Reviews</h4>
         <div>
-            {studio?.studio_reviews?.map(studio_review => <StudioReviewContainer studio_review={studio_review}/>)}
+            {
+                Object.keys(studio?.studio_reviews).length ?
+                    Object.values(studio?.studio_reviews).map(studio_review => <StudioReviewContainer studio_review={studio_review}/>)
+                :
+                    (<p>no reviews</p>)
+
+            }
         </div>
         </>
     )

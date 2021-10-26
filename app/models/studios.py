@@ -41,8 +41,8 @@ class Studio(db.Model):
             'owner': self.owner.to_dict(),
             'phone_contact': self.phone_contact,
             'email_contact': self.email_contact,
-            'studio_events': [event.to_dict() for event in self.studio_events],
-            'studio_schedule': [schedule.to_dict() for schedule in self.studio_schedules],
-            'studio_photos': [photo.to_dict() for photo in self.studio_photos],
-            'studio_reviews': [review.to_dict() for review in self.studio_reviews]
+            'studio_events': {event.to_dict()['id']: event.to_dict() for event in self.studio_events},
+            'studio_schedule': {schedule.to_dict()['id']: schedule.to_dict() for schedule in self.studio_schedules},
+            'studio_photos': {photo.to_dict()['id']: photo.to_dict() for photo in self.studio_photos},
+            'studio_reviews': {review.to_dict()['id']: review.to_dict() for review in self.studio_reviews}
         }

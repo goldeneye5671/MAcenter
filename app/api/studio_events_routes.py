@@ -45,10 +45,9 @@ def update_event(id):
             return {}
     elif (request.method == "DELETE"):
         studio_event = Studio_Event.query.get(id)
-        print("Found studio event: ", studio_event.to_dict())
         if (studio_event):
             Studio_Event.query.filter(Studio_Event.id == id).delete()
             db.session.commit()
-            return {"message": "delete successful"}
+            return studio_event.to_dict()
         else:
             return {"message": "delete failed. No such event exists"}

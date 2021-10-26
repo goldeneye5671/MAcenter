@@ -21,5 +21,6 @@ class Studio_Event(db.Model):
             'title': self.title,
             'description': self.description,
             'event_date': self.event_date,
-            'location': self.location
+            'location': self.location,
+            'studio_id': self.studio_id
         }
