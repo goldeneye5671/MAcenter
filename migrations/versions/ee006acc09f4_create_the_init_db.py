@@ -1,8 +1,8 @@
-"""empty message
+"""Create the init db
 
-Revision ID: 1ead395cf2ed
+Revision ID: ee006acc09f4
 Revises: 
-Create Date: 2021-10-23 22:17:01.585120
+Create Date: 2021-10-26 09:58:50.006557
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1ead395cf2ed'
+revision = 'ee006acc09f4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -103,11 +103,13 @@ def upgrade():
     )
     op.create_table('studio_reviews',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
     sa.Column('content', sa.Text(), nullable=False),
     sa.Column('rating', sa.Integer(), nullable=False),
     sa.Column('studio_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['studio_id'], ['studios.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('studio_schedules',

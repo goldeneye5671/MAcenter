@@ -18,7 +18,6 @@
 #                 ]
 #             }
 
-import json
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import Studio, db, Studio_Event, Studio_Review, Studio_Schedule, Studio_Photo

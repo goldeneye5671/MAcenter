@@ -1,43 +1,46 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import BasicStudioInfo from './BasicStudioInfo'
-import Bio from './Bio'
-import StudioEvents from './StudioEvents'
-import StudioReviews from './StudioReviews'
-import Map from './Map'
+import BasicStudioInfo from './StudioInfo/BasicStudioInfo'
+import Bio from './StudioInfo/Bio'
+import StudioEvents from './EventComponents/StudioEvents'
+import StudioReviews from './ReviewComponents/StudioReviews'
+import Map from './StudioInfo/Map'
 import { useParams } from 'react-router'
 import { fetchOneStudioAction } from '../../store/StudioState'
-import StudioClassSchedules from './StudioClassSchedules'
+import StudioClassSchedules from './ClassComponents/StudioClassSchedules'
+import StudioEventAddForm from './EventComponents/StudioEventAddForm'
 
-export default function StudioProfilePage() {
+export default function StudioProfilePage({owner}) {
     const [loaded, setLoaded] = React.useState(false);
     const [edit, setEdit] = React.useState(false);
+    const {studioId} = useParams();
+    const studio = useSelector(state => state.studios[studioId]);
     const dispatch = useDispatch();
-    const {studioId} = useParams()
-    const studios = useSelector(state => state.studios)
     React.useEffect(() => {
-        if (!studioId) {
-          setLoaded(true);
-          return;
-        }
-        (async () => {
-          dispatch(fetchOneStudioAction(parseInt(studioId)));
-          setLoaded(true)
-        })();
-      }, [studioId, loaded, edit, dispatch]);
+        dispatch(fetchOneStudioAction(studioId))
+    }, [edit, loaded]);
 
     return (
         <div>
-            <BasicStudioInfo studio={studios[studioId]}/>
+            <BasicStudioInfo studio={studio}/>
             <div>
                 <div>
-                    <Bio studio={studios[studioId]}/>
-                    <StudioEvents studio={studios[studioId]}/>
-                    <StudioReviews studio={studios[studioId]}/>
+                    <Bio studio={studio}/>
+                    {
+                        owner && (
+                            edit ? (
+                                <StudioEventAddForm edit={edit} setEdit={setEdit} studio_id={studio.id}/>
+                                )
+                                :
+                                <button onClick={e => setEdit(!edit)}> Add Event </button>
+                        )
+                    }
+                    <StudioEvents owner={owner}/>
+                    <StudioReviews studio={studio}/>
                 </div>
                 <div>
-                    <Map studio={studios[studioId]}/>
-                    <StudioClassSchedules studio={studios[studioId]} />
+                    <Map studio={studio} owner={owner}/>
+                    <StudioClassSchedules studio={studio} />
                     {/* <Address /> */}
                 </div>
             </div>

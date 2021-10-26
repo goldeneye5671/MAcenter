@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 import { fetchOneStudioAction } from '../store/StudioState'
 import StudioProfilePage from './StudioProfilePage/StudioProfilePage'
 import StudioUpdate from './StudioProfilePage/StudioUpdate'
@@ -10,7 +10,7 @@ export default function Studio() {
     const [edit, setEdit] = React.useState(false);
     const dispatch = useDispatch();
     const {studioId} = useParams();
-    const studios = useSelector(state => state.studios);
+    const studio = useSelector(state => state.studios[studioId]);
     const session = useSelector(state => state.session.user);
     React.useEffect(() => {
         if (!studioId) {
@@ -18,7 +18,7 @@ export default function Studio() {
           return;
         }
         (async () => {
-          dispatch(fetchOneStudioAction(parseInt(studioId)));
+          await dispatch(fetchOneStudioAction(parseInt(studioId)));
           setLoaded(true)
         })();
       }, [studioId, loaded, edit, dispatch]);
@@ -26,27 +26,27 @@ export default function Studio() {
     return (
         <>
             {
-                studios[studioId] ?
-                    session && session.id === studios[studioId]?.owner?.id ?
+                studio ?
+                    session && session.id === studio?.owner?.id ?
                         !edit ? 
                         (
                             <>
                                 <button onClick={e => setEdit(!edit)}> edit </button>
-                                <StudioProfilePage />
+                                <StudioProfilePage owner={true} studio={studio}/>
                             </>
                         )
                         :
                         (
                         <>
                             <button onClick={e => setEdit(!edit)}>cancel</button>
-                            <StudioUpdate studio={studios[studioId]} setEdit={setEdit}/>
+                            <StudioUpdate studio={studio} setEdit={setEdit}/>
                         </>
                         )
                     :
                     (
                         <>
                             <h1>A studio</h1>
-                            <StudioProfilePage />
+                            <StudioProfilePage owner={false} studio={studio} />
                         </>
                     )
                 :

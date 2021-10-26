@@ -5,43 +5,50 @@ def seed_reviews():
         title="test review",
         content="This is a test review",
         rating=5,
-        studio_id=1
+        studio_id=1,
+        user_id=1,
     )    
     r2 = Studio_Review(
         title="test review",
         content="This is a test review",
         rating=5,
-        studio_id=1
+        studio_id=1,
+        user_id=1,
     )    
     r3 = Studio_Review(
         title="test review",
         content="This is a test review",
         rating=5,
-        studio_id=1
+        studio_id=1,
+        user_id=1,
     )    
     r4 = Studio_Review(
         title="test review",
         content="This is a test review",
         rating=5,
-        studio_id=1
+        studio_id=1,
+        user_id=1,
     )    
     r5 = Studio_Review(
         title="test review",
         content="This is a test review",
         rating=5,
-        studio_id=1
+        studio_id=1,
+        user_id=1,
     )    
     r6 = Studio_Review(
         title="test review",
         content="This is a test review",
         rating=5,
-        studio_id=1
+        studio_id=1,
+        user_id=1,
     )    
     r7 = Studio_Review(
         title="test review",
         content="This is a test review",
         rating=5,
-        studio_id=1
+        studio_id=1,
+        user_id=1,
     )    
 
     db.session.add(r1)
