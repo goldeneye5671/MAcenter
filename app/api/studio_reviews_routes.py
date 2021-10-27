@@ -13,7 +13,7 @@ studio_reviews_routes = Blueprint("studio_reviews", __name__)
 
 #create and delete need to be done at the same route
 
-@studio_reviews_routes.route('/', methods={"POST"})
+@studio_reviews_routes.route('/', methods=["POST"])
 def create_studio_review():
     if (request.method == "POST"):
         body = request.json

@@ -3,52 +3,52 @@ from datetime import datetime
 
 def seed_studio_schedules():
     ss1 = Studio_Schedule(
-        class_name="Test Class",
-        class_day="Monday",
-        start_time=datetime.now(),
-        end_time=datetime.now(),
+        schedule_name='test_schedule_1',
+        schedule_description='this is a test',
+        start_timestamp=datetime.now(),
+        end_timestamp=datetime.now(),
         studio_id=1
     )
     ss2 = Studio_Schedule(
-        class_name="Test Class",
-        class_day="Monday",
-        start_time=datetime.now(),
-        end_time=datetime.now(),
+        schedule_name='test_schedule_2',
+        schedule_description='this is a test',
+        start_timestamp=datetime.now(),
+        end_timestamp=datetime.now(),
         studio_id=1
     )
     ss3 = Studio_Schedule(
-        class_name="Test Class",
-        class_day="Monday",
-        start_time=datetime.now(),
-        end_time=datetime.now(),
+        schedule_name='test_schedule_3',
+        schedule_description='this is a test',
+        start_timestamp=datetime.now(),
+        end_timestamp=datetime.now(),
         studio_id=1
     )
     ss4 = Studio_Schedule(
-        class_name="Test Class",
-        class_day="Monday",
-        start_time=datetime.now(),
-        end_time=datetime.now(),
+        schedule_name='test_schedule_4',
+        schedule_description='this is a test',
+        start_timestamp=datetime.now(),
+        end_timestamp=datetime.now(),
         studio_id=1
     )
     ss5 = Studio_Schedule(
-        class_name="Test Class",
-        class_day="Monday",
-        start_time=datetime.now(),
-        end_time=datetime.now(),
+        schedule_name='test_schedule_5',
+        schedule_description='this is a test',
+        start_timestamp=datetime.now(),
+        end_timestamp=datetime.now(),
         studio_id=1
     )
     ss6 = Studio_Schedule(
-        class_name="Test Class",
-        class_day="Monday",
-        start_time=datetime.now(),
-        end_time=datetime.now(),
+        schedule_name='test_schedule_6',
+        schedule_description='this is a test',
+        start_timestamp=datetime.now(),
+        end_timestamp=datetime.now(),
         studio_id=1
     )
     ss7 = Studio_Schedule(
-        class_name="Test Class",
-        class_day="Monday",
-        start_time=datetime.now(),
-        end_time=datetime.now(),
+        schedule_name='test_schedule_7',
+        schedule_description='this is a test',
+        start_timestamp=datetime.now(),
+        end_timestamp=datetime.now(),
         studio_id=1
     )
 
