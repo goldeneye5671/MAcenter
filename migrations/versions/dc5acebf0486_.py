@@ -1,8 +1,8 @@
-"""Create the init db
+"""empty message
 
-Revision ID: ee006acc09f4
+Revision ID: dc5acebf0486
 Revises: 
-Create Date: 2021-10-26 09:58:50.006557
+Create Date: 2021-10-27 13:52:01.404369
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ee006acc09f4'
+revision = 'dc5acebf0486'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -114,10 +114,11 @@ def upgrade():
     )
     op.create_table('studio_schedules',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('class_name', sa.String(length=256), nullable=False),
-    sa.Column('class_day', sa.String(length=9), nullable=False),
-    sa.Column('start_time', sa.DateTime(), nullable=False),
-    sa.Column('end_time', sa.DateTime(), nullable=False),
+    sa.Column('schedule_name', sa.String(length=256), nullable=False),
+    sa.Column('schedule_description', sa.Text(), nullable=False),
+    sa.Column('start_time', sa.String(length=5), nullable=False),
+    sa.Column('end_time', sa.String(length=5), nullable=False),
+    sa.Column('week_day', sa.String(length=9), nullable=False),
     sa.Column('studio_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['studio_id'], ['studios.id'], ),
     sa.PrimaryKeyConstraint('id')

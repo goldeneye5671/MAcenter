@@ -7,7 +7,7 @@ import StudioReviews from './ReviewComponents/StudioReviews'
 import Map from './StudioInfo/Map'
 import { useParams } from 'react-router'
 import { fetchOneStudioAction } from '../../store/StudioState'
-import StudioClassSchedules from './ClassComponents/StudioClassSchedules'
+import StudioClassSchedules from './ScheduleComponents/StudioClassSchedules'
 import StudioEventAddForm from './EventComponents/StudioEventAddForm'
 
 export default function StudioProfilePage({owner}) {
@@ -40,7 +40,7 @@ export default function StudioProfilePage({owner}) {
                 </div>
                 <div>
                     <Map studio={studio} owner={owner}/>
-                    <StudioClassSchedules studio={studio} />
+                    <StudioClassSchedules studio={studio} owner={owner} />
                     {/* <Address /> */}
                 </div>
             </div>
