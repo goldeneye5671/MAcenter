@@ -289,7 +289,7 @@ export const removeStudioScheduleAction = (studioSchedule) => async(dispatch) =>
     );
     if (response.ok) {
         const studioSchedule = await response.json();
-        await dispatch(deleteStudioSchedule(studioSchedule);)
+        await dispatch(deleteStudioSchedule(studioSchedule));
     }
 }
 
@@ -347,7 +347,7 @@ const studiosReducer = (state=initialState, action) => {
         case UPDATE_STUDIO_SCHEDULE:
             const updateStudioSchedule = {...state};
             updateStudioSchedule[[action.studioSchedule.studio_id]].studio_schedules[[action.studioState.id]] = action.studioSchedule;
-            return updatedStudioSchedule;
+            return updateStudioSchedule;
         case REMOVE_STUDIO_SCHEDULE:
             const removeStudioSchedule = {...state};
             delete removeStudioSchedule[[action.studioSchedule.studio_id]].studio_schedules[[action.studioState.id]];
