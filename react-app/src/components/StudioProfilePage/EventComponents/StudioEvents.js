@@ -9,22 +9,11 @@ export default function StudioEvents({owner}) {
     const dispatch = useDispatch()
     const {studioId} = useParams();
     const studio = useSelector(state => state.studios[studioId])
-
-    const [edit, setEdit] = React.useState(false)
-
-    function test(){
-        console.log("edit", edit);
-    }
-
-    function deleteEvent(e, studio_event) {
-        e.preventDefault();
-        dispatch(removeStudioEventAction(studio_event))
-        dispatch(fetchOneStudioAction(studioId))
-    }
+    const studioEvents = useSelector(state => Object.values(state.studios[studioId].studio_events))
 
     React.useState(() => {
         dispatch(fetchOneStudioAction(studioId))
-    }, [dispatch, studioId, edit])
+    }, [dispatch, studioId])
     
     
     return (
@@ -34,26 +23,15 @@ export default function StudioEvents({owner}) {
                 Object.keys(studio?.studio_events).length ? 
                     owner ?
                         
-                        Object.values(studio?.studio_events).map(studio_event => {
-                            return( 
-                                    !edit ? 
-                                    (
-                                        <>
-                                            <StudioEventContainer studio_event={studio_event}/>
-                                            <button onClick={e => setEdit(!edit)}>edit</button>
-                                            <button onClick={e => deleteEvent(e, studio_event)}>delete</button>
-                                        </>
-                                    )
-                                    :
-                                    (
-                                        <>
-                                            <StudioEventEditForm studio_event={studio_event} edit={edit} setEdit={setEdit}/>
-                                        </>
-                                    )
-                                )
+                        studioEvents.map(studio_event => {
+                            return(   
+                                <>
+                                    <StudioEventContainer owner={owner} studio_event={studio_event}/>
+                                </>        
+                            )
                         })
                     :
-                        Object.values(studio?.studio_events).map(studio_event => <StudioEventContainer studio_event={studio_event}/>)
+                        studioEvents.map(studio_event => <StudioEventContainer owner={owner} studio_event={studio_event}/>)
                 :
                     (<p>no events</p>)
             }
