@@ -32,6 +32,7 @@ def update_delete_studio_schedule(id):
             studio_schedule.start_timestamp=body.get("start_timestamp", studio_schedule.start_timestamp)
             studio_schedule.end_timestamp=body.get("end_timestamp", studio_schedule.end_timestamp)
             db.session.commit()
+            return studio_schedule.to_dict()
     if (request.method == "DELETE"):
         studio_schedule = Studio_Schedule.query.get(id)
         if (studio_schedule):

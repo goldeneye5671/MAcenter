@@ -5,8 +5,8 @@ export default function StudioClassSchedule({schedule}) {
         <div>
             <h4>{schedule.class_name}</h4>
             <ul>
-                <li>Start Time: {schedule.start_time}</li>
-                <li>End Time: {schedule.end_time}</li>
+                <li>Start Time: {schedule.start_timestamp}</li>
+                <li>End Time: {schedule.end_timestamp}</li>
             </ul>
         </div>
     )

@@ -13,6 +13,10 @@ const CREATE_STUDIO_REVIEW = 'StudioState/CREATE_STUDIO_REVIEW';
 const UPDATE_STUDIO_REVIEW = 'StudioState/UPDATE_STUDIO_REVIEW';
 const REMOVE_STUDIO_REVIEW = 'StudioState/REMOVE_STUDIO_REVIEW';
 
+const CREATE_STUDIO_SCHEDULE = 'StudioState/CREATE_STUDIO_SCHEDULE';
+const UPDATE_STUDIO_SCHEDULE = 'StudioState/UPDATE_STUDIO_SCHEDULE';
+const REMOVE_STUDIO_SCHEDULE = 'StudioState/REMOVE_STUDIO_SCHEDULE';
+
 //action creators
 
 const createStudio = (studio) => (
@@ -89,6 +93,25 @@ const removeStudioReview = (studioReview) => (
     {
         type: REMOVE_STUDIO_REVIEW,
         studioReview   
+    }
+)
+
+const createStudioSchedule = (studioSchedule) => (
+    {
+        type: CREATE_STUDIO_SCHEDULE,
+        studioSchedule
+    }
+)
+const updateStudioSchedule = (studioSchedule) => (
+    {
+        type: UPDATE_STUDIO_SCHEDULE,
+        studioSchedule
+    }
+)
+const deleteStudioSchedule = (studioSchedule) => (
+    {
+        type: REMOVE_STUDIO_SCHEDULE,
+        studioSchedule
     }
 )
 
@@ -222,6 +245,54 @@ export const removeStudioReviewAction = (review) => async(dispatch) => {
     }
 }
 
+export const createStudioScheduleAction = (studioSchedule) => async(dispatch) => {
+    const response = await fetch(`/api/studio-schedules/${studioSchedule.id}`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(studioSchedule)
+        }
+    );
+    if (response.ok) {
+        const studioSchedule = await response.json();
+        await dispatch(createStudioSchedule(studioSchedule));
+    }
+}
+
+export const updateStudioScheduleAction = (studioSchedule) => async(dispatch) => {
+    const response = await fetch(`/api/studio-schedules/${studioSchedule.id}`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(studioSchedule)
+        }
+    );
+    if (response.ok) {
+        const studioSchedule = await response.json();
+        await dispatch(updateStudioSchedule(studioSchedule))
+    }
+}
+
+export const removeStudioScheduleAction = (studioSchedule) => async(dispatch) => {
+    const response = await fetch(`/api/studio-schedules/${studioSchedule.id}`,
+        {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(studioSchedule)
+        }
+    );
+    if (response.ok) {
+        const studioSchedule = await response.json();
+        await dispatch(deleteStudioSchedule(studioSchedule);)
+    }
+}
+
 //reducer
 
 const initialState = {};
@@ -259,7 +330,6 @@ const studiosReducer = (state=initialState, action) => {
             return removeStudioEventState;
         case CREATE_STUDIO_REVIEW:
             const createStudioReviewState = {...state};
-            console.log(action)
             createStudioReviewState[[action.studioReview.studio_id]].studio_reviews[[action.studioReview.id]] = action.studioReview
             return createStudioReviewState;
         case UPDATE_STUDIO_REVIEW:
@@ -270,6 +340,18 @@ const studiosReducer = (state=initialState, action) => {
             const removeStudioReviewState = {...state};
             delete removeStudioReviewState[[action.studioReview.studio_id]].studio_reviews[[action.studioReview.id]];
             return removeStudioReviewState;
+        case CREATE_STUDIO_SCHEDULE:
+            const createStudioSchedule = {...state};
+            createStudioSchedule[[action.studioSchedule.studio_id]].studio_schedules[[action.studioSchedule.id]] = action.studioSchedule;
+            return createStudioSchedule;
+        case UPDATE_STUDIO_SCHEDULE:
+            const updateStudioSchedule = {...state};
+            updateStudioSchedule[[action.studioSchedule.studio_id]].studio_schedules[[action.studioState.id]] = action.studioSchedule;
+            return updatedStudioSchedule;
+        case REMOVE_STUDIO_SCHEDULE:
+            const removeStudioSchedule = {...state};
+            delete removeStudioSchedule[[action.studioSchedule.studio_id]].studio_schedules[[action.studioState.id]];
+            return removeStudioSchedule;
         default: return state;
     }
 }
