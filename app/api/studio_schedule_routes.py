@@ -12,8 +12,9 @@ def create_studio_schedule():
             schedule_name=body['schedule_name'],
             schedule_description=body['schedule_description'],
             studio_id=body['studio_id'],
-            start_timestamp=body['start_timestamp'],
-            end_timestamp=body['end_timestamp']
+            week_day=body['week_day'],
+            start_time=body['start_time'],
+            end_time=body['end_time']
         )
         db.session.add(studio_schedule)
         db.session.commit()
@@ -29,8 +30,9 @@ def update_delete_studio_schedule(id):
             studio_schedule.schedule_name=body.get("schedule_name", studio_schedule.schedule_name)
             studio_schedule.schedule_description=body.get("schedule_description", studio_schedule.schedule_description)
             studio_schedule.studio_id=body.get("studio_id", studio_schedule.studio_id)
-            studio_schedule.start_timestamp=body.get("start_timestamp", studio_schedule.start_timestamp)
-            studio_schedule.end_timestamp=body.get("end_timestamp", studio_schedule.end_timestamp)
+            studio_schedule.week_day=body.get("week_day", studio_schedule.week_day)
+            studio_schedule.start_time=body.get("start_time", studio_schedule.start_time)
+            studio_schedule.end_time=body.get("end_time", studio_schedule.end_time)
             db.session.commit()
             return studio_schedule.to_dict()
     if (request.method == "DELETE"):

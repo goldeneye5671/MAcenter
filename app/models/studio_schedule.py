@@ -6,8 +6,9 @@ class Studio_Schedule(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     schedule_name = db.Column(db.String(256), nullable=False)
     schedule_description = db.Column(db.Text, nullable=False)
-    start_timestamp = db.Column(db.DateTime, nullable=False)
-    end_timestamp = db.Column(db.DateTime, nullable=False)
+    start_time = db.Column(db.String(5), nullable=False)
+    end_time = db.Column(db.String(5), nullable=False)
+    week_day = db.Column(db.String(9), nullable=False)
 
     studio_id = db.Column(db.Integer, db.ForeignKey("studios.id"), nullable=False)
     studio = db.relationship("Studio", back_populates="studio_schedules")
@@ -18,6 +19,7 @@ class Studio_Schedule(db.Model):
             'schedule_name': self.schedule_name,
             'schedule_description': self.schedule_description,
             'studio_id': self.studio_id,
-            'start_timestamp': self.start_timestamp,
-            'end_timestamp': self.end_timestamp
+            'week_day': self.week_day,
+            'start_time': self.start_time,
+            'end_time': self.end_time
         }

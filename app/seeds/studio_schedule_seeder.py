@@ -5,50 +5,57 @@ def seed_studio_schedules():
     ss1 = Studio_Schedule(
         schedule_name='test_schedule_1',
         schedule_description='this is a test',
-        start_timestamp=datetime.now(),
-        end_timestamp=datetime.now(),
+        week_day="Tuesday",
+        start_time='19:00',
+        end_time='20:00',
         studio_id=1
     )
     ss2 = Studio_Schedule(
         schedule_name='test_schedule_2',
         schedule_description='this is a test',
-        start_timestamp=datetime.now(),
-        end_timestamp=datetime.now(),
+        week_day="Tuesday",
+        start_time='19:00',
+        end_time='20:00',
         studio_id=1
     )
     ss3 = Studio_Schedule(
         schedule_name='test_schedule_3',
         schedule_description='this is a test',
-        start_timestamp=datetime.now(),
-        end_timestamp=datetime.now(),
+        week_day="Tuesday",
+        start_time='19:00',
+        end_time='20:00',
         studio_id=1
     )
     ss4 = Studio_Schedule(
         schedule_name='test_schedule_4',
         schedule_description='this is a test',
-        start_timestamp=datetime.now(),
-        end_timestamp=datetime.now(),
+        week_day="Tuesday",
+        start_time='19:00',
+        end_time='20:00',
         studio_id=1
     )
     ss5 = Studio_Schedule(
         schedule_name='test_schedule_5',
         schedule_description='this is a test',
-        start_timestamp=datetime.now(),
-        end_timestamp=datetime.now(),
+        week_day="Tuesday",
+        start_time='19:00',
+        end_time='20:00',
         studio_id=1
     )
     ss6 = Studio_Schedule(
         schedule_name='test_schedule_6',
         schedule_description='this is a test',
-        start_timestamp=datetime.now(),
-        end_timestamp=datetime.now(),
+        week_day="Tuesday",
+        start_time='19:00',
+        end_time='20:00',
         studio_id=1
     )
     ss7 = Studio_Schedule(
         schedule_name='test_schedule_7',
         schedule_description='this is a test',
-        start_timestamp=datetime.now(),
-        end_timestamp=datetime.now(),
+        week_day="Tuesday",
+        start_time='19:00',
+        end_time='20:00',
         studio_id=1
     )
 
