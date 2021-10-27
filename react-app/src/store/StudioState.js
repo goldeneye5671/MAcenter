@@ -9,6 +9,10 @@ const CREATE_STUDIO_EVENT = 'StudioState/CREATE_STUDIO_EVENT';
 const UPDATE_STUDIO_EVENT = 'StudioState/UPDATE_STUDIO_EVENT';
 const REMOVE_STUDIO_EVENT = 'StudioState/REMOVE_STUDIO_EVENT';
 
+const CREATE_STUDIO_REVIEW = 'StudioState/CREATE_STUDIO_REVIEW';
+const UPDATE_STUDIO_REVIEW = 'StudioState/UPDATE_STUDIO_REVIEW';
+const REMOVE_STUDIO_REVIEW = 'StudioState/REMOVE_STUDIO_REVIEW';
+
 //action creators
 
 const createStudio = (studio) => (
@@ -64,6 +68,27 @@ const removeStudioEvent = (studioEvent) => (
     {
         type: REMOVE_STUDIO_EVENT,
         studioEvent
+    }
+)
+
+const createStudioReview = (studioReview) => (
+    {
+        type: CREATE_STUDIO_REVIEW,
+        studioReview
+    }
+)
+
+const updateStudioReview = (studioReview) => (
+    {
+        type: UPDATE_STUDIO_REVIEW,
+        studioReview
+    }
+)
+
+const removeStudioReview = (studioReview) => (
+    {
+        type: REMOVE_STUDIO_REVIEW,
+        studioReview   
     }
 )
 
@@ -141,7 +166,6 @@ export const updateStudioEventAction = (eventId, event) => async(dispatch) => {
     });
     if (response.ok) {
         const updatedStudioEvent = await response.json();
-        console.log("returned from API", updatedStudioEvent)
         await dispatch(updateStudioEvent(updatedStudioEvent));
     }
 }
@@ -152,6 +176,49 @@ export const removeStudioEventAction = (event) => async(dispatch) => {
     });
     if (response.ok) {
         await dispatch(removeStudioEvent(event))
+    }
+}
+
+export const createStudioReviewAction = (review) => async(dispatch) => {
+    const response = await fetch(`/api/studio-reviews/`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(review)
+        }
+    );
+    if (response.ok) {
+        const review = await response.json();
+        console.log(review)
+        await dispatch(createStudioReview(review));
+    }
+}
+export const updateStudioReviewAction = (reviewId, review) => async(dispatch) => {
+    const response = await fetch(`/api/studio-reviews/${reviewId}`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(review)
+        }
+    );
+    if (response.ok) {
+        const review = await response.json()
+        await dispatch(updateStudioReview(review))
+    }
+}
+export const removeStudioReviewAction = (review) => async(dispatch) => {
+    const response = await fetch(`/api/studio-reviews/${review.id}`,
+        {
+            method: "DELETE",
+        }
+    );
+    if (response.ok) {
+        const review = await response.json();
+        await dispatch(removeStudioReview(review));
     }
 }
 
@@ -190,6 +257,19 @@ const studiosReducer = (state=initialState, action) => {
             const removeStudioEventState = {...state};
             delete removeStudioEventState[[action.studioEvent.studio_id]].studio_events[[action.studioEvent.id]];
             return removeStudioEventState;
+        case CREATE_STUDIO_REVIEW:
+            const createStudioReviewState = {...state};
+            console.log(action)
+            createStudioReviewState[[action.studioReview.studio_id]].studio_reviews[[action.studioReview.id]] = action.studioReview
+            return createStudioReviewState;
+        case UPDATE_STUDIO_REVIEW:
+            const updatedStudioReviewState = {...state};
+            updatedStudioReviewState[[action.studioReview.studio_id]].studio_reviews[[action.studioReview.id]] = action.studioReview
+            return updatedStudioReviewState;
+        case REMOVE_STUDIO_REVIEW:
+            const removeStudioReviewState = {...state};
+            delete removeStudioReviewState[[action.studioReview.studio_id]].studio_reviews[[action.studioReview.id]];
+            return removeStudioReviewState;
         default: return state;
     }
 }

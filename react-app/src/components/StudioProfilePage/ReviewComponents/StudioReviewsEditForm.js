@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { createStudioReviewAction } from '../../../store/StudioState';
+import { createStudioReviewAction, updateStudioReviewAction } from '../../../store/StudioState';
 
-export default function StudioReviewsAddForm({edit, setEdit, studioId}) {
+export default function StudioReviewEditForm({edit, setEdit, studioReview}) {
     const user = useSelector(state => state.session.user)
-
     const dispatch = useDispatch();
 
     const [user_id, set_user_id] = React.useState(user.id);
-    const [title, set_title] = React.useState('');
-    const [content, set_content] = React.useState('');
-    const [rating, set_rating] = React.useState(0);
+    const [title, set_title] = React.useState(studioReview.title);
+    const [content, set_content] = React.useState(studioReview.content);
+    const [rating, set_rating] = React.useState(studioReview.rating);
     
     const [errors, set_errors] = React.useState([]);
 
@@ -22,18 +21,18 @@ export default function StudioReviewsAddForm({edit, setEdit, studioId}) {
         if (!title) errors.push("Please provide a title in the title field");
         if (!content) errors.push("Please provide a review")
         if (!rating) errors.push("Please provide a number rating");
-        if (!studioId) errors.push("Please provide a studio");
+        if (!studioReview.studio_id) errors.push("Please provide a studio");
         if (errors.length > 0) {
             set_errors(errors);
         } else {
-            const studioReview = {
-                studio_id: studioId,
+            const studio_review = {
+                studio_id: studioReview.studio_id,
                 user_id,
                 title,
                 content,
                 rating
             }
-            dispatch(createStudioReviewAction(studioReview));
+            dispatch(updateStudioReviewAction(studioReview.id, studio_review));
             setEdit(!edit);
         }
     }
@@ -59,7 +58,7 @@ export default function StudioReviewsAddForm({edit, setEdit, studioId}) {
                 <label>5</label><input onChange={e => set_rating(5)} type="radio" value={5} checked={rating === 5}></input>
             </div>
 
-            <button onClick={submit}>create review</button>
+            <button onClick={submit}>update review</button>
             <button onClick={e => {e.preventDefault(); setEdit(!edit)}}>cancel</button>
         </form>
     )

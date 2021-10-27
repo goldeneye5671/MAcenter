@@ -111,7 +111,7 @@ export default function SignUpForm() {
             </select>
 
             <label>Studio</label>
-            <select value={studio}>
+            <select value={studio} onChange={e => set_studio(e.target.value)}>
                 <option>Select Studio</option>
                 {Object.values(studios).map(studio => (<option value={studio.id}>{studio.name}</option>))}
             </select>
