@@ -10,6 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Studio from './components/Studio';
 import StudioCreate from './components/StudioProfilePage/StudioCreate';
+import StudioSearch from './components/StudioSearch';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -35,6 +36,9 @@ function App() {
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
+        </Route>
+        <Route path='/search' exact={true}>
+          <StudioSearch />
         </Route>
         <Route path='/studios/new' exact={true}>
           <StudioCreate />

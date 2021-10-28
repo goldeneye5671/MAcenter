@@ -18,10 +18,14 @@ class Martial_Art(db.Model):
 
     user = db.relationship("User", back_populates="martial_art")
     ranks = db.relationship("Martial_Art_Rank", back_populates="")
-    studio = db.relationship("Studio", back_populates="martial_art")
+    studios = db.relationship("Studio", back_populates="martial_art")
 
 
     def to_dict(self):
+        
+        for studio in self.studios:
+            
+
         return {
             'id': self.id,
             'name': self.name,
@@ -30,5 +34,5 @@ class Martial_Art(db.Model):
             'bio': self.bio,
             'difficulty_level': self.difficulty_level,
             'region': self.region,
-            'ranks': [rank.to_dict() for rank in self.ranks]
+            # 'ranks': [rank.to_dict() for rank in self.ranks],
         }

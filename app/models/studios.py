@@ -16,7 +16,7 @@ class Studio(db.Model):
 
 
     martial_art_id = db.Column(db.Integer, db.ForeignKey("martial_arts.id"), nullable=False)
-    martial_art = db.relationship("Martial_Art", back_populates="studio")
+    martial_art = db.relationship("Martial_Art", back_populates="studios")
     
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     owner = db.relationship("User", back_populates="owned_studio")
