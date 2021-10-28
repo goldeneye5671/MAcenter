@@ -17,7 +17,7 @@ def seed_studios():
         address="1234 N. Santa Fe Avenue, Vista, CA 92083",
         phone_contact=610,
         email_contact="test2@test.net",
-        martial_art_id=1,
+        martial_art_id=2,
         studio_bio="This is a test bio",
         owner_id=1
     )
@@ -47,7 +47,7 @@ def seed_studios():
         address="1234 N. Santa Fe Avenue, Vista, CA 92083",
         phone_contact=610,
         email_contact="test5@test.net",
-        martial_art_id=1,
+        martial_art_id=3,
         studio_bio="This is a test bio",
         owner_id=1
     )

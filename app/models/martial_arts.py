@@ -1,5 +1,3 @@
-from ast import BinOp
-from unicodedata import name
 from .db import db
 
 #need difficulty level as an int
@@ -17,15 +15,11 @@ class Martial_Art(db.Model):
     region = db.Column(db.String(50), nullable=False)
 
     user = db.relationship("User", back_populates="martial_art")
-    ranks = db.relationship("Martial_Art_Rank", back_populates="")
+    ranks = db.relationship("Martial_Art_Rank", back_populates="martial_art_ranks")
     studios = db.relationship("Studio", back_populates="martial_art")
 
 
     def to_dict(self):
-        
-        for studio in self.studios:
-            
-
         return {
             'id': self.id,
             'name': self.name,
@@ -34,5 +28,18 @@ class Martial_Art(db.Model):
             'bio': self.bio,
             'difficulty_level': self.difficulty_level,
             'region': self.region,
-            # 'ranks': [rank.to_dict() for rank in self.ranks],
+            'ranks': [rank.to_dict() for rank in self.ranks],
         }
+
+# def to_dict_search(self):
+#     return {
+#             'id': self.id,
+#             'name': self.name,
+#             'creation_date': self.creation_date,
+#             'art_type': self.art_type,
+#             'bio': self.bio,
+#             'difficulty_level': self.difficulty_level,
+#             'region': self.region,
+#             'ranks': [rank.to_dict() for rank in self.ranks],
+#             'studio': {studio.id: studio for studio in self.studios.to_dict_id()}
+#         }

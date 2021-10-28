@@ -2,6 +2,7 @@ import React from 'react'
 
 import MartialArtProfilePage from './StudioSearch/MartialArtProfilePage';
 import MartialArtsList from './StudioSearch/MartialArtsList';
+import StudioContainer from './StudioSearch/StudioContainer';
 import StudioList from './StudioSearch/StudioList'
 
 export default function StudioSearch() {
@@ -11,7 +12,8 @@ export default function StudioSearch() {
         <div>
             <MartialArtsList activeArt={activeArt} setActiveArt={setActiveArt}/>
             <MartialArtProfilePage activeArt={activeArt}/>
-            <StudioList activeArt={activeArt}/>
+            {/* <StudioList activeArt={activeArt}/> */}
+            <StudioContainer activeArt={activeArt} />
         </div>
     )
 }

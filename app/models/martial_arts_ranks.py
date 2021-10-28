@@ -10,6 +10,7 @@ class Martial_Art_Rank(db.Model):
     martial_art_rank = db.Column(db.Integer, db.ForeignKey("martial_arts.id"))
     martial_art_ranks = db.relationship("Martial_Art", back_populates="ranks")
 
+
     user = db.relationship("User", back_populates="rank")
 
 

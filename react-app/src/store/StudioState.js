@@ -5,6 +5,8 @@ const FETCH_ALL_STUDIOS = 'StudioState/FETCH_ALL_STUDIOS';
 const UPDATE_STUDIO = 'StudioState/UPDATE_STUDIO';
 const REMOVE_STUDIO = 'StudioState/REMOVE_STUDIO';
 
+const CLEAR_STUDIO_STATE = 'StudioState/CLEAR_STUDIO_STATE';
+
 const CREATE_STUDIO_EVENT = 'StudioState/CREATE_STUDIO_EVENT';
 const UPDATE_STUDIO_EVENT = 'StudioState/UPDATE_STUDIO_EVENT';
 const REMOVE_STUDIO_EVENT = 'StudioState/REMOVE_STUDIO_EVENT';
@@ -115,7 +117,15 @@ const deleteStudioSchedule = (studioSchedule) => (
     }
 )
 
+const clearStudioState = () => ({
+    type: CLEAR_STUDIO_STATE,
+})
+
 //thunks
+
+export const clearStudioStateAction = () => async (dispatch) => {
+    dispatch(clearStudioState())
+}
 
 export const createStudioAction = (studio) => async(dispatch) => {
     const response = await fetch(`/api/studios/`, {
@@ -352,6 +362,8 @@ const studiosReducer = (state=initialState, action) => {
             const removeStudioSchedule = {...state};
             delete removeStudioSchedule[[action.studioSchedule.studio_id]].studio_schedule[[action.studioSchedule.id]];
             return removeStudioSchedule;
+        case CLEAR_STUDIO_STATE:
+            return {};
         default: return state;
     }
 }
