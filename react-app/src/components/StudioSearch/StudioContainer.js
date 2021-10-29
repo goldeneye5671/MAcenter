@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { clearStudioStateAction, fetchAllStudiosAction } from '../../store/StudioState';
 
 export default function StudioContainer({activeArt}) {
@@ -12,14 +13,14 @@ export default function StudioContainer({activeArt}) {
     }, [activeArt, dispatch])
 
     return (
-        <div>
+        <div className={"studio-list"}>
             {
                 activeMartialArtStudios.filter(
                     studio => {
                         return studio.martial_art.id === activeArt
                     }
                 ).map(studio => {
-                    return <h1>{studio.name}</h1>
+                    return <Link to={`/studios/${studio.id}`}><h1>{studio.name}</h1></Link>
                 })
             }
         </div>

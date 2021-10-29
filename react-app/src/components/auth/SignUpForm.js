@@ -1,14 +1,18 @@
 import React, {useEffect} from 'react'
-import {Redirect} from 'react-router-dom'
+import {Redirect, useHistory} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllMartialArtsAction } from '../../store/MartialArtState';
 import { signUp } from '../../store/session';
 import { fetchAllStudiosAction } from '../../store/StudioState';
 import { updateUserAction } from '../../store/UserState';
 
+
+
 export default function SignUpForm() {
-  const martialArts = useSelector(state => state.martialArts)
-  const studios = useSelector(state => state.studios);
+    const martialArts = useSelector(state => state.martialArts)
+    const studios = useSelector(state => state.studios);
+
+    const history = useHistory()
 
     const [loaded, setLoaded] = React.useState(false)
     const [errors, setErrors] = React.useState([])
@@ -53,7 +57,7 @@ export default function SignUpForm() {
               // dispatch(updateUserAction(user.id, updatedUserInfo))
               const otherErrs = await dispatch(signUp(newUser))
               if (!otherErrs) {
-                <Redirect to={"/"}/>
+                history.push('/')
               } else {
                 setErrors(otherErrs);
               }
@@ -70,8 +74,10 @@ export default function SignUpForm() {
     }, [dispatch, errors, loaded])
 
     return (
-        <form>
-            <h1>sign up form</h1>
+        <div className="container">
+<div className={"form-container"}>
+            <form className={"form"}>
+            <h1 className={"form-header"}>sign up form</h1>
             {errors.length > 0 &&
                 <>
                     <ul>
@@ -117,5 +123,8 @@ export default function SignUpForm() {
             </select>
             <button onClick={submit}>Sign Up!</button>
         </form>
+        </div>
+        </div>
+        
     )
 }

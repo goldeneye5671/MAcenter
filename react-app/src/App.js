@@ -11,6 +11,9 @@ import { authenticate } from './store/session';
 import Studio from './components/Studio';
 import StudioCreate from './components/StudioProfilePage/StudioCreate';
 import StudioSearch from './components/StudioSearch';
+import SplashPage from './components/SplashPage';
+
+import "./index.css"
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -53,7 +56,7 @@ function App() {
           <User />
         </Route>
         <Route path='/' exact={true} >
-          <h1>My Home Page</h1>
+          <SplashPage />
         </Route>
       </Switch>
     </BrowserRouter>

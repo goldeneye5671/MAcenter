@@ -1,1 +1,95 @@
-/* TODO Add site wide styles */
+/* CSS FOR STUDIO CREATE PAGE */
+
+.container{
+    background: rgb(255,0,0);
+    background: linear-gradient(42deg, rgba(255,0,0,1) 26%, rgba(0,54,98,1) 81%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 88vh;
+    margin: 0 auto;
+}
+
+.form-container{
+    background-color: #f5f5f5;
+    width: 50%;
+    height: 75vh;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.form{
+    
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 75%;
+    gap: 15px;
+    padding: 1.5rem; 
+}
+
+.form-header{
+    text-align: center;
+}
+
+/* Navigation */
+
+nav{
+    display: flex;
+    padding: 15px;
+    align-items: center;
+    justify-content: space-between;
+    height: 5vh;
+    border-bottom: 1px solid black;
+}
+
+.nav-links{
+    display: flex;
+    gap: 15px;
+}
+
+/* Search */
+.search-container{
+    padding: 60px;
+    gap: 5%;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    background-color: #f5f5f5;
+    width: 80%;
+    border-radius: 15px;
+    /* border: solid black 2px; */
+}
+
+
+/* Martial Arts List */
+.martial-arts-list{
+    padding: 0 15px;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    border-right: solid black 1px;
+}
+
+/* Martial Arts Profile Page  */
+.martial-arts-profile-page{
+    padding: 0 15px;
+    border-right: solid black 1px;
+
+    width: 40%;
+    height: 40vh;
+    overflow-y: scroll;
+}
+
+/* studio-list */
+.studio-list{
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}

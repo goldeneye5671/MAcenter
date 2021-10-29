@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchAllMartialArtsAction } from '../../store/MartialArtState';
 import { createStudioAction } from '../../store/StudioState';
 
+
+
 export default function StudioCreate() {
     const session = useSelector(state => state.session.user);
     const martialArts = useSelector(state => state.martialArts);
@@ -58,8 +60,9 @@ export default function StudioCreate() {
     }, [loaded, dispatch, errors])
     
     return (
-        <form>
-            <h1>Create new studio</h1>
+        <div className={'form-container'}>
+        <form className={"form"}>
+            <h1 className={'form-header'}>Create new studio</h1>
             {
                 errors.length > 0 && 
                 <ul>
@@ -95,5 +98,7 @@ export default function StudioCreate() {
             <button onClick={submit}>Create Studio</button>
 
         </form>
+        </div>
+        
     )
 }

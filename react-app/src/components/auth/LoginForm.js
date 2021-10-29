@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 
+
+
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
@@ -31,13 +33,14 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
-      <div>
+    <div class="container">
+      <div className={'form-container'}>
+      <form className={'form'} onSubmit={onLogin}>
+      <h1 className={"form-header"}>Log In</h1>
+      {
+          errors.length > 0 && <ul>{errors.map(error => <li>{error}</li>)}</ul>
+      }
+
         <label htmlFor='email'>Email</label>
         <input
           name='email'
@@ -46,8 +49,8 @@ const LoginForm = () => {
           value={email}
           onChange={updateEmail}
         />
-      </div>
-      <div>
+
+
         <label htmlFor='password'>Password</label>
         <input
           name='password'
@@ -57,9 +60,13 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
         <button type='submit'>Login</button>
-      </div>
+
     </form>
-  );
+
+    </div>
+
+    </div>
+    );
 };
 
 export default LoginForm;
