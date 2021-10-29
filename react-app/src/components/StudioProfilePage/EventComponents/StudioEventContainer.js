@@ -32,6 +32,7 @@ export default function StudioEventContainer({owner, studio_event}) {
                                 <ul>
                                     <li>{studio_event?.event_date}</li>
                                     <li>{studio_event?.location}</li>
+                                    <li>{studio_event.description}</li>
                                 </ul>
                                 <button onClick={e => setEdit(!edit)}>edit</button>
                                 <button onClick={e => deleteEvent(e, studio_event)}>delete</button>

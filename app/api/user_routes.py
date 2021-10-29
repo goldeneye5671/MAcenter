@@ -12,16 +12,19 @@ def users():
     return jsonify([user.to_dict() for user in users])
 
 
-@user_routes.route('/<int:id>', methods=["GET", "PUT", "DELETE"])
-# @login_required
+@user_routes.route('/<int:id>')
 def user(id):
-    if (request.method == "GET"):
-        user = User.query.get(id)
-        if user:
-            return user.to_dict()
-        else:
-            return jsonify({"message": "User not found"}), 404
-    elif (request.method == "PUT"):
+    user = User.query.get(id)
+    if user:
+        return user.to_dict()
+    else:
+        return jsonify({"message": "User not found"}), 404
+
+
+@user_routes.route('/<int:id>', methods=["PUT", "DELETE"])
+@login_required
+def user_profile(id):
+    if (request.method == "PUT"):
         user = User.query.get(id)
         if (user):
             body = request.json

@@ -13,6 +13,7 @@ studio_events_routes = Blueprint('studio_events', __name__)
 
 #create and delete need to be done at the same route
 @studio_events_routes.route('/', methods=["POST"])
+@login_required
 def create_delete_event():
     if (request.method == "POST"):
         body = request.json
@@ -29,6 +30,7 @@ def create_delete_event():
 
 #update needs a seporate route to update a specific event
 @studio_events_routes.route('/<int:id>', methods=["PUT", "DELETE"])
+@login_required
 def update_event(id):
     if (request.method == "PUT"):
         studio_event = Studio_Event.query.get(id)

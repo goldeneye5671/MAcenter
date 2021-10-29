@@ -138,7 +138,7 @@ export const createStudioAction = (studio) => async(dispatch) => {
 
     if (response.ok) {
         const studio = await response.json();
-        dispatch(createStudio(studio));
+        return dispatch(createStudio(studio));
     }
 }
 

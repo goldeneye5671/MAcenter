@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom';
 import { fetchAllMartialArtsAction } from '../../store/MartialArtState';
 import { createStudioAction } from '../../store/StudioState';
 
@@ -8,7 +9,9 @@ import { createStudioAction } from '../../store/StudioState';
 export default function StudioCreate() {
     const session = useSelector(state => state.session.user);
     const martialArts = useSelector(state => state.martialArts);
-    
+    const studios = useSelector(state => state.studios)
+    const history = useHistory()
+
     const dispatch = useDispatch();
 
     const [loaded, setLoaded] = React.useState(false);
@@ -23,7 +26,7 @@ export default function StudioCreate() {
     const [martial_art, set_martial_art] = React.useState();
     const [owner_id, set_owner_id] = React.useState(session.id);
 
-    function submit(e) {
+    async function submit(e) {
         e.preventDefault();
         const errors = [];
         if (!name) {errors.push("Please provide a value to the Name field")};
@@ -47,7 +50,9 @@ export default function StudioCreate() {
                 owner_id
             }
             console.log("newStudio: ", newStudio)
-            dispatch(createStudioAction(newStudio));
+            const studioInfo = await dispatch(createStudioAction(newStudio));
+            console.log(studioInfo)
+            history.push(`/studios/${studioInfo.studio.id}`)
             // setEdit(edit => !edit);
         }
     }
@@ -60,8 +65,9 @@ export default function StudioCreate() {
     }, [loaded, dispatch, errors])
     
     return (
-        <div className={'form-container'}>
-        <form className={"form"}>
+        <div className={"container"}>
+            <div className={'form-container'}>
+            <form className={"form"}>
             <h1 className={'form-header'}>Create new studio</h1>
             {
                 errors.length > 0 && 
@@ -99,6 +105,6 @@ export default function StudioCreate() {
 
         </form>
         </div>
-        
+        </div>        
     )
 }

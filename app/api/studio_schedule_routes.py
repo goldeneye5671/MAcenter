@@ -5,6 +5,7 @@ from app.models import Studio, db, Studio_Event, Studio_Review, Studio_Schedule,
 studio_schedule_routes = Blueprint("studio_classes_routes", __name__)
 
 @studio_schedule_routes.route('/', methods=["POST"])
+@login_required
 def create_studio_schedule():
     if (request.method == "POST"):
         body = request.json
@@ -22,6 +23,7 @@ def create_studio_schedule():
 
 
 @studio_schedule_routes.route('/<int:id>', methods=["PUT", "DELETE"])
+@login_required
 def update_delete_studio_schedule(id):
     if (request.method == "PUT"):
         studio_schedule = Studio_Schedule.query.get(id)
