@@ -20,7 +20,7 @@ export default function MartialArtsList({activeArt, setActiveArt}) {
         <div className={"martial-arts-list"}>
             {
                 allMartialArts?.map(art => {
-                    return <MartialArtContainer art={art} setActiveArt={setActiveArt} />
+                    return <MartialArtContainer art={art} activeArt={activeArt} setActiveArt={setActiveArt} />
                 })
             }
         </div>

@@ -27,7 +27,15 @@ export default function StudioReviews() {
                             }
                         </>
                     :
+                        <>
                         <StudioReviewsAddForm edit={edit} setEdit={setEdit} studioId={parseInt(studioId)}/>
+                        {
+                            studioReviews.length ?
+                                studioReviews.map(studio_review => <StudioReviewContainer studio_review={studio_review} owner={studio_review?.user_id === user?.id}/>)
+                            :
+                                (<p>no reviews</p>)
+                        }
+                        </>
                 :
                     studioReviews.length ?
                         studioReviews.map(studio_review => <StudioReviewContainer studio_review={studio_review} owner={studio_review?.user_id === user?.id}/>)

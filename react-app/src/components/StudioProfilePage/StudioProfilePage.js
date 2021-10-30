@@ -12,6 +12,7 @@ import StudioEventAddForm from './EventComponents/StudioEventAddForm'
 
 export default function StudioProfilePage({owner, studioSetEdit}) {
     const [loaded, setLoaded] = React.useState(false);
+    const [visibleThing, setVisibleThing] = React.useState(1)
     const {studioId} = useParams();
     const studio = useSelector(state => state.studios[studioId]);
     const dispatch = useDispatch();
@@ -22,11 +23,16 @@ export default function StudioProfilePage({owner, studioSetEdit}) {
     return (
         <div>
             <BasicStudioInfo owner={owner} studio={studio}/>
+            <div className={"visible-info-buttons"}>
+                    <button className={visibleThing===1 ? 'active-button' : "button"} onClick={e => {setVisibleThing(1)}}>About</button>
+                    <button className={visibleThing===2 ? 'active-button' : "button"} onClick={e => {setVisibleThing(2)}}>Events</button>
+                    <button className={visibleThing===3 ? 'active-button' : "button"} onClick={e => {setVisibleThing(3)}}>Reviews</button>
+            </div>
             <div className={"profile-container"}>
                 <div className={"main-info"}>
-                    <Bio studio={studio}/>
-                    <StudioEvents owner={owner}/>
-                    <StudioReviews studio={studio}/>
+                    {visibleThing === 1 ? <Bio studio={studio}/> : null}
+                    {visibleThing === 2 ? <StudioEvents owner={owner}/>: null}
+                    {visibleThing === 3 ? <StudioReviews studio={studio}/>: null}
                 </div>
                 <div className={"other-info"}>
                     <Map studio={studio} owner={owner}/>

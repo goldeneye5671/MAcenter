@@ -41,6 +41,7 @@ export default function StudioEventAddForm({setEdit, edit, studio_id}) {
         <div className="overlay-styles"></div>
         <div className={"modal-styles form-container"}>
             <form className={"form"}>
+            <h1>Add Event</h1>
             {
                 errors.length > 0 &&
                 (<ul>

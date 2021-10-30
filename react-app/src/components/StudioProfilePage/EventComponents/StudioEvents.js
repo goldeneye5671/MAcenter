@@ -20,44 +20,52 @@ export default function StudioEvents({owner}) {
     
     
     return (
-        <div>
+        <>
+        <div className={"headers"}>
             <h3>Events</h3>
+            {owner && (<button onClick={e => setEdit(!edit)}>add event</button>)}
+        </div>
+        <div className={"studio-profile-container"}>
             <>
                 {
                     owner ?
                     // Edit here is referrring to creating a new event
                         !edit ?
                             <>
-                                <button onClick={e => setEdit(!edit)}>add event</button>
+                                
                                 {
                                     studioEvents.map(studio_event => {
                                         return (
-                                            <StudioEventContainer owner={owner} studio_event={studio_event} />
+                                            <div className={"studio-profile-event"}>
+                                                <StudioEventContainer owner={owner} studio_event={studio_event} />
+                                            </div>
                                         )
                                     })
                                 }
                             </>
                         :
                             <>
-                                <StudioEventAddForm setEdit={setEdit} edit={edit} studio_id={studioId} />
-                                {
-                                    studioEvents.map(studio_event => {
-                                        return (
-                                            <StudioEventContainer owner={owner} studio_event={studio_event} />
-                                        )
-                                    })        
-                                }
-                            </>
-                    :
-                        <>
+                            <StudioEventAddForm setEdit={setEdit} edit={edit} studio_id={studioId} />
                             {
                                 studioEvents.map(studio_event => {
                                     return (
+                                            <StudioEventContainer owner={owner} studio_event={studio_event} />
+                                            )
+                                        })        
+                                    }
+                            </>
+                    :
+
+                        <>
+                        {
+                            studioEvents.map(studio_event => {
+                                return (
                                         <StudioEventContainer owner={owner} studio_event={studio_event} />
-                                    )
-                                })
-                            }
+                                        )
+                                    })
+                                }
                         </>
+
                 }
                 {
                     studioEvents.length === 0 && (
@@ -66,5 +74,6 @@ export default function StudioEvents({owner}) {
                 }
             </>
         </div>
+        </>
     )
 }

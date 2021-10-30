@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function MartialArtContainer({art, setActiveArt}) {
+export default function MartialArtContainer({art, activeArt, setActiveArt}) {
     return (
-        <button className={"search-studio-button"}onClick={e => setActiveArt(art.id)}>
+        <button className={ activeArt===art.id ? 'active-button-fixed' : "button-fixed"} onClick={e => setActiveArt(art.id)}>
             {art.name}
         </button>
     )
