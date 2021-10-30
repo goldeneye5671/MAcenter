@@ -85,38 +85,47 @@ export default function SignUpForm() {
                     </ul>
                 </>
             }
-            <label>First Name</label>
-            <input value={first_name} onChange={e => set_first_name(e.target.value)}></input>
+            <div className={"fields-container"}>
+                <div className={"field-container"}>
+                    <input placeholder={"First Name"} className={"form-field"} value={first_name} onChange={e => set_first_name(e.target.value)}></input>
+                </div>
 
-            <label>Last Name</label>
-            <input value={last_name} onChange={e => set_last_name(e.target.value)}></input>
+                <div placeholder={"Last Name"} className={"field-container"}>
+                    <input placeholder={"Last Name"} className={"form-field"} value={last_name} onChange={e => set_last_name(e.target.value)}></input>
+                </div>
+            </div>
 
-            <label>Email</label>
-            <input type="email" value={email} onChange={e => set_email(e.target.value)}></input>
+            <div className={"fields-container"}>
+                <div className={"field-container"}>
+                    <input placeholder={"Password"} className={"form-field"} type="password" value={password} onChange={e => set_password( password => password = e.target.value )} />
+                </div>
+                <div className={"field-container"}>
+                    <input placeholder={"Verify Password"} className={"form-field"} type="password" value={verify_password} onChange={e => set_verify_password( verify_password => verify_password = e.target.value)} />
+                </div>
 
-            <label>Password</label>
-            <input type="password" value={password} onChange={e => set_password( password => password = e.target.value )} />
+            </div>
 
-            <label>Verify Password </label>
-            <input type="password" value={verify_password} onChange={e => set_verify_password( verify_password => verify_password = e.target.value)} />
+            <input placeholder={"Email"} className={"form-field"} type="email" value={email} onChange={e => set_email(e.target.value)}></input>
 
-            <label>Bio</label>
-            <textarea value={bio} onChange={e => setBio(bio => e.target.value)} />
+            <textarea placeholder={"Tell us about yourself!"}className={"form-field"} value={bio} onChange={e => setBio(bio => e.target.value)} />
 
-            <label>Martial Art</label>
-            <select value={martial_art} onChange={e => set_martial_art(e.target.value)}>
-                <option>Select Martial Art</option>
-                {Object.values(martialArts).map( art => (<option value={art.id}>{art.name}</option>)
-                )}
-            </select>
+            <div className={"fields-container"}>
+                <div className={"field-container"}>
+                    <select value={martial_art} onChange={e => set_martial_art(e.target.value)}>
+                        <option>Select Martial Art</option>
+                        {Object.values(martialArts).map( art => (<option value={art.id}>{art.name}</option>)
+                        )}
+                    </select>
+                </div>
+                <div className={"field-container"}>
+                    <select value={rank} onChange={e => set_rank(e.target.value)}>
+                    <option>Select Rank</option>
+                        {martialArts[martial_art]?.ranks?.map(rank => (<option value={rank.id}>{rank.name} Rank number {rank.number}</option>))}
+                    </select>
+                </div>
+            </div>
 
-            <label>Rank</label>
-            <select value={rank} onChange={e => set_rank(e.target.value)}>
-              <option>Select Rank</option>
-                {martialArts[martial_art]?.ranks?.map(rank => (<option value={rank.id}>{rank.name} Rank number {rank.number}</option>))}
-            </select>
 
-            <label>Studio</label>
             <select value={studio} onChange={e => set_studio(e.target.value)}>
                 <option>Select Studio</option>
                 {Object.values(studios).map(studio => (<option value={studio.id}>{studio.name}</option>))}

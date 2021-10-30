@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { createStudioEventAction } from '../../../store/StudioState';
+import { ReactDOM } from 'react';
 
 export default function StudioEventAddForm({setEdit, edit, studio_id}) {
     const [title, set_title] = React.useState('');
@@ -34,9 +35,10 @@ export default function StudioEventAddForm({setEdit, edit, studio_id}) {
             setErrors(errors)
         }
     }
-
-    return (
-        <form>
+    if (!edit) return null;
+    return ReactDOM.createPortal(
+        <div className={"studio-event-modal"}>
+            <form>
             {
                 errors.length > 0 &&
                 (<ul>
@@ -59,5 +61,8 @@ export default function StudioEventAddForm({setEdit, edit, studio_id}) {
             <button onClick={submit}>create event</button>
             <button onClick={e => setEdit(!edit)}>cancel</button>
         </form>
+        </div>
+        ,
+        document.getElementById('portal')
     )
 }

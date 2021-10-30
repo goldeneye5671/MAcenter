@@ -11,26 +11,27 @@ export default function MartialArtProfilePage({activeArt}) {
             {
                 activeArt && (
                     <>
-                    {console.log(activeArt)}
+                        <div>
                             <h2>About {activeMartialArt?.name}</h2>
                             <p>{activeMartialArt?.bio}</p>
-                            <div>
-                                <ul>
-                                    <li>
-                                        Founded {activeMartialArt?.creation_date}
-                                    </li>
-                                    <li>
-                                        Difficulty Level {activeMartialArt?.difficulty_level}
-                                    </li>
-                                    <li>
-                                        Art Type {activeMartialArt?.art_type}
-                                    </li>
-                                    <li>
-                                        Region {activeMartialArt?.region}
-                                    </li>
-                
-                                </ul>
-                            </div>
+                        </div>
+                        <div>
+                            <ul>
+                                <li>
+                                    Founded {activeMartialArt?.creation_date}
+                                </li>
+                                <li>
+                                    Difficulty Level {activeMartialArt?.difficulty_level}
+                                </li>
+                                <li>
+                                    Art Type {activeMartialArt?.art_type}
+                                </li>
+                                <li>
+                                    Region {activeMartialArt?.region}
+                                </li>    
+                            </ul>
+                        </div>
+
                     </>
                 )
             }

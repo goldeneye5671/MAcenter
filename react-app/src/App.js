@@ -43,9 +43,9 @@ function App() {
         <Route path='/search' exact={true}>
           <StudioSearch />
         </Route>
-        <Route path='/studios/new' exact={true}>
+        <ProtectedRoute path='/studios/new' exact={true}>
           <StudioCreate />
-        </Route>
+        </ProtectedRoute>
         <Route path='/studios/:studioId' exact={true}>
           <Studio />
         </Route>

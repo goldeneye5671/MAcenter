@@ -10,7 +10,7 @@ import { fetchOneStudioAction } from '../../store/StudioState'
 import StudioClassSchedules from './ScheduleComponents/StudioClassSchedules'
 import StudioEventAddForm from './EventComponents/StudioEventAddForm'
 
-export default function StudioProfilePage({owner}) {
+export default function StudioProfilePage({owner, studioSetEdit}) {
     const [loaded, setLoaded] = React.useState(false);
     const [edit, setEdit] = React.useState(false);
     const {studioId} = useParams();
@@ -22,23 +22,21 @@ export default function StudioProfilePage({owner}) {
 
     return (
         <div>
-            <BasicStudioInfo studio={studio}/>
-            <div>
-                <div>
+            <BasicStudioInfo studioSetEdit={studioSetEdit} studio={studio}/>
+            <div className={"profile-container"}>
+                <div className={"main-info"}>
                     <Bio studio={studio}/>
                     {
                         owner && (
-                            edit ? (
+                            edit && (
                                 <StudioEventAddForm edit={edit} setEdit={setEdit} studio_id={studio.id}/>
                                 )
-                                :
-                                <button onClick={e => setEdit(!edit)}> Add Event </button>
                         )
                     }
                     <StudioEvents owner={owner}/>
                     <StudioReviews studio={studio}/>
                 </div>
-                <div>
+                <div className={"other-info"}>
                     <Map studio={studio} owner={owner}/>
                     <StudioClassSchedules studio={studio} owner={owner} />
                     {/* <Address /> */}

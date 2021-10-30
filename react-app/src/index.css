@@ -1,5 +1,11 @@
 /* CSS FOR STUDIO CREATE PAGE */
 
+body{
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
 .container{
     background: rgb(255,0,0);
     background: linear-gradient(42deg, rgba(255,0,0,1) 26%, rgba(0,54,98,1) 81%);
@@ -7,8 +13,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 88vh;
     margin: 0 auto;
+    height: 93vh
 }
 
 .form-container{
@@ -32,24 +38,51 @@
     padding: 1.5rem; 
 }
 
+.form-field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid gray;
+    outline: 0;
+    padding: 4px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
 .form-header{
     text-align: center;
 }
 
+.fields-container{
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+
+}
+
+.field-container{
+    display:flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 /* Navigation */
 
-nav{
+nav {
+    position: relative;
+    width: calc(100% - 60px);
+    margin: auto;
     display: flex;
-    padding: 15px;
-    align-items: center;
     justify-content: space-between;
-    height: 5vh;
-    border-bottom: 1px solid black;
-}
+    align-items: center;
+  }
 
 .nav-links{
     display: flex;
+    /* justify-content: flex-end; */
+    align-items: center;
     gap: 15px;
+    padding: 5px;
 }
 
 /* Search */
@@ -74,16 +107,18 @@ nav{
     flex-direction: column;
     width: 20%;
     border-right: solid black 1px;
+    height: 60vh;
+    overflow-y: scroll;
+
+
 }
 
 /* Martial Arts Profile Page  */
 .martial-arts-profile-page{
     padding: 0 15px;
     border-right: solid black 1px;
-
-    
     width: 40%;
-    height: 40vh;
+    height: 60vh;
     overflow-y: scroll;
 }
 
@@ -93,4 +128,72 @@ nav{
     display: flex;
     flex-direction: column;
     width: 20%;
+    overflow-y: scroll;
+    height: 60vh;
+
 }
+
+button, .link-button {
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid red;
+    border-radius: 0.6em;
+    color: red;
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+
+    line-height: 1;
+    padding: .75em 1.1em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+
+  }
+
+
+  button:hover, .link-button:hover {
+    box-shadow: 0 0 40px 40px red inset;
+    color: #f5f5f5;
+  }
+
+
+  .studio-info{
+    border: solid black 1px;
+    height: 300px;
+    background: rgb(255,0,0);
+    background: linear-gradient(42deg, rgba(255,0,0,1) 26%, rgba(0,54,98,1) 81%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: white;
+    padding: 15px;
+  }
+
+  .main-info{
+      padding: 45px;
+      width: 75%;
+  }
+
+  .other-info{
+      width: 25%;
+  }
+  .profile-container{
+      display: flex;
+      flex-direction: row;
+  }
+
+  .studio-event-modal{
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 50px;
+      z-index:1000
+  }

@@ -40,9 +40,8 @@ const LoginForm = () => {
       {
           errors.length > 0 && <ul>{errors.map(error => <li>{error}</li>)}</ul>
       }
-
-        <label htmlFor='email'>Email</label>
         <input
+          className={"form-field"}
           name='email'
           type='text'
           placeholder='Email'
@@ -51,8 +50,8 @@ const LoginForm = () => {
         />
 
 
-        <label htmlFor='password'>Password</label>
         <input
+          className={"form-field"}
           name='password'
           type='password'
           placeholder='Password'

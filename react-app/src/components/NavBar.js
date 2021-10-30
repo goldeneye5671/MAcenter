@@ -15,25 +15,25 @@ const NavBar = () => {
       </div>
 
       <div className={"nav-links"}>
-        <NavLink to='/search' exact={true}>
-          Search for a Studio
+        <NavLink className={"link-button"} to='/search'>
+          Search
         </NavLink>
 
         {
           session.user ? 
             (
               <>
-                <Link to={'/studios/new'}>Create a new studio</Link>
+                <NavLink className={"link-button"} to={'/studios/new'}>create studio</NavLink>
                 <LogoutButton />
               </>
             )
           :
             (
               <>
-                <NavLink to='/login' exact={true} activeClassName='active'>
+                <NavLink className={"link-button"} to='/login' exact={true} activeClassName='active'>
                   Login
                 </NavLink>
-                <NavLink to='/sign-up' exact={true} activeClassName='active'>
+                <NavLink className={"link-button"} to='/sign-up' exact={true} activeClassName='active'>
                   Sign Up
                 </NavLink>
               </>

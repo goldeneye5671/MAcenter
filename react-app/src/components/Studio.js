@@ -24,34 +24,31 @@ export default function Studio() {
       }, [studioId, loaded, edit, dispatch]);
 
     return (
-        <>
+        <div>
             {
                 studio ?
                     session && session.id === studio?.owner?.id ?
                         !edit ? 
                         (
-                            <>
-                                <button onClick={e => setEdit(!edit)}> edit </button>
-                                <StudioProfilePage owner={true} studio={studio}/>
-                            </>
+                            <div>
+                                <StudioProfilePage studioSetEdit={setEdit} owner={true} studio={studio}/>
+                            </div>
                         )
                         :
                         (
                         <>
-                            <button onClick={e => setEdit(!edit)}>cancel</button>
                             <StudioUpdate studio={studio} setEdit={setEdit}/>
                         </>
                         )
                     :
                     (
                         <>
-                            <h1>A studio</h1>
                             <StudioProfilePage owner={false} studio={studio} />
                         </>
                     )
                 :
                 (<h1>studio does not exist</h1>)
             }
-        </>        
+        </div>        
     )
 }
