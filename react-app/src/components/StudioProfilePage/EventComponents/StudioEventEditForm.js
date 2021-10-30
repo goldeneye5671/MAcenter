@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { fetchOneStudioAction, updateStudioAction, updateStudioEventAction } from '../../../store/StudioState';
+import ReactDOM from 'react-dom'
 
 export default function StudioEventEditForm({studio_event, edit, setEdit}) {
     const [title, set_title] = React.useState(studio_event.title);
@@ -36,30 +37,36 @@ export default function StudioEventEditForm({studio_event, edit, setEdit}) {
         }
     }
     
-    return (
-    <form>
-            {
-                errors.length > 0 &&
-                (<ul>
-                    {errors.map(error => <li>{error}</li>)}
-                </ul>)
-            }
+    return ReactDOM.createPortal(
+        <>
+        <div className={"overlay-styles"}></div>
+        <div className={"form-container modal-styles"}>
+            <form className={"form"}>
+                {
+                    errors.length > 0 &&
+                    (<ul>
+                        {errors.map(error => <li>{error}</li>)}
+                    </ul>)
+                }
 
-            <label>Title of event</label>
-            <input value={title} onChange={e => set_title(e.target.value)}></input>
+                <label>Title of event</label>
+                <input value={title} onChange={e => set_title(e.target.value)}></input>
 
-            <label>Description</label>
-            <textarea value={description} onChange={e => set_description(e.target.value)}></textarea>
+                <label>Description</label>
+                <textarea value={description} onChange={e => set_description(e.target.value)}></textarea>
 
-            <label>Event Date</label>
-            <input value={event_date} type="date" onChange={e => set_event_date(e.target.value)}></input>
-            <p>Original date was: {studio_event.event_date}</p>
+                <label>Event Date</label>
+                <input value={event_date} type="date" onChange={e => set_event_date(e.target.value)}></input>
+                <p>Original date was: {studio_event.event_date}</p>
 
-            <label>location</label>
-            <input value={location} onChange={e => set_event_location(e.target.value)}></input>
+                <label>location</label>
+                <input value={location} onChange={e => set_event_location(e.target.value)}></input>
 
-            <button onClick={submit}>create event</button>
-            <button onClick={e => setEdit(!edit)}>cancel</button>
-        </form>
+                <button onClick={submit}>update event</button>
+                <button onClick={e => {e.preventDefault(); setEdit(!edit)}}>cancel</button>
+            </form>
+        </div>
+        </>,
+        document.getElementById('portal')
     )
 }

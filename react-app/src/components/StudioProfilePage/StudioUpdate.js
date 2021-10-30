@@ -3,6 +3,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchAllMartialArtsAction } from '../../store/MartialArtState';
 import { updateStudioAction } from '../../store/StudioState';
+import  ReactDOM  from 'react-dom';
 
 export default function StudioUpdate({studio, edit, setEdit}) {
     const session = useSelector(state => state.session.user);
@@ -59,10 +60,10 @@ export default function StudioUpdate({studio, edit, setEdit}) {
         })()
     }, [])
     
-    return (
-        
-        <div className={"container"}>
-            <div className={'form-container'}>
+        return ReactDOM.createPortal(
+            <>
+        <div className={"overlay-styles"}></div>    
+        <div className="modal-styles form-container">
             <form className={"form"}>
             <h1 className={'form-header'}>Update Studio</h1>
             {
@@ -92,10 +93,11 @@ export default function StudioUpdate({studio, edit, setEdit}) {
             </select>
 
             <button onClick={submit}>Create Studio</button>
-            <button>Cancel</button>
+            <button onClick={e => {e.preventDefault(); setEdit(!edit)}}>Cancel</button>
 
         </form>
         </div>
-        </div>        
+        </> ,
+        document.getElementById("portal")       
     )
 }

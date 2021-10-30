@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { createStudioEventAction } from '../../../store/StudioState';
-import { ReactDOM } from 'react';
+import  ReactDOM  from 'react-dom';
 
 export default function StudioEventAddForm({setEdit, edit, studio_id}) {
     const [title, set_title] = React.useState('');
@@ -37,8 +37,10 @@ export default function StudioEventAddForm({setEdit, edit, studio_id}) {
     }
     if (!edit) return null;
     return ReactDOM.createPortal(
-        <div className={"studio-event-modal"}>
-            <form>
+        <>
+        <div className="overlay-styles"></div>
+        <div className={"modal-styles form-container"}>
+            <form className={"form"}>
             {
                 errors.length > 0 &&
                 (<ul>
@@ -59,9 +61,10 @@ export default function StudioEventAddForm({setEdit, edit, studio_id}) {
             <input onChange={e => set_event_location(e.target.value)}></input>
 
             <button onClick={submit}>create event</button>
-            <button onClick={e => setEdit(!edit)}>cancel</button>
+            <button onClick={e => {e.preventDefault(); setEdit(!edit)}}>cancel</button>
         </form>
         </div>
+        </>
         ,
         document.getElementById('portal')
     )

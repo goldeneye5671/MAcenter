@@ -12,27 +12,19 @@ import StudioEventAddForm from './EventComponents/StudioEventAddForm'
 
 export default function StudioProfilePage({owner, studioSetEdit}) {
     const [loaded, setLoaded] = React.useState(false);
-    const [edit, setEdit] = React.useState(false);
     const {studioId} = useParams();
     const studio = useSelector(state => state.studios[studioId]);
     const dispatch = useDispatch();
     React.useEffect(() => {
         dispatch(fetchOneStudioAction(studioId))
-    }, [edit, loaded]);
+    }, [loaded, dispatch, studioId]);
 
     return (
         <div>
-            <BasicStudioInfo studioSetEdit={studioSetEdit} studio={studio}/>
+            <BasicStudioInfo owner={owner} studio={studio}/>
             <div className={"profile-container"}>
                 <div className={"main-info"}>
                     <Bio studio={studio}/>
-                    {
-                        owner && (
-                            edit && (
-                                <StudioEventAddForm edit={edit} setEdit={setEdit} studio_id={studio.id}/>
-                                )
-                        )
-                    }
                     <StudioEvents owner={owner}/>
                     <StudioReviews studio={studio}/>
                 </div>

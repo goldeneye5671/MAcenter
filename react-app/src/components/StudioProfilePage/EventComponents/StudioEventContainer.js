@@ -40,7 +40,18 @@ export default function StudioEventContainer({owner, studio_event}) {
                         )
                     :
                         (
-                            <StudioEventEditForm studio_event={studio_event} edit={edit} setEdit={setEdit} />
+                            <>
+                                <StudioEventEditForm studio_event={studio_event} edit={edit} setEdit={setEdit} />
+                                <h4>{studio_event?.title}</h4>
+                                <p>{studio_event?.content}</p>
+                                <ul>
+                                    <li>{studio_event?.event_date}</li>
+                                    <li>{studio_event?.location}</li>
+                                    <li>{studio_event.description}</li>
+                                </ul>
+                                <button onClick={e => setEdit(!edit)}>edit</button>
+                                <button onClick={e => deleteEvent(e, studio_event)}>delete</button>
+                            </>    
                         )
                 :
                 (

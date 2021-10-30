@@ -7,7 +7,6 @@ import StudioUpdate from './StudioProfilePage/StudioUpdate'
 
 export default function Studio() {
     const [loaded, setLoaded] = React.useState(false);
-    const [edit, setEdit] = React.useState(false);
     const dispatch = useDispatch();
     const {studioId} = useParams();
     const studio = useSelector(state => state.studios[studioId]);
@@ -21,31 +20,16 @@ export default function Studio() {
           await dispatch(fetchOneStudioAction(parseInt(studioId)));
           setLoaded(true)
         })();
-      }, [studioId, loaded, edit, dispatch]);
+      }, [studioId, loaded, dispatch]);
 
     return (
         <div>
             {
                 studio ?
                     session && session.id === studio?.owner?.id ?
-                        !edit ? 
-                        (
-                            <div>
-                                <StudioProfilePage studioSetEdit={setEdit} owner={true} studio={studio}/>
-                            </div>
-                        )
+                            <StudioProfilePage owner={true} studio={studio}/>
                         :
-                        (
-                        <>
-                            <StudioUpdate studio={studio} setEdit={setEdit}/>
-                        </>
-                        )
-                    :
-                    (
-                        <>
                             <StudioProfilePage owner={false} studio={studio} />
-                        </>
-                    )
                 :
                 (<h1>studio does not exist</h1>)
             }
