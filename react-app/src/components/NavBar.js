@@ -8,8 +8,8 @@ const NavBar = () => {
   const session = useSelector(state => state.session);
   return (
     <nav>
-      <div className={"home-button"}>
-        <NavLink to='/' exact={true} activeClassName='active'>
+      <div className={"nav-links"}>
+        <NavLink className={"link-button"} to='/' exact={true} activeClassName='active'>
           MaCenter
         </NavLink>
       </div>
@@ -24,6 +24,9 @@ const NavBar = () => {
             (
               <>
                 <NavLink className={"link-button"} to={'/studios/new'}>create studio</NavLink>
+                <Link className={"link-button"} to={`/users/${session?.user?.id}`}>
+                  profile
+                </Link>
                 <LogoutButton />
               </>
             )

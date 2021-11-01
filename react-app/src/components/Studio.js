@@ -26,7 +26,7 @@ export default function Studio() {
         <div>
             {
                 studio ?
-                    session && session.id === studio?.owner?.id ?
+                    session && ((session.id === studio?.owner_id) || (session.id === studio?.owner?.id)) ?
                             <StudioProfilePage owner={true} studio={studio}/>
                         :
                             <StudioProfilePage owner={false} studio={studio} />

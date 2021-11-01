@@ -22,23 +22,26 @@ def user(id):
 
 
 @user_routes.route('/<int:id>', methods=["PUT", "DELETE"])
-@login_required
+# @login_required
 def user_profile(id):
     if (request.method == "PUT"):
         user = User.query.get(id)
         if (user):
             body = request.json
-            studio = Studio.query.get(body.get("studio_id", 0))
-            user.first_name = body.get("first_name", user.first_name)
-            user.last_name = body.get("last_name", user.last_name)
-            user.email = body.get("email", user.email)
-            user.bio = body.get("bio", user.bio)
-            user.rank_id = body.get("rank_id", user.rank_id)
-            user.martial_art_id = body.get("martial_art_id", user.martial_art_id)
-            # user.studio_id = body.get("studio_id", user.studio_id)
-            studios=[studio]
-            db.session.commit()
-            return user.to_dict()
+            studio = Studio.query.get(body.get("studio_id"))
+            if (studio): 
+                user.first_name = body.get("first_name", user.first_name)
+                user.last_name = body.get("last_name", user.last_name)
+                user.email = body.get("email", user.email)
+                user.bio = body.get("bio", user.bio)
+                user.rank_id = body.get("rank_id", user.rank_id)
+                user.martial_art_id = body.get("martial_art_id", user.martial_art_id)
+                # user.studio_id = body.get("studio_id", user.studio_id)
+                user.studios=[studio]
+                db.session.commit()
+                return user.to_dict()
+            else:
+                return {}, 404
         else:
             return {}
     elif (request.method == "DELETE"):

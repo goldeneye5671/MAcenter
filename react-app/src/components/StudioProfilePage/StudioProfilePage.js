@@ -34,9 +34,14 @@ export default function StudioProfilePage({owner, studioSetEdit}) {
                     {visibleThing === 2 ? <StudioEvents owner={owner}/>: null}
                     {visibleThing === 3 ? <StudioReviews studio={studio}/>: null}
                 </div>
-                <div className={"other-info"}>
-                    <Map studio={studio} owner={owner}/>
-                    <StudioClassSchedules studio={studio} owner={owner} />
+                <div className={"other-info-container"}>
+                    <div className={"headers"}>
+                        <h4>Other information</h4>
+                    </div>
+                    <div className={"other-info"}>
+                        <Map studio={studio} owner={owner}/>
+                        <StudioClassSchedules studio={studio} owner={owner} />
+                    </div>
                     {/* <Address /> */}
                 </div>
             </div>

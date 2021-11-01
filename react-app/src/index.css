@@ -14,18 +14,17 @@ body{
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    height: 93vh
+    height: 95vh
 }
 
 .form-container{
     background-color: #f5f5f5;
-    width: 50%;
-    height: 75vh;
+    width: 75%;
+    min-height: 75vh;
+    height: fit-content;
     border-radius: 15px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    overflow-y: scroll;
 }
 
 .form{
@@ -132,10 +131,12 @@ nav {
     width: 20%;
     overflow-y: scroll;
     height: 60vh;
+    align-items: center;
+    gap: 30px;
 
 }
 
-button, .link-button, .active-button-fixed, .button {
+button, .link-button, .active-button-fixed, .button, .home-button {
     box-sizing: border-box;
     appearance: none;
     background-color: transparent;
@@ -159,11 +160,11 @@ button, .link-button, .active-button-fixed, .button {
   }
 
   .active-button-fixed{
-      width: 300px;
+    width: 100%;
   }
 
   .button-fixed{
-    width: 300px;
+    width: 100%;
   }
 
   button:hover, .link-button:hover {
@@ -190,11 +191,21 @@ button, .link-button, .active-button-fixed, .button {
 
   .main-info{
       padding: 45px;
-      width: 75%;
+      width: 70%;
+  }
+
+  .other-info-container{
+    width: 30%;
+    padding: 45px 5px;
   }
 
   .other-info{
-      width: 25%;
+      width: 100%;
+      height: 80vh;
+      overflow-y: scroll;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+      background-color: lightgray;
+
   }
   .profile-container{
       display: flex;
@@ -233,18 +244,196 @@ button, .link-button, .active-button-fixed, .button {
 
   .studio-profile-container{
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      /* flex-wrap: wrap; */
+      /* justify-content: center; */
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+      background-color: lightgray;
+      padding: 1.75em;
+      height: 75vh;
+      overflow-y: scroll;
   }
 
-  .studio-profile-event{
-      border: solid black 1px;
-      margin: 10px;
-    padding: 20px;
+  .studio-profile-event, .studio-profile-review{
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+    margin: 45px 15px;;
+    /* padding: 20px; */
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    /* width: 715px; */
+    width:90%;
+    /* margin: 0 auto; */
+    /* height: 430px; */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
   }
 
   .headers{
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 0 15px;
+      border: solid black 1px;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
   }
+
+  .edit-and-delete-button-container{
+      padding: 15px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 15px;
+  }
+
+  .studio-event-content, .studio-review-content{
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* overflow-y: scroll; */
+    width: 100%;
+    /* padding: 15px; */
+    width: 80%;
+    height: fit-content;
+    margin: 0 auto;
+    padding: 45px;
+  }
+
+  .studio-schedule-container{
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+    margin: 45px 15px;;
+    /* padding: 20px; */
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    /* width: 715px; */
+    width:90%;
+    /* margin: 0 auto; */
+    /* height: 430px; */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+  }
+
+  .studio-schedule-content{
+        display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    /* overflow-y: scroll; */
+    /* padding: 15px; */
+    width: 80%;
+    height: fit-content;
+    margin: 0 auto;
+    padding: 15px;
+    align-self: center;
+  }
+
+  .headers-center-only{
+    text-align: center;
+  }
+
+  .button-center-only{
+    margin: 0 auto;
+  }
+
+  .splash-page-container{
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgb(255,0,0);
+      background: linear-gradient(42deg, rgba(255,0,0,1) 26%, rgba(0,54,98,1) 81%);
+  }
+
+  .splash-card-v1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    width: 85%;
+    margin: 30px;
+    padding: 30px;
+    background: white;
+  }
+
+  .splash-card-v2{
+    display: flex;
+    gap: 60px;
+    background-color: white;
+    border-radius: 15px;
+    margin: 30px;
+    padding: 30px;
+    width: 80%;
+  }
+
+  .sub-splash-card-v2{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+        justify-content: center;
+        width: 600px;
+  }
+
+  .splash-card-v3{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    background-color: white;
+    border-radius: 15px;
+    margin: 30px;
+    padding: 30px;
+    width: 80%;
+    }
+
+    .splash-img{
+        width: 300px;
+        height: 300px;
+    }
+
+    .home-button:hover{
+        background: rgb(255,0,0);
+        background: linear-gradient(42deg, rgba(255,0,0,1) 26%, rgba(0,54,98,1) 81%);
+        transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    }
+
+    .splash-logged-in{
+        display: flex;
+        gap: 15px;
+    }
+
+    .user-info{
+        border: solid black 1px;
+        height: 300px;
+        background: rgb(255,0,0);
+        background: linear-gradient(42deg, rgba(255,0,0,1) 26%, rgba(0,54,98,1) 81%);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        color: white;
+        padding: 30px;
+    }
+
+    .user-edit-button{
+        align-self: flex-end;
+    }
+
+    .contact-info{
+        background-color: #f5f5f5;
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .contact-info-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }

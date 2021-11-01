@@ -47,7 +47,7 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
-        return {
+        return  {
             'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,
@@ -55,7 +55,8 @@ class User(db.Model, UserMixin):
             'bio': self.bio,
             'martial_art': {'id': self.martial_art.to_dict()['id'], 'name': self.martial_art.to_dict()['name']},
             'ranks': self.rank.to_dict(),
-            'studio_names': [{'id': studio.to_dict()['id'], 'name': studio.to_dict()['name']} for studio in self.studios],
+            'studio_names': {studio.id : studio.to_dict() for studio in self.studios} ,
             'photos': [photo.user_photos.to_dict() for photo in self.user_photos]
         }
+
         

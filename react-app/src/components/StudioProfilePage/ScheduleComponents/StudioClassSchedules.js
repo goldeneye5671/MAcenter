@@ -11,13 +11,13 @@ export default function StudioClassSchedules({owner}) {
 
     return (
         <>
-        <h4>Studio Schedules</h4>
+        <h4 className={"headers-center-only"}>Studio Schedules</h4>
         <div>
             {
                 owner ?
                     !edit ?
                         <>
-                            <button onClick={e => setEdit(!edit)}>Add New Schedule</button>
+                            <button className={"button-center-only"} onClick={e => setEdit(!edit)}>Add New Schedule</button>
                             {studioSchedule.map(schedule => <StudioClassSchedule schedule={schedule} owner={owner}/>)}
                         </>
                     :
@@ -27,6 +27,11 @@ export default function StudioClassSchedules({owner}) {
                         </>
                 :
                 studioSchedule.map(schedule => <StudioClassSchedule schedule={schedule} owner={owner}/>)
+            }
+            {
+                studioSchedule.length === 0 && (
+                    <h5>no events</h5>
+                )
             }
         </div>
         </>

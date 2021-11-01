@@ -58,7 +58,13 @@ const LoginForm = () => {
           value={password}
           onChange={updatePassword}
         />
-        <button type='submit'>Login</button>
+        <div className={"edit-and-delete-button-container"}>
+          <button type='submit'>Login</button>
+          <button onClick={e => {
+            setEmail("demo-lition@demo.com")
+            setPassword("password")
+          }}>Demo</button>
+        </div>
 
     </form>
 

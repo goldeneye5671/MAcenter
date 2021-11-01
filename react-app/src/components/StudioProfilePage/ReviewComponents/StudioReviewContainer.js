@@ -20,17 +20,40 @@ export default function StudioReviewContainer({studio_review, owner}) {
     }
 
     return (
-        <>
+        <div className={"studio-profile-review"}>
         {                
             owner ? 
                 !edit ?
-                    (    
+                    (
+                        // <div className={"studio-review-container"}>
+                        //     <div className={"studio-review-content"}>
+                        //         <div className={"headers"}>
+                        //             <h4>{studio_review?.title}</h4>
+                        //             <p>rating: {studio_review.rating}</p>
+                        //         </div>
+                        //         <div>
+                        //             <p>{studio_review.content}</p>
+                        //         </div>
+                        //         <div className={"edit-and-delete-button-container"}>
+                        //             <button onClick={e => setEdit(!edit)}>edit</button>
+                        //             <button onClick={e => deleteHandler(e)}>delete</button>
+                        //         </div>
+                        //     </div>
+                        // </div>
                         <div>
-                            <h5>{studio_review?.title}</h5>
-                            <p><strong>rating: {studio_review?.rating}</strong></p>
-                            <p>{studio_review?.content}</p>
-                            <button onClick={e => setEdit(!edit)}>edit</button>
-                            <button onClick={deleteHandler}>delete</button>
+                           <div className={"headers"}>
+                               <h4>{studio_review.title}</h4>
+                               <p>{studio_review.rating}</p>
+                           </div> 
+                           <div className={"studio-review-content"}>
+                               <p>{studio_review.content}</p>
+                           </div> 
+                           
+                           <div className={"edit-and-delete-button-container"}>
+                                <button onClick={e => setEdit(!edit)}>edit</button>
+                                <button onClick={e => deleteHandler(e)}>delete</button>
+                            </div>
+                            
                         </div>
                     )
                 :
@@ -40,12 +63,16 @@ export default function StudioReviewContainer({studio_review, owner}) {
             :
             (
                 <div>
-                    <h5>{studio_review?.title}</h5>
-                    <p><strong>rating: {studio_review?.rating}</strong></p>
-                    <p>{studio_review?.content}</p>
-                </div>
+                <div className={"headers"}>
+                    <h4>{studio_review.title}</h4>
+                    <p>{studio_review.rating}</p>
+                </div> 
+                <div className={"studio-review-content"}>
+                    <p>{studio_review.content}</p>
+                </div> 
+             </div>
             )
         }
-        </>
+        </div>
     )
 }

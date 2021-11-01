@@ -9,7 +9,6 @@ function User() {
   const users = useSelector(state => state.users);
   const session = useSelector(state => state.session.user);
   const [loaded, setLoaded] = React.useState(false)
-  const [edit, setEdit] = React.useState(false)
   const { userId } = useParams();
   
   const dispatch = useDispatch()
@@ -24,32 +23,18 @@ function User() {
       dispatch(fetchUserAction(parseInt(userId)))
       setLoaded(true)
     })();
-  }, [userId, loaded, edit, dispatch]);
+  }, [userId, loaded, dispatch]);
 
   if (loaded) {
     return (
       <> 
       {
           session && session.id === parseInt(userId) ?
-              !edit ?
-              (
-                  <>
-                  <button onClick={e => setEdit(edit => !edit)}>edit</button>
-                  <UserProfilePage user={users[userId]} />
-                  </>
-              )
-            :
-              (
-                <>
-                  <button onClick={e => setEdit(edit => !edit)}> Cancel </button>
-                  <EditUserProfilePage user={users[userId]} setEdit={setEdit}/>
-                </>
-              )
+            <UserProfilePage user={users[userId]} />
           :
             users[userId] ?
             <>
-                <h1>Hello</h1>
-                <UserProfilePage user={users[userId]} />
+              <UserProfilePage user={users[userId]} />
             </>
             :
             <h1>User not found</h1>

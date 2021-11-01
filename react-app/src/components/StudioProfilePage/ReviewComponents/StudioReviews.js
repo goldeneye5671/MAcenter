@@ -12,16 +12,22 @@ export default function StudioReviews() {
     const user = useSelector(state => state.session.user);
     return (
         <>
-        <h4>Reviews</h4>
-        <div>
+        <div className={"headers"}>
+            <h4>Reviews</h4>
+            {user && (<button onClick={e => setEdit(!edit)}>Add Review</button>)}
+        </div>
+        <div className={'studio-profile-container'}>
             {
                 user ?
                     !edit ?
                         <>
-                            <button onClick={e => setEdit(!edit)}>Add Review</button>
                             {
                                 studioReviews.length ?
-                                    studioReviews.map(studio_review => <StudioReviewContainer studio_review={studio_review} owner={studio_review?.user_id === user?.id}/>)
+                                    studioReviews.map(studio_review => {
+                                        return (
+                                            <StudioReviewContainer studio_review={studio_review} owner={studio_review?.user_id === user?.id}/>
+                                        )
+                                    })
                                 :
                                     (<p>no reviews</p>)
                             }

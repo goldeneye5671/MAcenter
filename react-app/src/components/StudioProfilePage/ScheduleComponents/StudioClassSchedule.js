@@ -17,20 +17,21 @@ export default function StudioClassSchedule({schedule, owner}) {
     }
 
     return (
-        <div>
+        <div className={"studio-schedule-container"}>
             {
                 owner ? 
                     !edit ? 
                         (
-                            <>
+                            <div className={"studio-schedule-content"}>
                                 <h4>{schedule.schedule_name}</h4>
-                                <ul>
-                                    <li>Start Time: {schedule.start_time}</li>
-                                    <li>End Time: {schedule.end_time}</li>
-                                </ul>
-                                <button onClick={e => setEdit(!edit)}>edit</button>
-                                <button onClick={deleteHandler}>delete</button>
-                            </>
+                                <div>
+                                    <p>from {schedule.start_time} to {schedule.end_time}</p>
+                                </div>
+                                <div className={"edit-and-delete-button-container"}>
+                                    <button onClick={e => setEdit(!edit)}>edit</button>
+                                    <button onClick={deleteHandler}>delete</button>
+                                </div>
+                            </div>
                         )
                     :
                         (
@@ -38,13 +39,12 @@ export default function StudioClassSchedule({schedule, owner}) {
                         )
                 :
                     (
-                        <>
+                        <div className={"studio-schedule-content"}>
                         <h4>{schedule.schedule_name}</h4>
-                        <ul>
-                            <li>Start Time: {schedule.start_time}</li>
-                            <li>End Time: {schedule.end_time}</li>
-                        </ul>
-                        </>
+                        <div>
+                            <p>from {schedule.start_time} to {schedule.end_time}</p>
+                        </div>
+                        </div>
                     )
             }
 

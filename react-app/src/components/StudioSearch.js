@@ -28,11 +28,11 @@ export default function StudioSearch() {
             loaded && (
                 <div className={"container"}>
                     <div className={"search-container"}>
-                    <MartialArtsList activeArt={activeArt} setActiveArt={setActiveArt}/>
-                    <MartialArtProfilePage activeArt={activeArt}/>
-                    {/* <StudioList activeArt={activeArt}/> */}
-                    <StudioContainer activeArt={activeArt} />
-                </div>
+                        <MartialArtsList activeArt={activeArt} setActiveArt={setActiveArt}/>
+                        <MartialArtProfilePage activeArt={activeArt}/>
+                        {/* <StudioList activeArt={activeArt}/> */}
+                        <StudioContainer activeArt={activeArt} />
+                    </div>
                 </div>
             )
         }

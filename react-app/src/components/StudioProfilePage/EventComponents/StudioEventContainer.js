@@ -26,43 +26,59 @@ export default function StudioEventContainer({owner, studio_event}) {
                 owner ? 
                     !edit ? 
                         (
-                            <>
-                                <h4>{studio_event?.title}</h4>
-                                <p>{studio_event?.content}</p>
-                                <ul>
-                                    <li>{studio_event?.event_date}</li>
-                                    <li>{studio_event?.location}</li>
-                                    <li>{studio_event.description}</li>
-                                </ul>
-                                <button onClick={e => setEdit(!edit)}>edit</button>
-                                <button onClick={e => deleteEvent(e, studio_event)}>delete</button>
-                            </>    
+                            <div>
+                                <div className="headers">
+                                    <h4>{studio_event?.title}</h4>
+                                    <p>{studio_event?.event_date}</p>
+                                    <div>{studio_event?.location}</div>
+                                </div>
+                                <div className={"studio-event-content"}>
+                                    <div>
+                                        {studio_event.description}
+                                    </div>
+                                </div>
+                                <div className={"edit-and-delete-button-container"}>
+                                    <button onClick={e => setEdit(!edit)}>edit</button>
+                                    <button onClick={e => deleteEvent(e, studio_event)}>delete</button>
+                                </div>
+                            </div>    
                         )
                     :
                         (
-                            <>
+                            <div>
                                 <StudioEventEditForm studio_event={studio_event} edit={edit} setEdit={setEdit} />
-                                <h4>{studio_event?.title}</h4>
-                                <p>{studio_event?.content}</p>
-                                <ul>
-                                    <li>{studio_event?.event_date}</li>
-                                    <li>{studio_event?.location}</li>
-                                    <li>{studio_event.description}</li>
-                                </ul>
-                                <button onClick={e => setEdit(!edit)}>edit</button>
-                                <button onClick={e => deleteEvent(e, studio_event)}>delete</button>
-                            </>    
+                                <div>
+                                    <div className="headers">
+                                        <h4>{studio_event?.title}</h4>
+                                        <p>{studio_event?.event_date}</p>
+                                        <div>{studio_event?.location}</div>
+                                    </div>
+                                    <div className={"studio-event-content"}>
+                                        <div>
+                                            {studio_event.description}
+                                        </div>
+                                    </div>
+                                    <div className={"edit-and-delete-button-container"}>
+                                        <button onClick={e => setEdit(!edit)}>edit</button>
+                                        <button onClick={e => deleteEvent(e, studio_event)}>delete</button>
+                                    </div>
+                                </div>  
+                            </div>  
                         )
                 :
                 (
-                    <>
-                        <h4>{studio_event?.title}</h4>
-                        <p>{studio_event?.content}</p>
-                        <ul>
-                            <li>{studio_event?.event_date}</li>
-                            <li>{studio_event?.location}</li>
-                        </ul>
-                    </>    
+                    <div>
+                        <div className="headers">
+                            <h4>{studio_event?.title}</h4>
+                            <p>{studio_event?.event_date}</p>
+                            <div>{studio_event?.location}</div>
+                        </div>
+                        <div className={"studio-event-content"}>
+                            <div>
+                                {studio_event.description}
+                            </div>
+                        </div>
+                    </div>    
                 )
             }
         </div>

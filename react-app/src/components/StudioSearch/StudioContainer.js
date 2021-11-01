@@ -20,7 +20,7 @@ export default function StudioContainer({activeArt}) {
                         return studio.martial_art.id === activeArt
                     }
                 ).map(studio => {
-                    return <Link to={`/studios/${studio.id}`}><h1>{studio.name}</h1></Link>
+                    return <Link className={"button button-fixed"} to={`/studios/${studio.id}`}>{studio.name}</Link>
                 })
             }
         </div>

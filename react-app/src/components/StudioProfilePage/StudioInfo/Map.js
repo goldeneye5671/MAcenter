@@ -5,11 +5,8 @@ export default function Map({studio}) {
         <>
         <div>
             {/* Map will go here */}
-            <h4>Address</h4>
-            <p>{studio?.address}</p>
-        </div>
-        <div>
-            
+            <h4 className={"headers-center-only"}>Address</h4>
+            <p className={"headers-center-only"}>{studio?.address}</p>
         </div>
         </>
     )

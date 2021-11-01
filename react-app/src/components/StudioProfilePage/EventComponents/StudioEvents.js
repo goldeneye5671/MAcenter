@@ -49,7 +49,9 @@ export default function StudioEvents({owner}) {
                             {
                                 studioEvents.map(studio_event => {
                                     return (
+                                        <div className={"studio-profile-event"}>
                                             <StudioEventContainer owner={owner} studio_event={studio_event} />
+                                        </div>
                                             )
                                         })        
                                     }
@@ -60,7 +62,9 @@ export default function StudioEvents({owner}) {
                         {
                             studioEvents.map(studio_event => {
                                 return (
-                                        <StudioEventContainer owner={owner} studio_event={studio_event} />
+                                        <div className={"studio-profile-event"}>
+                                            <StudioEventContainer owner={owner} studio_event={studio_event} />
+                                        </div>
                                         )
                                     })
                                 }
