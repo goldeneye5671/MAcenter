@@ -59,9 +59,9 @@ export default function SplashPage() {
                 </div>
             </div>
             <div className={"contact-info"}>
-                <div className={"contact-info-container"}><AiFillGithub /> <a> @goldeneye5671</a></div> |
-                <div className={"contact-info-container"}><AiFillGithub /> <a> MAcenter</a></div> |
-                <div className={"contact-info-container"}><AiFillLinkedin /><a> @Anthony Seefried</a></div> 
+                <div className={"contact-info-container"}><AiFillGithub /> <a href={"https://github.com/goldeneye5671"} target="_blank" rel="noreferrer"> @goldeneye5671</a></div> |
+                <div className={"contact-info-container"}><AiFillGithub /> <a href={"https://github.com/goldeneye5671/MAcenter.git"} target="_blank" rel="noreferrer"> MAcenter</a></div> |
+                <div className={"contact-info-container"}><AiFillLinkedin /><a href={"https://www.linkedin.com/in/anthony-seefried-9233751a6/"} target="_blank" rel="noreferrer"> @Anthony Seefried</a></div> 
             </div>
         </div>
     )

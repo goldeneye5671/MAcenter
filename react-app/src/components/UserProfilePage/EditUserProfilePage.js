@@ -69,7 +69,7 @@ export default function EditUserProfilePage({edit, setEdit}) {
         <div className={"overlay-styles"}></div>
         <div className={"modal-styles form-container"}>
             <form className={"form"}>
-                <h1>edit form</h1>
+                <h1>Edit User Profile</h1>
                 {errors.length > 0 &&
                     <>
                         <ul>
@@ -78,16 +78,16 @@ export default function EditUserProfilePage({edit, setEdit}) {
                     </>
                 }
                 <label>First Name</label>
-                <input value={first_name} onChange={e => set_first_name(e.target.value)}></input>
+                <input className={"form-field"} value={first_name} onChange={e => set_first_name(e.target.value)}></input>
 
                 <label>Last Name</label>
-                <input value={last_name} onChange={e => set_last_name(e.target.value)}></input>
+                <input className={"form-field"} value={last_name} onChange={e => set_last_name(e.target.value)}></input>
 
                 <label>Email</label>
-                <input type="email" value={email} onChange={e => set_email(e.target.value)}></input>
+                <input className={"form-field"} type="email" value={email} onChange={e => set_email(e.target.value)}></input>
 
                 <label>Bio</label>
-                <textarea value={bio} onChange={e => setBio(bio => e.target.value)} />
+                <textarea className={"form-field"} value={bio} onChange={e => setBio(bio => e.target.value)} />
 
                 <label>Martial Art</label>
                 <select value={martial_art} onChange={e => set_martial_art(e.target.value)}>

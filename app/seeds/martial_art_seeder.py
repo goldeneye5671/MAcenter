@@ -20,7 +20,7 @@ def seed_martial_arts():
         region="Southern Korea"
     )
     ma3 = Martial_Art(
-        name="Kong Fu",
+        name="Kung Fu",
         creation_date=datetime.now(),
         art_type="Self Defense",
         bio='Wushu (/ˌwuːˈʃuː/) or Kungfu, is a hard and soft and complete martial art, as well as a full-contact sport.[1][2] It has a long history in reference to Chinese martial arts. It was developed in 1949 in an effort to standardize the practice of traditional Chinese martial arts,[3] yet attempts to structure the various decentralized martial arts traditions date back earlier, when the Central Guoshu Institute was established at Nanking in 1928. "Wushu" is the Chinese term for "martial arts" (武 "Wu" = military or martial, 術 "Shu" = art). In contemporary times, Wushu has become an international sport under the International Wushu Federation (IWUF), which holds the World Wushu Championships every two years. Wushu is an official event at the Asian Games, Southeast Asian Games, World Combat Games, and in various other multi-sport events.',

@@ -40,6 +40,7 @@ const LoginForm = () => {
       {
           errors.length > 0 && <ul>{errors.map(error => <li>{error}</li>)}</ul>
       }
+        <label>Email</label>
         <input
           className={"form-field"}
           name='email'
@@ -49,7 +50,7 @@ const LoginForm = () => {
           onChange={updateEmail}
         />
 
-
+        <label>Password</label>
         <input
           className={"form-field"}
           name='password'

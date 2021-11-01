@@ -42,6 +42,7 @@ export default function StudioEventEditForm({studio_event, edit, setEdit}) {
         <div className={"overlay-styles"}></div>
         <div className={"form-container modal-styles"}>
             <form className={"form"}>
+                <h1>Edit Event</h1>
                 {
                     errors.length > 0 &&
                     (<ul>
@@ -50,17 +51,17 @@ export default function StudioEventEditForm({studio_event, edit, setEdit}) {
                 }
 
                 <label>Title of event</label>
-                <input value={title} onChange={e => set_title(e.target.value)}></input>
+                <input className={"form-field"}  value={title} onChange={e => set_title(e.target.value)}></input>
 
                 <label>Description</label>
-                <textarea value={description} onChange={e => set_description(e.target.value)}></textarea>
+                <textarea className={"form-field"}  value={description} onChange={e => set_description(e.target.value)}></textarea>
 
                 <label>Event Date</label>
-                <input value={event_date} type="date" onChange={e => set_event_date(e.target.value)}></input>
+                <input  className={"form-field"} value={event_date} type="date" onChange={e => set_event_date(e.target.value)}></input>
                 <p>Original date was: {studio_event.event_date}</p>
 
                 <label>location</label>
-                <input value={location} onChange={e => set_event_location(e.target.value)}></input>
+                <input className={"form-field"}  value={location} onChange={e => set_event_location(e.target.value)}></input>
 
                 <button onClick={submit}>update event</button>
                 <button onClick={e => {e.preventDefault(); setEdit(!edit)}}>cancel</button>

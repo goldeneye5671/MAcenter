@@ -18,10 +18,6 @@ def seed():
     seed_martial_arts()
     seed_martial_art_ranks()
     seed_users()
-    seed_studios()
-    seed_studio_events()
-    seed_studio_schedules()
-    seed_reviews()
     # Add other seed functions here
 
 
@@ -29,8 +25,5 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     undo_users()
-    undo_studios()
-    undo_studio_events()
-    undo_studio_schedule()
-    undo_studio_reviews()
+    
     # Add other undo functions here

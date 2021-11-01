@@ -53,10 +53,10 @@ export default function StudioScheduleEditForm({studioSchedule, edit, setEdit}) 
                 }
 
                 <label>Schedule Name</label>
-                <input value={schedule_name} onChange={e => set_schedule_name(e.target.value)}/>
+                <input className={"form-field"} value={schedule_name} onChange={e => set_schedule_name(e.target.value)}/>
 
                 <label>Schedule Description</label>
-                <textarea value={schedule_description} onChange={e => set_schedule_description(e.target.value)} />
+                <textarea className={"form-field"} value={schedule_description} onChange={e => set_schedule_description(e.target.value)} />
 
                 <label>Day</label>
                 <select value={week_day} onChange={e => set_week_day(e.target.value)}>
@@ -69,10 +69,10 @@ export default function StudioScheduleEditForm({studioSchedule, edit, setEdit}) 
                 </select>
 
                 <label>Start Time</label>
-                <input type="time" value={start_time} onChange={e => set_start_time(e.target.value)} />
+                <input className={"form-field"} type="time" value={start_time} onChange={e => set_start_time(e.target.value)} />
                 
                 <label>End Time</label>
-                <input type="time" value={end_time} onChange={e => set_end_time(e.target.value)} /> 
+                <input className={"form-field"} type="time" value={end_time} onChange={e => set_end_time(e.target.value)} /> 
 
                 <button onClick={submit}>Edit Schedule</button>
                 <button onClick={e => setEdit(!edit)}>Cancel</button>

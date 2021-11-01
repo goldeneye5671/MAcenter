@@ -68,33 +68,39 @@ export default function StudioCreate() {
         <div className={"container"}>
             <div className={'form-container'}>
             <form className={"form"}>
-            <h1 className={'form-header'}>Create new studio</h1>
+            <h1 className={'form-header'}>Create Studio</h1>
             {
                 errors.length > 0 && 
                 <ul>
                     {errors.map((error, index) => <li key={index}>{error}</li>)}
                 </ul>
             }
-
+            <label>Studio name</label>
             <input className={"form-field"} placeholder={"Studio name"} value={name} onChange={e => set_name(e.target.value)} />
             
+            <label>Federation ID</label>
             <input className={"form-field"} placeholder={"federation id"} value={federation_id} onChange={e => set_federation_id(e.target.value)} />
 
             <label>{"Address (number street name, city, state zipcode)"}</label>
             <input className={"form-field"} placeholder={"address"} value={address} onChange={e => set_address(e.target.value)} />
 
+            <label>Studio contact phone</label>
             <input className={"form-field"} placeholder={"studio contact phone number"} value={phone_contact} onChange={e => set_phone_contact(e.target.value)} />
 
+            <label> Studio contact email</label>
             <input className={"form-field"} placeholder={"studio contact email"} type="email" value={email_contact} onChange={e => set_email_contact(e.target.value)} />
 
+            <label>Studio bio</label>
             <textarea className={"form-field"} placeholder={"tell us about your studio"} value={studio_bio} onChange={e => set_studio_bio(e.target.value)} />
 
+            <label>Studio art</label>
             <select value={martial_art} onChange={e => set_martial_art(e.target.value)}>
                 <option>Select Martial Art</option>
                 {Object.values(martialArts).map( art => (<option value={art.id}>{art.name}</option>)
                 )}
             </select>
 
+            <label></label>
             <button onClick={submit}>Create Studio</button>
 
         </form>
