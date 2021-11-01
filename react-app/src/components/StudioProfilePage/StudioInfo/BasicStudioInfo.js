@@ -5,9 +5,7 @@ import StudioUpdate from '../StudioUpdate'
 export default function BasicStudioInfo({owner, studio}) {
     const [edit, setEdit] = React.useState(false)
     const user = useSelector(state => state.session.user)
-    React.useEffect(() => {
-        console.log(owner)
-    }, [owner])
+
     return (
         <div className={"studio-info"}>
             {

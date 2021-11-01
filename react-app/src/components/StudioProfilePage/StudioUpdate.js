@@ -27,11 +27,16 @@ export default function StudioUpdate({studio, edit, setEdit}) {
         e.preventDefault();
         const errors = [];
         if (!name) {errors.push("Please provide a value to the Name field")};
+        if (name.length > 256) {errors.push("name of studio is too long")}
         if (!federation_id) {errors.push("Please provide a value to the federation id field")};
+        if (federation_id.length > 14) {errors.push("Federation id is too long")}
         if (!address) {errors.push("Please provide a value to the address field")};
         if (!martial_art) {errors.push("Please provide a value to the martial art field")};
         if (!phone_contact) {errors.push("Please provide a value to the studio phone field")};
+        if (phone_contact.length > 14) {errors.push("Phone is too long")}
         if (!studio_bio) {errors.push("Please provide a value to the studio bio field")};
+        if (!email_contact) {errors.push("Please provide an email")}
+        if (email_contact.length > 30) {errors.push("Email is too long")}
         if (!owner_id) {errors.push("In order to add a studio you must be logged in. Please log in")}
         if (errors.length > 0) {
             setErrors(errors);
@@ -46,7 +51,6 @@ export default function StudioUpdate({studio, edit, setEdit}) {
                 martial_art_id: martial_art,
                 owner_id
             }
-            console.log("newStudio: ", updatedStudio);
             dispatch(updateStudioAction(studio.id, updatedStudio));
             // dispatch(createStudioAction(newStudio));
             setEdit(edit => !edit);

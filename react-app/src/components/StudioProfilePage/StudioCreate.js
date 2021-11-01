@@ -18,9 +18,9 @@ export default function StudioCreate() {
     const [errors, setErrors] = React.useState([]);
 
     const [name, set_name] = React.useState('');
-    const [federation_id, set_federation_id] = React.useState();
+    const [federation_id, set_federation_id] = React.useState('');
     const [address, set_address] = React.useState('') ;
-    const [phone_contact, set_phone_contact] = React.useState();
+    const [phone_contact, set_phone_contact] = React.useState('');
     const [email_contact, set_email_contact] = React.useState('');
     const [studio_bio, set_studio_bio] = React.useState('');
     const [martial_art, set_martial_art] = React.useState();
@@ -30,10 +30,15 @@ export default function StudioCreate() {
         e.preventDefault();
         const errors = [];
         if (!name) {errors.push("Please provide a value to the Name field")};
+        if (name.length > 256) {errors.push("Name of studio is too long")}
         if (!federation_id) {errors.push("Please provide a value to the federation id field")};
+        if (federation_id.length > 25) {errors.push("Federation id is too long")}
         if (!address) {errors.push("Please provide a value to the address field")};
         if (!martial_art) {errors.push("Please provide a value to the martial art field")};
         if (!phone_contact) {errors.push("Please provide a value to the studio phone field")};
+        if (phone_contact.length > 14) {errors.push("Phone number is too long")}
+        if (!email_contact) {errors.push("please provide a contact email")}
+        if (email_contact.length > 30) {errors.push("email is too long")}
         if (!studio_bio) {errors.push("Please provide a value to the studio bio field")};
         if (!owner_id) {errors.push("In order to add a studio you must be logged in. Please log in")}
         if (errors.length > 0) {
@@ -49,9 +54,7 @@ export default function StudioCreate() {
                 martial_art_id: martial_art,
                 owner_id
             }
-            console.log("newStudio: ", newStudio)
             const studioInfo = await dispatch(createStudioAction(newStudio));
-            console.log(studioInfo)
             history.push(`/studios/${studioInfo.studio.id}`)
             // setEdit(edit => !edit);
         }

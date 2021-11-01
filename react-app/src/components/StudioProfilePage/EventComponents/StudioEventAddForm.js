@@ -28,7 +28,6 @@ export default function StudioEventAddForm({setEdit, edit, studio_id}) {
                 location,
                 studio_id
             }
-            console.log(studioEvent)
             dispatch(createStudioEventAction(studioEvent))
             setEdit(!edit);
         } else {
@@ -50,19 +49,19 @@ export default function StudioEventAddForm({setEdit, edit, studio_id}) {
             }
 
             <label>Title of event</label>
-            <input onChange={e => set_title(e.target.value)}></input>
+            <input className={"form-field"} onChange={e => set_title(e.target.value)}></input>
 
             <label>Description</label>
-            <textarea onChange={e => set_description(e.target.value)}></textarea>
+            <textarea  className={"form-field"} onChange={e => set_description(e.target.value)}></textarea>
 
             <label>Event Date</label>
-            <input type="date" onChange={e => set_event_date(e.target.value)}></input>
+            <input className={"form-field"} type="date" onChange={e => set_event_date(e.target.value)}></input>
 
             <label>location</label>
-            <input onChange={e => set_event_location(e.target.value)}></input>
+            <input className={"form-field"} onChange={e => set_event_location(e.target.value)}></input>
 
             <button onClick={submit}>create event</button>
-            <button onClick={e => {e.preventDefault(); setEdit(!edit)}}>cancel</button>
+            <button  className={"form-field"} onClick={e => {e.preventDefault(); setEdit(!edit)}}>cancel</button>
         </form>
         </div>
         </>

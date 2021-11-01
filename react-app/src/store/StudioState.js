@@ -167,7 +167,6 @@ export const fetchAllStudiosAction = () => async(dispatch) => {
 
 export const fetchOneStudioAction = (studioId) => async(dispatch) => {
     const response = await fetch(`/api/studios/${studioId}`);
-    console.log("In the thunk")
     if (response.ok) {
         const oneStudio = await response.json();
         await dispatch(fetchStudio(oneStudio));
@@ -224,7 +223,6 @@ export const createStudioReviewAction = (review) => async(dispatch) => {
     );
     if (response.ok) {
         const review = await response.json();
-        console.log(review)
         await dispatch(createStudioReview(review));
     }
 }

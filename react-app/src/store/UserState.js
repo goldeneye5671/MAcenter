@@ -47,7 +47,6 @@ export const fetchUserAction = (userId) => async(dispatch) => {
 }
 
 export const updateUserAction = (userId, user) => async(dispatch) => {
-    console.log("In the update action")
     const response = await fetch(`/api/users/${userId}`,
         {
             method: "PUT",
@@ -59,7 +58,6 @@ export const updateUserAction = (userId, user) => async(dispatch) => {
     );
     if (response.ok) {
         const updatedUser = await response.json();
-        console.log(updatedUser)
         dispatch(updateUser(updatedUser));
     }
 }

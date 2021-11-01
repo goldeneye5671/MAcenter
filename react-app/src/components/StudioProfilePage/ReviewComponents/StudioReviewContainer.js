@@ -9,10 +9,6 @@ export default function StudioReviewContainer({studio_review, owner}) {
     
     const dispatch = useDispatch()
 
-    React.useEffect(() => {
-        console.log(edit)
-    }
-    , [edit])
 
     function deleteHandler (e) {
         e.preventDefault();

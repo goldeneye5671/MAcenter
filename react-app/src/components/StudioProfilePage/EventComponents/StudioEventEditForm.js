@@ -28,7 +28,6 @@ export default function StudioEventEditForm({studio_event, edit, setEdit}) {
                 location,
                 studio_id: studio_event.studio_id
             }
-            console.log(studioEvent)
             dispatch(updateStudioEventAction(studio_event.id, studioEvent))
             dispatch(fetchOneStudioAction(studio_event.studio_id))
             setEdit(!edit)

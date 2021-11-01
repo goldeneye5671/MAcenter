@@ -14,7 +14,6 @@ export default function StudioEvents({owner}) {
     const studioEvents = useSelector(state => Object.values(state.studios[studioId].studio_events))
 
     React.useState(() => {
-        console.log(edit)
         dispatch(fetchOneStudioAction(studioId))
     }, [dispatch, studioId])
     

@@ -32,12 +32,16 @@ export default function SignUpForm() {
         e.preventDefault();
         const errors = [];
         if (!first_name) {errors.push("Please provide a value to the first name field")};
+        if (first_name.length > 50) {errors.push("First Name is TOO long")}
         if (!last_name) {errors.push("Please provide a value to the last name field")};
+        if (last_name.length > 50) {errors.push("Last name is too long")}
         if (!email) {errors.push("Please provide a value to the email field")};
+        if (email.length > 255) {errors.push("email is too long")}
         if (!martial_art) {errors.push("Please provide a value to the password field")};
         if (!rank) {errors.push("Please provide a value to the rank field")};
         if (!bio) {errors.push("Please provide a value to the bio field")}
         if (!password) {errors.push("Please provide a value to the password field")};
+        if (password.length > 255)
         if (!verify_password) {errors.push("Please provide a value to the verify password field")};
         if (password !== verify_password) {errors.push("Passwords do not match")}
         if (errors.length > 0) {

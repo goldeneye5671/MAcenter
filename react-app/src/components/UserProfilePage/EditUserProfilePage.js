@@ -28,7 +28,6 @@ export default function EditUserProfilePage({edit, setEdit}) {
 
     function submit(e) {
         e.preventDefault();
-        console.log("clicked")
         const errors = [];
         if (!first_name) {errors.push("Please provide a value to the first name field")};
         if (!last_name) {errors.push("Please provide a value to the last name field")};
@@ -40,7 +39,6 @@ export default function EditUserProfilePage({edit, setEdit}) {
         if (errors.length > 0) {
             setErrors(errors);
         } else {
-            console.log(bio)
             const updatedUserInfo = {
                 first_name,
                 last_name,
@@ -50,7 +48,6 @@ export default function EditUserProfilePage({edit, setEdit}) {
                 rank_id: rank,
                 studio_id: parseInt(studio)
             }
-            console.log(updatedUserInfo)
             dispatch(updateUserAction(userId, updatedUserInfo))
             setEdit(!edit);
         }

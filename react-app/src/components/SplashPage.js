@@ -28,7 +28,7 @@ export default function SplashPage() {
                 </div>
             </div>
                 <div className={"splash-card-v2"}>
-                    <img className={"splash-img"} src={'/images/korean-yin-yang.svg'}></img>
+                    <img className={"splash-img"} src={'https://upload.wikimedia.org/wikipedia/commons/a/ad/Taegeuk.svg'}></img>
                     <div className={"sub-splash-card-v2"}>
                         <h2>Find your next Martial Art</h2>
                         <p>
@@ -38,7 +38,7 @@ export default function SplashPage() {
                     </div>
                 </div>
             <div className={"splash-card-v3"}>
-                <img className={"splash-img"} src={'/images/belts.jpg'}></img>
+                <img className={"splash-img"} src={'https://cdn.britannica.com/07/145407-050-8DBD77E9/belts.jpg'}></img>
                 <div className={"sub-splash-card-v2"}>
                     <h2>Leave a Review</h2>
                     <p>
@@ -48,7 +48,7 @@ export default function SplashPage() {
                 </div>
             </div>
             <div className={"splash-card-v2"}>
-                <img className={"splash-img"} src={'/images/Martial-Arts.jpg'}></img>
+                <img className={"splash-img"} src={'https://pinnaclemartialarts.com.au/wp-content/uploads/2020/06/Is-Pinnacle-Martial-Arts-Near-Me-Pinnacle-Martial-Arts-in-Marrickville-Inner-West-Sydney-and-Chester-Hill-in-South-West-Sydney-scaled.jpg'}></img>
                 <div className={"sub-splash-card-v2"}>
                     <h2>Bring your studio to more people</h2>
                     <p>
