@@ -61,9 +61,10 @@ export default function StudioEventEditForm({studio_event, edit, setEdit}) {
 
                 <label>location</label>
                 <input className={"form-field"}  value={location} onChange={e => set_event_location(e.target.value)}></input>
-
-                <button onClick={submit}>update event</button>
-                <button onClick={e => {e.preventDefault(); setEdit(!edit)}}>cancel</button>
+                <div className={"edit-and-delete-button-container"}>
+                    <button onClick={submit}>update event</button>
+                    <button onClick={e => {e.preventDefault(); setEdit(!edit)}}>cancel</button>
+                </div>
             </form>
         </div>
         </>,

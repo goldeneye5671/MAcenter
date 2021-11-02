@@ -47,11 +47,13 @@ export default function StudioReviewEditForm({edit, setEdit, studioReview}) {
                     errors && <ul>{errors.map(error => <li>{error}</li>)}</ul>
                 }
 
+                <h1>Edit review</h1>
+
                 <label>title</label>
-                <input value={title} onChange={e => set_title(e.target.value)}></input>
+                <input className={"form-field"} value={title} onChange={e => set_title(e.target.value)}></input>
 
                 <label>write a review</label>
-                <textarea value={content} onChange={e => set_content(e.target.value)}/>
+                <textarea className={"form-field"} value={content} onChange={e => set_content(e.target.value)}/>
 
                 <label>rating</label>
                 <div>
