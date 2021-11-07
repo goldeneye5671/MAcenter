@@ -8,6 +8,7 @@ import { updateUserAction } from '../../store/UserState';
 import UserName from '../Form/UserName';
 import Password from '../Form/Password';
 import Email from '../Form/Email';
+import Bio from '../Form/Bio';
 
 
 
@@ -101,12 +102,15 @@ export default function SignUpForm() {
                         submitClicked={submitClicked}
                     />
 
-                    <label></label>
-                    <textarea placeholder={"Tell us about yourself!"}className={"form-field"} value={bio} onChange={e => setBio(bio => e.target.value)} />
+                    <Bio
+                        bio={bio}
+                        setBio={setBio}
+                        submitClicked={submitClicked} 
+                    />
 
                     <div className={"fields-container"}>
                         <div className={"field-container"}>
-                        <label>Bio</label>
+                        <label>Martial Art</label>
                             <select value={martial_art} onChange={e => set_martial_art(e.target.value)}>
                                 <option>Select Martial Art</option>
                                 {Object.values(martialArts).map( art => (<option value={art.id}>{art.name}</option>)

@@ -17,8 +17,6 @@ export default function Email({email, setEmail, submitClicked}) {
                 errors.push("Provided email is not valid")
             }
 
-            console.log(email.match(emailRegex))
-
             if (errors.length > 0) {
                 setErrors(errors);
             } else {
@@ -33,28 +31,30 @@ export default function Email({email, setEmail, submitClicked}) {
 
     return (
         <div className={"fields-container"}>
-            <label>Email</label>
-            {
-                errors.includes("Email must be between 0 and 255 characters") && submitClicked ?
-                (
-                    <p>
-                        Email must be between 1 and 255 characters
-                    </p>
-                )
-                :
-                null
-            }
-            {
-                errors.includes("Provided email is not valid") && submitClicked ?
-                (
-                    <p>
-                        Provided email is not valid
-                    </p>
-                )
-                :
-                null
-            }
-            <input className={"form-field"} value={email} onChange={e => setEmail(e.target.value)} />
+            <div>
+                <label>Email</label>
+                {
+                    errors.includes("Email must be between 0 and 255 characters") && submitClicked ?
+                    (
+                        <p>
+                            Email must be between 1 and 255 characters
+                        </p>
+                    )
+                    :
+                    null
+                }
+                {
+                    errors.includes("Provided email is not valid") && submitClicked ?
+                    (
+                        <p>
+                            Provided email is not valid
+                        </p>
+                    )
+                    :
+                    null
+                }
+                <input className={"form-field"} value={email} onChange={e => setEmail(e.target.value)} />
+            </div>
         </div>
     )
 }
