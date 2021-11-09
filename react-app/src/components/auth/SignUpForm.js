@@ -89,6 +89,7 @@ export default function SignUpForm() {
                     />
                     
                     <Password
+                        single={false}
                         password={password}
                         verifyPassword={verify_password}
                         setPassword={set_password}

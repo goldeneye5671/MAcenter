@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import { fetchAllMartialArtsAction } from '../../store/MartialArtState';
 import { createStudioAction } from '../../store/StudioState';
-
+import Address from '../Form/Address';
+import StudioName from '../Form/StudioName';
+import Email from '../Form/Email'
+import Bio from "../Form/Bio"
 
 
 export default function StudioCreate() {
@@ -16,6 +19,7 @@ export default function StudioCreate() {
 
     const [loaded, setLoaded] = React.useState(false);
     const [errors, setErrors] = React.useState([]);
+    const [submitClicked, setSubmitClicked] = React.useState(false);
 
     const [name, set_name] = React.useState('');
     const [federation_id, set_federation_id] = React.useState('');
@@ -28,18 +32,16 @@ export default function StudioCreate() {
 
     async function submit(e) {
         e.preventDefault();
+        setSubmitClicked(true);
         const errors = [];
-        if (!name) {errors.push("Please provide a value to the Name field")};
-        if (name.length > 256) {errors.push("Name of studio is too long")}
-        if (!federation_id) {errors.push("Please provide a value to the federation id field")};
-        if (federation_id.length > 25) {errors.push("Federation id is too long")}
-        if (!address) {errors.push("Please provide a value to the address field")};
+        // if (!name) {errors.push("Please provide a value to the Name field")};
+        // if (name.length > 256) {errors.push("Name of studio is too long")}
+        // if (!federation_id) {errors.push("Please provide a value to the federation id field")};
+        // if (federation_id.length > 25) {errors.push("Federation id is too long")}
+        
         if (!martial_art) {errors.push("Please provide a value to the martial art field")};
         if (!phone_contact) {errors.push("Please provide a value to the studio phone field")};
         if (phone_contact.length > 14) {errors.push("Phone number is too long")}
-        if (!email_contact) {errors.push("please provide a contact email")}
-        if (email_contact.length > 30) {errors.push("email is too long")}
-        if (!studio_bio) {errors.push("Please provide a value to the studio bio field")};
         if (!owner_id) {errors.push("In order to add a studio you must be logged in. Please log in")}
         if (errors.length > 0) {
             setErrors(errors);
@@ -78,23 +80,36 @@ export default function StudioCreate() {
                     {errors.map((error, index) => <li key={index}>{error}</li>)}
                 </ul>
             }
-            <label>Studio name</label>
-            <input className={"form-field"} placeholder={"Studio name"} value={name} onChange={e => set_name(e.target.value)} />
-            
-            <label>Federation ID</label>
-            <input className={"form-field"} placeholder={"federation id"} value={federation_id} onChange={e => set_federation_id(e.target.value)} />
 
-            <label>{"Address (number street name, city, state zipcode)"}</label>
-            <input className={"form-field"} placeholder={"address"} value={address} onChange={e => set_address(e.target.value)} />
+
+            <StudioName 
+               studioName={name}
+               setStudioName={set_name} 
+               federationId={federation_id}
+               setFederationId={set_federation_id}
+               submitClicked={submitClicked}
+            />
+
+            <Address
+                address={address}
+                setAddress={set_address}
+                submitClicked={submitClicked}
+            />
 
             <label>Studio contact phone</label>
             <input className={"form-field"} placeholder={"studio contact phone number"} value={phone_contact} onChange={e => set_phone_contact(e.target.value)} />
 
-            <label> Studio contact email</label>
-            <input className={"form-field"} placeholder={"studio contact email"} type="email" value={email_contact} onChange={e => set_email_contact(e.target.value)} />
+            <Email
+                email={email_contact}
+                setEmail={set_email_contact}
+                submitClicked={submitClicked}
+            />
 
-            <label>Studio bio</label>
-            <textarea className={"form-field"} placeholder={"tell us about your studio"} value={studio_bio} onChange={e => set_studio_bio(e.target.value)} />
+            <Bio
+                bio={studio_bio}
+                setBio={set_studio_bio}
+                submitClicked={submitClicked}
+            />
 
             <label>Studio art</label>
             <select value={martial_art} onChange={e => set_martial_art(e.target.value)}>

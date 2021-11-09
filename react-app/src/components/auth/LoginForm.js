@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import Email from '../Form/Email';
+import Password from '../Form/Password';
 
 
 
@@ -10,6 +12,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
+  const [submitClicked, setSubmitClicked] = React.useState(false);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
@@ -40,25 +43,18 @@ const LoginForm = () => {
       {
           errors.length > 0 && <ul>{errors.map(error => <li>{error}</li>)}</ul>
       }
-        <label>Email</label>
-        <input
-          className={"form-field"}
-          name='email'
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={updateEmail}
+        <Email
+          email={email}
+          setEmail={setEmail}
+
         />
 
-        <label>Password</label>
-        <input
-          className={"form-field"}
-          name='password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={updatePassword}
+        <Password 
+          single={true}
+          password={password}
+          setPassword={setPassword}
         />
+        
         <div className={"edit-and-delete-button-container"}>
           <button type='submit'>Login</button>
           <button onClick={e => {
