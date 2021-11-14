@@ -30,22 +30,33 @@ export default function StudioCreate() {
     const [martial_art, set_martial_art] = React.useState();
     const [owner_id, set_owner_id] = React.useState(session.id);
 
+    const [nameValidated, setNameValidated] = React.useState(false)
+    const [emailValidated, setEmailValidated] = React.useState(false)
+    const [addressValidated, setAddressValidated] = React.useState(false)
+    const [phoneValidated, setPhoneValidated] = React.useState(false)
+    const [martialArtValidated, setMartialArtValidated] = React.useState(false)
+    const [bioValidated, setBioValidated] = React.useState(false)
+
     async function submit(e) {
         e.preventDefault();
         setSubmitClicked(true);
         const errors = [];
+        console.log("Address validated status: ", addressValidated)
         // if (!name) {errors.push("Please provide a value to the Name field")};
         // if (name.length > 256) {errors.push("Name of studio is too long")}
         // if (!federation_id) {errors.push("Please provide a value to the federation id field")};
         // if (federation_id.length > 25) {errors.push("Federation id is too long")}
         
-        if (!martial_art) {errors.push("Please provide a value to the martial art field")};
-        if (!phone_contact) {errors.push("Please provide a value to the studio phone field")};
-        if (phone_contact.length > 14) {errors.push("Phone number is too long")}
-        if (!owner_id) {errors.push("In order to add a studio you must be logged in. Please log in")}
-        if (errors.length > 0) {
+        // if (!martial_art) {errors.push("Please provide a value to the martial art field")};
+        // if (!phone_contact) {errors.push("Please provide a value to the studio phone field")};
+        // if (phone_contact.length > 14) {errors.push("Phone number is too long")}
+        // if (!owner_id) {errors.push("In order to add a studio you must be logged in. Please log in")}
+        
+        if (!nameValidated || !emailValidated || !addressValidated || !phoneValidated || !martialArtValidated || !bioValidated) {
             setErrors(errors);
+            console.log("Inside the check")
         } else {
+            console.log("Inside the otehr check")
             const newStudio = {
                 name,
                 federation_id,
@@ -74,12 +85,12 @@ export default function StudioCreate() {
             <div className={'form-container'}>
             <form className={"form"}>
             <h1 className={'form-header'}>Create Studio</h1>
-            {
+            {/* {
                 errors.length > 0 && 
                 <ul>
                     {errors.map((error, index) => <li key={index}>{error}</li>)}
                 </ul>
-            }
+            } */}
 
 
             <StudioName 
@@ -88,13 +99,17 @@ export default function StudioCreate() {
                federationId={federation_id}
                setFederationId={set_federation_id}
                submitClicked={submitClicked}
+               setValidated={setNameValidated}
             />
 
             <Address
                 address={address}
                 setAddress={set_address}
+                setValidated={setAddressValidated}
                 submitClicked={submitClicked}
             />
+
+            {/*
 
             <label>Studio contact phone</label>
             <input className={"form-field"} placeholder={"studio contact phone number"} value={phone_contact} onChange={e => set_phone_contact(e.target.value)} />
@@ -119,6 +134,7 @@ export default function StudioCreate() {
             </select>
 
             <label></label>
+            */}
             <button onClick={submit}>Create Studio</button>
 
         </form>

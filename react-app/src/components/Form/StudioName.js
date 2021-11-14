@@ -1,12 +1,14 @@
 import React from 'react'
 
-export default function StudioName({studioName, setStudioName, federationId, setFederationId, submitClicked}) {
+export default function StudioName({studioName, setStudioName, federationId, setFederationId, submitClicked, setValidated}) {
     
     const [errors, setErrors] = React.useState([]);
     const [showFederationId, setShowFederationId] = React.useState(false);
     
     React.useEffect(
         () => {
+            const errors = [];
+
             if (studioName.length === 0 || studioName.length >= 50) {
                 errors.push("Studio name must exist and be between 1 and 50 characters");
             }
@@ -17,10 +19,13 @@ export default function StudioName({studioName, setStudioName, federationId, set
                 }
             }
 
+            
             if (errors.length > 0) {
                 setErrors(errors);
+                setValidated(false);
             } else {
                 setErrors([]);
+                setValidated(true);
             }
 
         },
@@ -28,7 +33,7 @@ export default function StudioName({studioName, setStudioName, federationId, set
             studioName,
             federationId,
             showFederationId,
-            errors
+            setValidated
         ]
     );
 
