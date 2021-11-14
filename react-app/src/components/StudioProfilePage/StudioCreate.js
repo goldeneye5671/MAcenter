@@ -7,11 +7,13 @@ import Address from '../Form/Address';
 import StudioName from '../Form/StudioName';
 import Email from '../Form/Email'
 import Bio from "../Form/Bio"
+import Phone from '../Form/Phone';
+import MartialArt from '../Form/MartialArt';
 
 
 export default function StudioCreate() {
     const session = useSelector(state => state.session.user);
-    const martialArts = useSelector(state => state.martialArts);
+    const martialArts = useSelector(state => Object.values(state.martialArts));
     const studios = useSelector(state => state.studios)
     const history = useHistory()
 
@@ -40,23 +42,8 @@ export default function StudioCreate() {
     async function submit(e) {
         e.preventDefault();
         setSubmitClicked(true);
-        const errors = [];
-        console.log("Address validated status: ", addressValidated)
-        // if (!name) {errors.push("Please provide a value to the Name field")};
-        // if (name.length > 256) {errors.push("Name of studio is too long")}
-        // if (!federation_id) {errors.push("Please provide a value to the federation id field")};
-        // if (federation_id.length > 25) {errors.push("Federation id is too long")}
-        
-        // if (!martial_art) {errors.push("Please provide a value to the martial art field")};
-        // if (!phone_contact) {errors.push("Please provide a value to the studio phone field")};
-        // if (phone_contact.length > 14) {errors.push("Phone number is too long")}
-        // if (!owner_id) {errors.push("In order to add a studio you must be logged in. Please log in")}
-        
-        if (!nameValidated || !emailValidated || !addressValidated || !phoneValidated || !martialArtValidated || !bioValidated) {
-            setErrors(errors);
-            console.log("Inside the check")
-        } else {
-            console.log("Inside the otehr check")
+
+        if (nameValidated && emailValidated && addressValidated && phoneValidated && martialArtValidated && bioValidated) {
             const newStudio = {
                 name,
                 federation_id,
@@ -69,7 +56,6 @@ export default function StudioCreate() {
             }
             const studioInfo = await dispatch(createStudioAction(newStudio));
             history.push(`/studios/${studioInfo.studio.id}`)
-            // setEdit(edit => !edit);
         }
     }
 
@@ -85,13 +71,6 @@ export default function StudioCreate() {
             <div className={'form-container'}>
             <form className={"form"}>
             <h1 className={'form-header'}>Create Studio</h1>
-            {/* {
-                errors.length > 0 && 
-                <ul>
-                    {errors.map((error, index) => <li key={index}>{error}</li>)}
-                </ul>
-            } */}
-
 
             <StudioName 
                studioName={name}
@@ -109,6 +88,12 @@ export default function StudioCreate() {
                 setValidated={setEmailValidated}
             />
 
+            <Phone
+                phone={phone_contact}
+                setPhone={set_phone_contact}
+                submitClicked={submitClicked}
+                setValidated={setPhoneValidated}
+            />
 
             <Address
                 address={address}
@@ -117,26 +102,18 @@ export default function StudioCreate() {
                 submitClicked={submitClicked}
             />
 
-            {/*
-
-            <label>Studio contact phone</label>
-            <input className={"form-field"} placeholder={"studio contact phone number"} value={phone_contact} onChange={e => set_phone_contact(e.target.value)} />
-
             <Bio
                 bio={studio_bio}
                 setBio={set_studio_bio}
                 submitClicked={submitClicked}
             />
 
-            <label>Studio art</label>
-            <select value={martial_art} onChange={e => set_martial_art(e.target.value)}>
-                <option>Select Martial Art</option>
-                {Object.values(martialArts).map( art => (<option value={art.id}>{art.name}</option>)
-                )}
-            </select>
+            <MartialArt
+                martialArt={martial_art}
+                setMartialArt={set_martial_art}
+                martialArts={martialArts}
+            />
 
-            <label></label>
-            */}
             <button onClick={submit}>Create Studio</button>
 
         </form>
