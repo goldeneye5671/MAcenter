@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Email({email, setEmail, submitClicked}) {
+export default function Email({email, setEmail, submitClicked, setValidated}) {
     
     const [errors, setErrors] = React.useState([])
 
@@ -19,8 +19,10 @@ export default function Email({email, setEmail, submitClicked}) {
 
             if (errors.length > 0) {
                 setErrors(errors);
+                setValidated(false);
             } else {
-                setErrors([])
+                setErrors([]);
+                setValidated(true);
             }
         },
         [

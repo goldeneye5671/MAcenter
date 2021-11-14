@@ -102,6 +102,14 @@ export default function StudioCreate() {
                setValidated={setNameValidated}
             />
 
+            <Email
+                email={email_contact}
+                setEmail={set_email_contact}
+                submitClicked={submitClicked}
+                setValidated={setEmailValidated}
+            />
+
+
             <Address
                 address={address}
                 setAddress={set_address}
@@ -113,12 +121,6 @@ export default function StudioCreate() {
 
             <label>Studio contact phone</label>
             <input className={"form-field"} placeholder={"studio contact phone number"} value={phone_contact} onChange={e => set_phone_contact(e.target.value)} />
-
-            <Email
-                email={email_contact}
-                setEmail={set_email_contact}
-                submitClicked={submitClicked}
-            />
 
             <Bio
                 bio={studio_bio}
