@@ -11,8 +11,11 @@ const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const user = useSelector(state => state.session.user);
   const [submitClicked, setSubmitClicked] = React.useState(false);
+  const [emailValidated, setEmailValidated] = React.useState(false);
+  const [passwordValidated, setPasswordValidated] = React.useState(false);
+
+  const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
@@ -46,7 +49,8 @@ const LoginForm = () => {
         <Email
           email={email}
           setEmail={setEmail}
-
+          submitClicked={submitClicked}
+          setValidated={setEmailValidated}
         />
 
         <Password 

@@ -20,7 +20,6 @@ export default function StudioCreate() {
     const dispatch = useDispatch();
 
     const [loaded, setLoaded] = React.useState(false);
-    const [errors, setErrors] = React.useState([]);
     const [submitClicked, setSubmitClicked] = React.useState(false);
 
     const [name, set_name] = React.useState('');
@@ -56,6 +55,8 @@ export default function StudioCreate() {
             }
             const studioInfo = await dispatch(createStudioAction(newStudio));
             history.push(`/studios/${studioInfo.studio.id}`)
+        } else {
+            console.error("Not all validators were flipped.", nameValidated, emailValidated, phoneValidated, martialArtValidated, bioValidated)
         }
     }
 
@@ -64,7 +65,7 @@ export default function StudioCreate() {
             dispatch(fetchAllMartialArtsAction());
             setLoaded(true);
         })()
-    }, [loaded, dispatch, errors])
+    }, [loaded, dispatch])
     
     return (
         <div className={"container"}>
@@ -106,12 +107,14 @@ export default function StudioCreate() {
                 bio={studio_bio}
                 setBio={set_studio_bio}
                 submitClicked={submitClicked}
+                setValidated={setBioValidated}
             />
 
             <MartialArt
                 martialArt={martial_art}
                 setMartialArt={set_martial_art}
                 martialArts={martialArts}
+                setValidated={setMartialArtValidated}
             />
 
             <button onClick={submit}>Create Studio</button>

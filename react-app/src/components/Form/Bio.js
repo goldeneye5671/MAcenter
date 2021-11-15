@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Bio({bio, setBio, submitClicked}) {
+export default function Bio({bio, setBio, submitClicked, setValidated}) {
 
     const [errors, setErrors] = React.useState([]);
 
@@ -14,13 +14,16 @@ export default function Bio({bio, setBio, submitClicked}) {
 
             if (errors.length > 0) {
                 setErrors(errors);
+                setValidated(false)
             } else {
                 setErrors([]);
+                setValidated(true)
             }
         },
         [
             bio,
-            submitClicked
+            submitClicked,
+            setValidated
         ]
     )
         return (

@@ -88,7 +88,7 @@ export default function Address({address, setAddress, setValidated, submitClicke
                 setErrors(myErrors);
                 setValidated(false);
             } else {
-                setAddress(parsedAddress);
+                setAddress(`${street}, ${city}, ${state}, ${country}, ${zipcode}`);
                 setErrors([]);
                 setValidated(true)
             }

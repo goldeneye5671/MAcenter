@@ -4,7 +4,7 @@ def seed_studios():
     demo_studio = Studio(
         name="DeJohnette Martial Arts Academy",
         federation_id=123456,
-        address="1234 N. Santa Fe Avenue, Vista, CA 92083",
+        address="1234 N. Santa Fe Avenue, Vista, California, 92083",
         phone_contact=610,
         email_contact="test@test.net",
         martial_art_id=1,
@@ -14,7 +14,7 @@ def seed_studios():
     demo_studio2 = Studio(
         name="Test Studio 2",
         federation_id=123456,
-        address="1234 N. Santa Fe Avenue, Vista, CA 92083",
+        address="1234 N. Santa Fe Avenue, Vista, California, 92083",
         phone_contact=610,
         email_contact="test2@test.net",
         martial_art_id=2,
@@ -24,7 +24,7 @@ def seed_studios():
     demo_studio3 = Studio(
         name="Test Studio 3",
         federation_id=123456,
-        address="1234 N. Santa Fe Avenue, Vista, CA 92083",
+        address="1234 N. Santa Fe Avenue, Vista, California, 92083",
         phone_contact=610,
         email_contact="test3@test.net",
         martial_art_id=1,
@@ -34,7 +34,7 @@ def seed_studios():
     demo_studio4 = Studio(
         name="Test Studo 4",
         federation_id=123456,
-        address="1234 N. Santa Fe Avenue, Vista, CA 92083",
+        address="1234 N. Santa Fe Avenue, Vista, California, 92083",
         phone_contact=610,
         email_contact="test4@test.net",
         martial_art_id=1,
@@ -44,7 +44,7 @@ def seed_studios():
     demo_studio5 = Studio(
         name="Test Studio 5",
         federation_id=123456,
-        address="1234 N. Santa Fe Avenue, Vista, CA 92083",
+        address="1234 N. Santa Fe Avenue, Vista, California, 92083",
         phone_contact=610,
         email_contact="test5@test.net",
         martial_art_id=3,
