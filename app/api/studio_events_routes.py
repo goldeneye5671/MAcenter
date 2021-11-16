@@ -20,7 +20,9 @@ def create_delete_event():
         studio_event = Studio_Event(
             title=body['title'],
             description=body['description'],
-            event_date=body['event_date'],
+            date=body['date'],
+            start_time=body['start_time'],
+            end_time=body['end_time'],
             location=body['location'],
             studio_id=body['studio_id']
         )
@@ -38,7 +40,9 @@ def update_event(id):
             body=request.json
             studio_event.title=body.get("title", studio_event.title)
             studio_event.description=body.get("description", studio_event.description)
-            studio_event.event_date=body.get("event_date", studio_event.event_date)
+            studio_event.date=body.get("event_date", studio_event.event_date)
+            studio_event.start_time = body.get("start_time", studio_event.start_time)
+            studio_event.end_time = body.get("end_time", studio_event.end_time)
             studio_event.location=body.get("location", studio_event.location)
             studio_event.studio_id=body.get("studio_id", studio_event.studio_id)
             db.session.commit()

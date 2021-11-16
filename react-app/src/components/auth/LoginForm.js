@@ -57,6 +57,7 @@ const LoginForm = () => {
           single={true}
           password={password}
           setPassword={setPassword}
+          setValidated={setPasswordValidated}
         />
         
         <div className={"edit-and-delete-button-container"}>

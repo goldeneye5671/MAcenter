@@ -8,7 +8,7 @@ export default function DayPicker({weekDay, setWeekDay, submitClicked, setValida
         () => {
             const myErrors = [];
 
-            if (weekDay.length === 0) {
+            if (weekDay === "") {
                 myErrors.push("Please select a weekday")
             }
 
@@ -32,7 +32,7 @@ export default function DayPicker({weekDay, setWeekDay, submitClicked, setValida
         <div>
             <label>Day</label>
             <select value={weekDay} onChange={e => setWeekDay(e.target.value)}>
-                <option value={null}>Please select a day</option>
+                <option value={""}>Please select a day</option>
                 <option value={"Monday"}>Monday</option>
                 <option value={"Tuesday"}>Tuesday</option>
                 <option value={"Wednesday"}>Wednesday</option>

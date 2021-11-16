@@ -7,7 +7,9 @@ class Studio_Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(256), nullable=False)
     description = db.Column(db.Text, nullable=False)
-    event_date = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.String, nullable=False)
+    start_time = db.Column(db.String(5))
+    end_time = db.Column(db.String(5))
     location = db.Column(db.Text, nullable=False)
 
 
@@ -19,7 +21,9 @@ class Studio_Event(db.Model):
             'id': self.id,
             'title': self.title,
             'description': self.description,
-            'event_date': self.event_date,
+            'event_date': self.date,
+            'start_time': self.start_time,
+            'end_time': self.end_time,
             'location': self.location,
             'studio_id': self.studio_id
         }

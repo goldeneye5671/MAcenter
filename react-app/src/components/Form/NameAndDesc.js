@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function StudioScheduleName({scheduleName, setScheduleName, scheduleDesc, setScheduleDesc, setValidated, setDescVal, submitClicked}) {
+export default function NameAndDesc({name, setName, desc, setDesc, setValidated, submitClicked}) {
     
     const [errors, setErrors] = React.useState([])
 
@@ -8,11 +8,11 @@ export default function StudioScheduleName({scheduleName, setScheduleName, sched
         () => {
             const myErrors = [];
             
-            if (scheduleDesc.length === 0 || scheduleDesc.length > 1000) {
+            if (desc.length === 0 || desc.length > 1000) {
                 myErrors.push("Description must be between 1 and 1000 characters");
             }
 
-            if (scheduleName.length === 0 || scheduleName.length > 255) {
+            if (name.length === 0 || name.length > 255) {
                 myErrors.push("Schedule name must exist and be between 1 and 255 characters");
             }
 
@@ -25,10 +25,10 @@ export default function StudioScheduleName({scheduleName, setScheduleName, sched
             }
         },
         [
-            scheduleName,
-            scheduleDesc,
-            setScheduleName,
-            setScheduleDesc,
+            name,
+            desc,
+            setName,
+            setDesc,
             setValidated,
             submitClicked
         ]
@@ -36,22 +36,22 @@ export default function StudioScheduleName({scheduleName, setScheduleName, sched
 
     return (
         <div>
-            <label>Schedule Name</label>
-            <input className={"form-field"} value={scheduleName} onChange={e => setScheduleName(e.target.value)}/>
+            <label>Name</label>
+            <input className={"form-field"} value={name} onChange={e => setName(e.target.value)}/>
             {
                 errors.includes("Schedule name must exist and be between 1 and 255 characters") && submitClicked ?
                     (
                         <p>
-                            Schedule name must exist and be between 1 and 255 characters
+                            Name must exist and be between 1 and 255 characters
                         </p>
                     )
                 :
                     null
             }
 
-            <label>Schedule Description</label>
-            <textarea className={"form-field"} value={scheduleDesc} onChange={e => setScheduleDesc(e.target.value)} />
-            <p>{scheduleDesc.length}/1000</p>
+            <label>Description</label>
+            <textarea className={"form-field"} value={desc} onChange={e => setDesc(e.target.value)} />
+            <p>{desc.length}/1000</p>
             {
                 errors.includes("Description must be between 1 and 1000 characters") && submitClicked ? 
                 (

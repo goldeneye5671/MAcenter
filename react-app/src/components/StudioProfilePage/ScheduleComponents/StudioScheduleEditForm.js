@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 
 import StartEndTime from '../../Form/StartEndTime';
 import DayPicker from '../../Form/DayPicker';
-import StudioScheduleName from '../../Form/StudioScheduleName';
+import NameAndDesc from '../../Form/NameAndDesc';
 
 
 export default function StudioScheduleEditForm({studioSchedule, edit, setEdit}) {
@@ -49,11 +49,11 @@ export default function StudioScheduleEditForm({studioSchedule, edit, setEdit}) 
             <form className={"form"}>
                 <h1>Edit schedule</h1>
 
-                <StudioScheduleName
-                    scheduleName={schedule_name}
-                    scheduleDesc={schedule_description}
-                    setScheduleName={set_schedule_name}
-                    setScheduleDesc={set_schedule_description}
+                <NameAndDesc
+                    name={schedule_name}
+                    desc={schedule_description}
+                    setName={set_schedule_name}
+                    setDesc={set_schedule_description}
                     setValidated={setStudioScheduleNameValidated}
                     submitClicked={submitClicked}
                 />
