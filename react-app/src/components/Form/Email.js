@@ -27,7 +27,8 @@ export default function Email({email, setEmail, submitClicked, setValidated}) {
         },
         [
             email,
-            submitClicked
+            submitClicked,
+            setValidated
         ]
     )
 

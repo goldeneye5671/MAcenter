@@ -26,7 +26,7 @@ export default function StudioEventContainer({owner, studio_event}) {
                 owner ? 
                     !edit ? 
                         (
-                            <div className={"event-container"}>
+                            <div>
                                 <div className="headers">
                                     <h4>{studio_event?.title}</h4>
                                     <p>{studio_event?.event_date}</p>
@@ -45,7 +45,7 @@ export default function StudioEventContainer({owner, studio_event}) {
                         )
                     :
                         (
-                            <div className={"event-container"}>
+                            <div>
                                 <StudioEventEditForm studio_event={studio_event} edit={edit} setEdit={setEdit} />
                                 <div>
                                     <div className="headers">
@@ -67,7 +67,7 @@ export default function StudioEventContainer({owner, studio_event}) {
                         )
                 :
                 (
-                    <div className={"event-container"}>
+                    <div>
                         <div className="headers">
                             <h4>{studio_event?.title}</h4>
                             <p>{studio_event?.event_date}</p>

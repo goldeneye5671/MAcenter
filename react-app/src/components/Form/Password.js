@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Password({single, password, setPassword, verifyPassword, setVerifyPassword, submitClicked}) {
+export default function Password({single, password, setPassword, verifyPassword, setVerifyPassword, submitClicked, setValidated}) {
 
     const [errors, setErrors] = React.useState([]);
 
@@ -26,15 +26,18 @@ export default function Password({single, password, setPassword, verifyPassword,
 
             if (errors.length > 0) {
                 setErrors(errors);
+                setValidated(false)
             } else{
                 setErrors([]);
+                setValidated(true);
             }
         },
         [
             password,
             verifyPassword,
             submitClicked,
-            single
+            single,
+            setValidated
         ]
     )
         if (!single) {

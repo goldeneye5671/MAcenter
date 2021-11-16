@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function UserName({firstName, lastName, setFirstName, setLastName, submitClicked}) {
+export default function UserName({firstName, lastName, setFirstName, setLastName, submitClicked, setValidated}) {
     
     const [errors, setErrors] = React.useState([])
 
@@ -16,16 +16,19 @@ export default function UserName({firstName, lastName, setFirstName, setLastName
                 errors.push("Last Name must exist and be between 1 and 50 characters");
             }
 
-            if (errors) {
+            if (errors.length > 0) {
                 setErrors(errors);
+                setValidated(false)
             }else{
                 setErrors([]);
+                setValidated(true)
             }
         },
         [
             firstName,
             lastName,
-            submitClicked
+            submitClicked,
+            setValidated
         ]
     )
     

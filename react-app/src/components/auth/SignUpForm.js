@@ -21,6 +21,7 @@ export default function SignUpForm() {
     const [loaded, setLoaded] = React.useState(false);
     const [errors, setErrors] = React.useState([]);
     const [submitClicked, setSubmitClicked] = React.useState(false);
+
     const [first_name, set_first_name] = React.useState('');
     const [last_name, set_last_name] = React.useState('');
     const [email, set_email] = React.useState('');
@@ -31,20 +32,18 @@ export default function SignUpForm() {
     const [password, set_password] = React.useState('');
     const [verify_password, set_verify_password] = React.useState('');
 
+    const [usernameValidated, setUsernameValidated] = React.useState(false)
+    const [emailValidated, setEmailValidated] = React.useState(false)
+    const [passwordValidated, setPasswordValidated] = React.useState(false)
+    const [bioValidated, setBioValidated] = React.useState(false)
+
     const dispatch = useDispatch()
 
     async function submit(e) {
         e.preventDefault();
         setSubmitClicked(true);
-        const errors = [];
-        if (!email) {errors.push("Please provide a value to the email field")};
-        if (email.length > 255) {errors.push("email is too long")}
-        if (!martial_art) {errors.push("Please provide a value to the password field")};
-        if (!rank) {errors.push("Please provide a value to the rank field")};
-        if (!bio) {errors.push("Please provide a value to the bio field")}
-        if (errors.length > 0) {
-            setErrors(errors);
-        } else {
+        
+        if (usernameValidated && emailValidated && passwordValidated && bioValidated) {
             const newUser = {
                 first_name,
                 last_name,
@@ -62,6 +61,12 @@ export default function SignUpForm() {
               } else {
                 setErrors(otherErrs);
               }
+        } else {
+            console.error("There is an error somewhere")
+            console.log("username", usernameValidated);
+            console.log("password", passwordValidated);
+            console.log("email", emailValidated);
+            console.log("bio", bioValidated)
         }
     }
 
@@ -86,6 +91,7 @@ export default function SignUpForm() {
                         setFirstName={set_first_name}
                         setLastName={set_last_name}
                         submitClicked={submitClicked}
+                        setValidated={setUsernameValidated}
                     />
                     
                     <Password
@@ -95,18 +101,21 @@ export default function SignUpForm() {
                         setPassword={set_password}
                         setVerifyPassword={set_verify_password}
                         submitClicked={submitClicked}
+                        setValidated={setPasswordValidated}
                     />
                     
                     <Email 
                         email={email}
                         setEmail={set_email}
                         submitClicked={submitClicked}
+                        setValidated={setEmailValidated}
                     />
 
                     <Bio
                         bio={bio}
                         setBio={setBio}
                         submitClicked={submitClicked} 
+                        setValidated={setBioValidated}
                     />
 
                     <div className={"fields-container"}>
