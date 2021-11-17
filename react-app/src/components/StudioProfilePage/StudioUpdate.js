@@ -40,7 +40,7 @@ export default function StudioUpdate({studio, edit, setEdit}) {
 
     function submit(e) {
         e.preventDefault();
-
+        setSubmitClicked(true);
         if (nameValidated && emailValidated && addressValidated && phoneValidated && martialArtValidated && bioValidated) {
             const updatedStudio = {
                 name,
