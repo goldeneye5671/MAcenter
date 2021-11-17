@@ -36,7 +36,7 @@ export default function NameAndDesc({name, setName, desc, setDesc, setValidated,
 
     return (
         <div>
-            <label>Name</label>
+            <label>Title</label>
             <input className={"form-field"} value={name} onChange={e => setName(e.target.value)}/>
             {
                 errors.includes("Schedule name must exist and be between 1 and 255 characters") && submitClicked ?

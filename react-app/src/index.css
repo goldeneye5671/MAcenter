@@ -210,6 +210,9 @@ button, .link-button, .active-button-fixed, .button, .home-button {
   .profile-container{
       display: flex;
       flex-direction: row;
+      padding: 45px;
+      justify-content: center;
+      align-items: center;
   }
 
   .modal-styles{

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { createStudioReviewAction, updateStudioReviewAction } from '../../../store/StudioState';
 import ReactDOM from 'react-dom'
+import NameAndDesc from '../../Form/NameAndDesc';
+import Rating from '../../Form/Rating';
 
 export default function StudioReviewEditForm({edit, setEdit, studioReview}) {
     const user = useSelector(state => state.session.user)
@@ -13,19 +15,16 @@ export default function StudioReviewEditForm({edit, setEdit, studioReview}) {
     const [rating, set_rating] = React.useState(studioReview.rating);
     
     const [errors, set_errors] = React.useState([]);
+    const [submitClicked, setSubmitClicked] = React.useState(false)
+
+    const [nameAndDescValidated, setNameAndDescValidated] = React.useState(false);
 
 
     function submit (e) {
         const errors = [];
         e.preventDefault();
-        if (!user_id) errors.push("You must be signed in to leave a review. Please sign in");
-        if (!title) errors.push("Please provide a title in the title field");
-        if (!content) errors.push("Please provide a review")
-        if (!rating) errors.push("Please provide a number rating");
-        if (!studioReview.studio_id) errors.push("Please provide a studio");
-        if (errors.length > 0) {
-            set_errors(errors);
-        } else {
+        setSubmitClicked(true)
+        if(nameAndDescValidated) {
             const studio_review = {
                 studio_id: studioReview.studio_id,
                 user_id,
@@ -43,26 +42,22 @@ export default function StudioReviewEditForm({edit, setEdit, studioReview}) {
         <div className={"overlay-styles"}></div>
         <div className={"form-container modal-styles"}>
             <form className={"form"}>
-                {
-                    errors && <ul>{errors.map(error => <li>{error}</li>)}</ul>
-                }
-
+        
                 <h1>Edit review</h1>
 
-                <label>title</label>
-                <input className={"form-field"} value={title} onChange={e => set_title(e.target.value)}></input>
+                <NameAndDesc 
+                    name={title}
+                    desc={content}
+                    setName={set_title}
+                    setDesc={set_content}
+                    setValidated={setNameAndDescValidated}
+                    submitClicked={submitClicked}
+                />
 
-                <label>write a review</label>
-                <textarea className={"form-field"} value={content} onChange={e => set_content(e.target.value)}/>
-
-                <label>rating</label>
-                <div>
-                    <label>1</label><input onChange={e => set_rating(1)} type="radio" value={1} checked={rating === 1}></input>
-                    <label>2</label><input onChange={e => set_rating(2)} type="radio" value={2} checked={rating === 2}></input>
-                    <label>3</label><input onChange={e => set_rating(3)} type="radio" value={3} checked={rating === 3}></input>
-                    <label>4</label><input onChange={e => set_rating(4)} type="radio" value={4} checked={rating === 4}></input>
-                    <label>5</label><input onChange={e => set_rating(5)} type="radio" value={5} checked={rating === 5}></input>
-                </div>
+                <Rating
+                    rating={rating}
+                    setRating={set_rating}
+                />
 
                 <button onClick={submit}>update review</button>
                 <button onClick={e => {e.preventDefault(); setEdit(!edit)}}>cancel</button>

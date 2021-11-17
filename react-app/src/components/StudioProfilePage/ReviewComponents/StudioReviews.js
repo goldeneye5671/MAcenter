@@ -14,7 +14,7 @@ export default function StudioReviews() {
         <>
         <div className={"headers"}>
             <h4>Reviews</h4>
-            {user && (<button onClick={e => setEdit(!edit)}>Add Review</button>)}
+            {(user && !studioReviews.find(review => review.user_id === user.id)) && (<button onClick={e => setEdit(!edit)}>Add Review</button>)}
         </div>
         <div className={'studio-profile-container'}>
             {
