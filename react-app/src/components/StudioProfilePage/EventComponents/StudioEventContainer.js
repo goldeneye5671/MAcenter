@@ -21,7 +21,7 @@ export default function StudioEventContainer({owner, studio_event}) {
     }
     
     return (
-        <div>
+        <div >
             {
                 owner ? 
                     !edit ? 
@@ -29,7 +29,8 @@ export default function StudioEventContainer({owner, studio_event}) {
                             <div>
                                 <div className="headers">
                                     <h4>{studio_event?.title}</h4>
-                                    <p>{studio_event?.event_date}</p>
+                                    <p>{studio_event?.week_day} {studio_event?.event_date}</p>
+                                    <p>{studio_event?.start_time} - {studio_event?.end_time}</p>
                                     <div>{studio_event?.location}</div>
                                 </div>
                                 <div className={"studio-event-content"}>

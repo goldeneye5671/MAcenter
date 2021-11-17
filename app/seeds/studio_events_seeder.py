@@ -1,53 +1,73 @@
 from app.models import db, Studio_Event
-from datetime import datetime
 
 def seed_studio_events():
+    
     se1 = Studio_Event(
         title="Test Event",
         description="This is a test event",
-        event_date=datetime.now(),
+        date='2021-12-20',
+        start_time='12:00',
+        end_time='14:00',
         location="1234 test road",
         studio_id=1
     )
+
     se2 = Studio_Event(
         title="Test Event",
         description="This is a test event",
-        event_date=datetime.now(),
+        date='2021-12-20',
+        start_time='12:00',
+        end_time='14:00',
         location="1234 test road",
         studio_id=1
     )
+
     se3 = Studio_Event(
         title="Test Event",
         description="This is a test event",
-        event_date=datetime.now(),
+        date='2021-12-20',
+        start_time='12:00',
+        end_time='14:00',
         location="1234 test road",
         studio_id=1
     )
+
     se4 = Studio_Event(
         title="Test Event",
         description="This is a test event",
-        event_date=datetime.now(),
+        date='2021-12-20',
+        start_time='12:00',
+        end_time='14:00',
         location="1234 test road",
         studio_id=1
     )
+
     se5 = Studio_Event(
         title="Test Event",
         description="This is a test event",
-        event_date=datetime.now(),
+        date='2021-12-20',
+        start_time='12:00',
+        end_time='14:00',
         location="1234 test road",
         studio_id=1
     )
+
     se6 = Studio_Event(
         title="Test Event",
         description="This is a test event",
-        event_date=datetime.now(),
+        date='2021-12-20',
+        start_time='12:00',
+        end_time='14:00',
         location="1234 test road",
         studio_id=1
     )
+
     se7 = Studio_Event(
         title="Test Event",
         description="This is a test event",
-        event_date=datetime.now(),
+        date='2021-12-20',
+        start_time='12:00',
+        end_time='14:00',
         location="1234 test road",
         studio_id=1
     )
