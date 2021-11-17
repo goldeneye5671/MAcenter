@@ -4,7 +4,12 @@ import { Link } from 'react-router-dom';
 import { clearStudioStateAction, fetchAllStudiosAction } from '../../store/StudioState';
 
 export default function StudioContainer({activeArt}) {
-    const activeMartialArtStudios = useSelector(state => Object.values(state.studios))
+    const activeMartialArtStudios = useSelector(state => Object.values(state.studios)?.filter(
+        studio => {
+            return studio.martial_art.id === activeArt
+        }
+    ))
+    const [searchTerm, setSearchTerm] = React.useState("")
     const dispatch = useDispatch();
     React.useEffect(() => {
         // dispatch(clearStudioStateAction())
@@ -14,14 +19,26 @@ export default function StudioContainer({activeArt}) {
 
     return (
         <div className={"studio-list"}>
+            <div>
+                <label>Search Studios</label>
+                <input 
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                />
+            </div>
             {
-                activeMartialArtStudios.filter(
-                    studio => {
-                        return studio.martial_art.id === activeArt
-                    }
-                ).map(studio => {
-                    return <Link className={"button button-fixed"} to={`/studios/${studio.id}`}>{studio.name}</Link>
-                })
+                searchTerm.length > 0 ? 
+                    activeMartialArtStudios.filter(
+                        studio => {
+                            return studio.name.toLowerCase().includes(searchTerm.toLowerCase())
+                        }
+                    ).map(studio => {
+                        return <Link className={"button button-fixed"} to={`/studios/${studio.id}`}>{studio.name}</Link>
+                    })
+                :
+                    activeMartialArtStudios.map(studio => {
+                        return <Link className={"button button-fixed"} to={`/studios/${studio.id}`}>{studio.name}</Link>
+                    })
             }
         </div>
     )
