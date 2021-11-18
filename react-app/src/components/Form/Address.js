@@ -50,6 +50,8 @@ export default function Address({address, setAddress, setValidated, submitClicke
                         )
                         const recievedAddress = await response.json();
 
+                        console.log(recievedAddress)
+
                         if (recievedAddress.addresses.length === 0 || recievedAddress.addresses.length > 1) {
                             myErrors.push("Address is invalid. Please re-enter the address")
 
