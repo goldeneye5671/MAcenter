@@ -50,7 +50,7 @@ def all_studios():
 def one_studio(id):
     if (request.method == "GET"):
         studio = Studio.query.get(id)
-        return studio.to_dict_with_owner()
+        return studio.to_dict()
     elif (request.method == "PUT"):
         body = request.json
         studio = Studio.query.get(id)

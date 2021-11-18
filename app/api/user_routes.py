@@ -9,14 +9,14 @@ user_routes = Blueprint('users', __name__)
 # @login_required
 def users():
     users = User.query.all()
-    return jsonify([user.to_dict() for user in users])
+    return jsonify([user.to_dict_with_studios() for user in users])
 
 
 @user_routes.route('/<int:id>')
 def user(id):
     user = User.query.get(id)
     if user:
-        return user.to_dict()
+        return user.to_dict_with_studios()
     else:
         return jsonify({"message": "User not found"}), 404
 
@@ -39,7 +39,7 @@ def user_profile(id):
                 # user.studio_id = body.get("studio_id", user.studio_id)
                 user.studios=[studio]
                 db.session.commit()
-                return user.to_dict()
+                return user.to_dict_with_studios()
             else:
                 return {}, 404
         else:

@@ -43,7 +43,7 @@ export default function SignUpForm() {
         e.preventDefault();
         setSubmitClicked(true);
         
-        if (usernameValidated && emailValidated && passwordValidated && bioValidated) {
+        if (usernameValidated && emailValidated && passwordValidated && bioValidated && errors.length === 0) {
             const newUser = {
                 first_name,
                 last_name,
@@ -60,6 +60,7 @@ export default function SignUpForm() {
                 history.push('/')
               } else {
                 setErrors(otherErrs);
+                console.log(otherErrs)
               }
         } else {
             console.error("There is an error somewhere")
@@ -85,6 +86,17 @@ export default function SignUpForm() {
                 <form className={"form"}>
                     <h1 className={"form-header"}>sign up form</h1>
                     
+                    {
+                        errors.length > 0 && submitClicked ? 
+                        (
+                            errors.map( error =>
+                                <p>{error}</p>
+                                )
+                        )
+                        :
+                        null
+                    }
+
                     <UserName 
                         firstName={first_name}
                         lastName={last_name}
