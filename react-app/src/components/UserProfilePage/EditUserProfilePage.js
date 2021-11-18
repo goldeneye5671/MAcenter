@@ -9,6 +9,7 @@ import ReactDOM from "react-dom"
 import UserName from '../Form/UserName';
 import Email from '../Form/Email';
 import Bio from '../Form/Bio';
+import SignUpArtStudioSelector from '../Form/SignUpArtStudioSelector';
 
 
 export default function EditUserProfilePage({edit, setEdit}) {
@@ -30,18 +31,20 @@ export default function EditUserProfilePage({edit, setEdit}) {
     const [usernameValidated, setUsernameValidated] = React.useState(false)
     const [emailValidated, setEmailValidated] = React.useState(false)
     const [bioValidated, setBioValidated] = React.useState(false)
+    const [signUpArtStudioSelectorValidated, setSignUpStudioSelectorValidated] = React.useState(false);
 
 
-    const martialArts = useSelector(state => state.martialArts)
-    const studios = useSelector(state => state.studios);
+    const martialArts = useSelector(state => Object.values(state.martialArts))
+    const studios = useSelector(state => Object.values(state.studios));
 
 
     const dispatch = useDispatch()
 
     function submit(e) {
+        console.log("clicked", submitClicked)
         e.preventDefault();
         setSubmitClicked(true);
-        if (usernameValidated && emailValidated && bioValidated) {
+        if (usernameValidated && emailValidated && bioValidated && signUpArtStudioSelectorValidated) {
             const updatedUserInfo = {
                 first_name,
                 last_name,
@@ -53,6 +56,8 @@ export default function EditUserProfilePage({edit, setEdit}) {
             }
             dispatch(updateUserAction(userId, updatedUserInfo))
             setEdit(!edit);
+        } else {
+            console.error("There was an error")
         }
     }
 
@@ -92,33 +97,22 @@ export default function EditUserProfilePage({edit, setEdit}) {
                     setValidated={setBioValidated}
                 />
 
-                <div className={"fields-container"}>
-                    <div className={"field-container"}>
-                    <label>Martial Art</label>
-                        <select value={martial_art} onChange={e => set_martial_art(e.target.value)}>
-                            <option>Select Martial Art</option>
-                            {Object.values(martialArts).map( art => (<option value={art.id}>{art.name}</option>)
-                            )}
-                        </select>
-                    </div>
+                <SignUpArtStudioSelector
+                    martialArts={martialArts}
+                    studios={studios}
+                    martialArt={martial_art}
+                    studio={studio}
+                    setMartialArt={set_martial_art}
+                    setStudio={set_studio}
+                    setRank={set_rank}
+                    rank={rank}
+                    submitClicked={submitClicked}
+                    setValidated={setSignUpStudioSelectorValidated}
+                />
 
-                    <div className={"field-container"}>
-                    <label>Rank</label>
-                        <select value={rank} onChange={e => set_rank(e.target.value)}>
-                        <option>Select Rank</option>
-                            {martialArts[martial_art]?.ranks?.map(rank => (<option value={rank.id}>{rank.name}</option>))}
-                        </select>
-                    </div>
-                </div>
-
-                    <label>Studio</label>
-                    <select value={studio} onChange={e => set_studio(e.target.value)}>
-                        <option>Select Studio</option>
-                        {Object.values(studios).map(studio => (<option value={studio.id}>{studio.name}</option>))}
-                    </select>
-                    <button onClick={submit}>Update</button> 
-                    <button onClick={e => setEdit(!edit)}>Cancel</button>
-                </form>
+                <button onClick={submit}>Update</button> 
+                <button onClick={e => setEdit(!edit)}>Cancel</button>
+            </form>
         </div>
         </>,
         document.getElementById("portal")

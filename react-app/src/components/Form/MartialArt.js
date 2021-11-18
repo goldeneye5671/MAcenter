@@ -9,8 +9,8 @@ export default function MartialArt({martialArt, setMartialArt, martialArts, subm
             const myErrors = [];
 
             
-            if (martialArt === "0") {
-                myErrors.push("no art selected");
+            if (martialArt === "null") {
+                myErrors.push("Please select a martial art");
             }
 
             if (myErrors.length > 0) {
@@ -31,9 +31,9 @@ export default function MartialArt({martialArt, setMartialArt, martialArts, subm
     
     return (
         <div>
-            <label>Studio art</label>
+            <label>martial art</label>
             <select value={martialArt} onChange={e => setMartialArt(e.target.value)}>
-                <option value={"0"}>Select Martial Art</option>
+                <option value={"null"}>Select Martial Art</option>
                 {
                     martialArts.map( 
                         art => (<option value={art.id}>{art.name}</option>)
@@ -41,7 +41,14 @@ export default function MartialArt({martialArt, setMartialArt, martialArts, subm
                 }
             </select>
             {
-                errors.includes("")
+                errors.length > 0 && submitClicked ? 
+                    errors.map(
+                        error => {
+                            return <p>{error}</p>
+                        }
+                    )
+                :
+                null
             }
 
         </div>
