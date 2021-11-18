@@ -194,32 +194,32 @@ def seed_martial_art_ranks():
     mar1 = Martial_Art_Rank(
         name="Yellow Belt",
         rank_number=10,
-        martial_art_rank=3
+        martial_art_rank=4
     )
     mar2 = Martial_Art_Rank(
         name="Orange Belt",
         rank_number=9,
-        martial_art_rank=3
+        martial_art_rank=4
     )
     mar3 = Martial_Art_Rank(
         name="Green Belt",
         rank_number=8,
-        martial_art_rank=3
+        martial_art_rank=4
     )
     mar4 = Martial_Art_Rank(
         name="Blue Belt",
         rank_number=7,
-        martial_art_rank=3
+        martial_art_rank=4
     )
     mar5 = Martial_Art_Rank(
         name="Brown Belt",
         rank_number=6,
-        martial_art_rank=3
+        martial_art_rank=4
     )
     mar6 = Martial_Art_Rank(
         name="Black Belt",
         rank_number=5,
-        martial_art_rank=3
+        martial_art_rank=4
     )
 
     db.session.add(mar1)
