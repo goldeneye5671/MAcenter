@@ -13,7 +13,6 @@ export default function Address({address, setAddress, setValidated, submitClicke
     React.useEffect(
         () => {
             const myErrors = [];
-            const parsedAddress = parseForAPIRoute(`${street} ${city} ${state} ${country} ${zipcode}`);
             if (street.length === 0 || street.length >= 255) {
                 myErrors.push("Street name must be between 1 and 255 characters");
             }
@@ -43,7 +42,7 @@ export default function Address({address, setAddress, setValidated, submitClicke
                 //  check to see if it is a valid address
                 (async () => {
                     try{
-                        const response = await fetch(`https://api.radar.io/v1/geocode/forward?query=${parsedAddress}`,
+                        const response = await fetch(`https://api.radar.io/v1/geocode/forward?query=${street}, ${city}, ${state} ${zipcode} ${country}`,
                             {
                                 "method":"GET",
                                 "headers":{"authorization":"prj_test_pk_9b56acdee26ee38170ccd7bd107b3fbef2ae1438"}
@@ -55,19 +54,19 @@ export default function Address({address, setAddress, setValidated, submitClicke
                             myErrors.push("Address is invalid. Please re-enter the address")
 
                         } else {
-                            if (recievedAddress.addresses[0].addressLabel.toLowerCase() !== street.toLowerCase()){
+                            if (recievedAddress.addresses[0].addressLabel && recievedAddress.addresses[0].addressLabel.toLowerCase() !== street.toLowerCase()){
                                 myErrors.push("Addresses does not exist. Please double check the address")
                             }
-                            if (!recievedAddress.addresses[0].city.toLowerCase().includes(city.toLowerCase())) {
+                            if (recievedAddress.addresses[0].city && !recievedAddress.addresses[0].city.toLowerCase().includes(city.toLowerCase())) {
                                 myErrors.push("Cities do not exist. Please double check the city");
                             }
-                            if (recievedAddress.addresses[0].state.toLowerCase() !== state.toLowerCase()) {
+                            if (recievedAddress.addresses[0].state && recievedAddress.addresses[0].state.toLowerCase() !== state.toLowerCase()) {
                                 myErrors.push("State/province does not exist. Please double check the state/province")
                             }
-                            if (recievedAddress.addresses[0].country.toLowerCase() !== country.toLowerCase()) {
+                            if (recievedAddress.addresses[0].country && recievedAddress.addresses[0].country.toLowerCase() !== country.toLowerCase()) {
                                 myErrors.push("Country does not exist. Please double check the country")
                             }
-                            if (recievedAddress.addresses[0].postalCode !== zipcode) {
+                            if (recievedAddress.addresses[0].postalCode && recievedAddress.addresses[0].postalCode !== zipcode) {
                                 myErrors.push("Zip code does not exist. Please double check the zipcode")
                             }
                         if (myErrors.length > 0){
@@ -79,13 +78,16 @@ export default function Address({address, setAddress, setValidated, submitClicke
                         }
                     }
                 }catch(e) {
+                    console.error(e)
                     errors.push("A connection issue has occurred. Please check your internet connection and refresh the page")
+                    setValidated(false)
                     setErrors(myErrors);
                 }
             })()
             //check after the IIFE runs to see if there are any errors
             if (myErrors.length > 0) {
                 setErrors(myErrors);
+                console.error(myErrors)
                 setValidated(false);
             } else {
                 setAddress(`${street}, ${city}, ${state}, ${country}, ${zipcode}`);

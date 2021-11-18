@@ -12,7 +12,6 @@ export default function StudioScheduleAddForm({studioId, edit, setEdit}) {
     const [schedule_name, set_schedule_name] = React.useState('');
     const [schedule_description, set_schedule_description] = React.useState('');
     const [studio_id, set_studio_id] = React.useState(studioId);
-    const [date, setDate] = React.useState('');
     const [week_day, set_week_day] = React.useState('');
     const [start_time, set_start_time] = React.useState('');
     const [end_time, set_end_time] = React.useState('');
@@ -20,7 +19,6 @@ export default function StudioScheduleAddForm({studioId, edit, setEdit}) {
     const [studioScheduleNameValidated, setStudioScheduleNameValidated] = React.useState(false)
     const [weekDayValidated, setWeekDayValidated] = React.useState(false)
     const [timeCompValidated, setTimeCompValidated] = React.useState(false)
-    const [dateValidated, setDateValidated] = React.useState(false);
     const [submitClicked, setSubmitClicked] = React.useState(false)
 
     const dispatch = useDispatch();
@@ -57,13 +55,6 @@ export default function StudioScheduleAddForm({studioId, edit, setEdit}) {
                     setDesc={set_schedule_description}
                     setValidated={setStudioScheduleNameValidated}
                     submitClicked={submitClicked}
-                />
-
-                <DatePicker 
-                    date={date}
-                    setDate={setDate}
-                    submitClicked={submitClicked}
-                    setValidated={setDateValidated}
                 />
 
                 <DayPicker 
