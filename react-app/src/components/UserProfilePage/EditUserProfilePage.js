@@ -6,12 +6,19 @@ import { fetchAllStudiosAction } from '../../store/StudioState';
 import { updateUserAction } from '../../store/UserState';
 import ReactDOM from "react-dom"
 
+import UserName from '../Form/UserName';
+import Email from '../Form/Email';
+import Bio from '../Form/Bio';
+
+
 export default function EditUserProfilePage({edit, setEdit}) {
     const {userId} = useParams()
 
     const user = useSelector(state => state.users[parseInt(userId)])
     const [loaded, setLoaded] = React.useState(false)
     const [errors, setErrors] = React.useState([])
+    const [submitClicked, setSubmitClicked] = React.useState(false)
+    
     const [first_name, set_first_name] = React.useState(user?.first_name);
     const [last_name, set_last_name] = React.useState(user?.last_name);
     const [email, set_email] = React.useState(user?.email);
@@ -19,6 +26,11 @@ export default function EditUserProfilePage({edit, setEdit}) {
     const [martial_art, set_martial_art] = React.useState(user?.martial_art?.id);
     const [rank, set_rank] = React.useState(user?.ranks?.id);
     const [studio, set_studio] = React.useState(parseInt(Object.keys(user?.studio_names)[0]));
+
+    const [usernameValidated, setUsernameValidated] = React.useState(false)
+    const [emailValidated, setEmailValidated] = React.useState(false)
+    const [bioValidated, setBioValidated] = React.useState(false)
+
 
     const martialArts = useSelector(state => state.martialArts)
     const studios = useSelector(state => state.studios);
@@ -28,17 +40,8 @@ export default function EditUserProfilePage({edit, setEdit}) {
 
     function submit(e) {
         e.preventDefault();
-        const errors = [];
-        if (!first_name) {errors.push("Please provide a value to the first name field")};
-        if (!last_name) {errors.push("Please provide a value to the last name field")};
-        if (!email) {errors.push("Please provide a value to the email field")};
-        if (!martial_art) {errors.push("Please provide a value to the password field")};
-        if (!rank) {errors.push("Please provide a value to the rank field")};
-        if (!studio) {errors.push("Please provide a value to the studio field")};
-        if (!bio) {errors.push("Please provide a value to the bio field")}
-        if (errors.length > 0) {
-            setErrors(errors);
-        } else {
+        setSubmitClicked(true);
+        if (usernameValidated && emailValidated && bioValidated) {
             const updatedUserInfo = {
                 first_name,
                 last_name,
@@ -53,7 +56,7 @@ export default function EditUserProfilePage({edit, setEdit}) {
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         (async () => {
             dispatch(fetchAllMartialArtsAction());
             dispatch(fetchAllStudiosAction());
@@ -66,46 +69,56 @@ export default function EditUserProfilePage({edit, setEdit}) {
         <div className={"overlay-styles"}></div>
         <div className={"modal-styles form-container"}>
             <form className={"form"}>
-                <h1>Edit User Profile</h1>
-                {errors.length > 0 &&
-                    <>
-                        <ul>
-                            {errors.map((error, index) => <li key={index}>{error}</li>)}
-                        </ul>
-                    </>
-                }
-                <label>First Name</label>
-                <input className={"form-field"} value={first_name} onChange={e => set_first_name(e.target.value)}></input>
+                <UserName 
+                    firstName={first_name}
+                    lastName={last_name}
+                    setFirstName={set_first_name}
+                    setLastName={set_last_name}
+                    submitClicked={submitClicked}
+                    setValidated={setUsernameValidated}
+                />
+                            
+                <Email 
+                    email={email}
+                    setEmail={set_email}
+                    submitClicked={submitClicked}
+                    setValidated={setEmailValidated}
+                />
 
-                <label>Last Name</label>
-                <input className={"form-field"} value={last_name} onChange={e => set_last_name(e.target.value)}></input>
+                <Bio
+                    bio={bio}
+                    setBio={setBio}
+                    submitClicked={submitClicked} 
+                    setValidated={setBioValidated}
+                />
 
-                <label>Email</label>
-                <input className={"form-field"} type="email" value={email} onChange={e => set_email(e.target.value)}></input>
+                <div className={"fields-container"}>
+                    <div className={"field-container"}>
+                    <label>Martial Art</label>
+                        <select value={martial_art} onChange={e => set_martial_art(e.target.value)}>
+                            <option>Select Martial Art</option>
+                            {Object.values(martialArts).map( art => (<option value={art.id}>{art.name}</option>)
+                            )}
+                        </select>
+                    </div>
 
-                <label>Bio</label>
-                <textarea className={"form-field"} value={bio} onChange={e => setBio(bio => e.target.value)} />
-
-                <label>Martial Art</label>
-                <select value={martial_art} onChange={e => set_martial_art(e.target.value)}>
-                    {Object.values(martialArts).map( art => (<option value={art.id}>{art.name}</option>)
-                    )}
-                </select>
-
-                <label>Rank</label>
-                <select value={rank} onChange={e => set_rank(e.target.value)}>
-                    {martialArts[martial_art]?.ranks?.map(rank => (<option value={rank.id}>{rank.name} Rank number {rank.number}</option>))}
-                </select>
-
-                <label>Studio</label>
-                <select value={studio} onChange={e => set_studio(e.target.value)}>
-                    {Object.values(studios).map(studio => (<option value={studio.id}>{studio.name}</option>))}
-                </select>
-                <div className={"edit-and-delete-button-container"}>
-                    <button onClick={submit}>Save Changes</button>
-                    <button onClick={e => setEdit(!edit)}> Cancel </button>
+                    <div className={"field-container"}>
+                    <label>Rank</label>
+                        <select value={rank} onChange={e => set_rank(e.target.value)}>
+                        <option>Select Rank</option>
+                            {martialArts[martial_art]?.ranks?.map(rank => (<option value={rank.id}>{rank.name}</option>))}
+                        </select>
+                    </div>
                 </div>
-            </form>
+
+                    <label>Studio</label>
+                    <select value={studio} onChange={e => set_studio(e.target.value)}>
+                        <option>Select Studio</option>
+                        {Object.values(studios).map(studio => (<option value={studio.id}>{studio.name}</option>))}
+                    </select>
+                    <button onClick={submit}>Update</button> 
+                    <button onClick={e => setEdit(!edit)}>Cancel</button>
+                </form>
         </div>
         </>,
         document.getElementById("portal")

@@ -10,7 +10,7 @@ import { fetchOneStudioAction } from '../../store/StudioState'
 import StudioClassSchedules from './ScheduleComponents/StudioClassSchedules'
 import StudioEventAddForm from './EventComponents/StudioEventAddForm'
 
-export default function StudioProfilePage({owner, studioSetEdit}) {
+export default function StudioProfilePage({owner}) {
     const [loaded, setLoaded] = React.useState(false);
     const [visibleThing, setVisibleThing] = React.useState(1)
     const {studioId} = useParams();
