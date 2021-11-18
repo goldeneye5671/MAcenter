@@ -6,12 +6,12 @@ export default function MartialArt({martialArt, setMartialArt, martialArts, subm
 
     React.useEffect(
         () => {
-            const errors = [];
-            if (martialArt === null) {
+            const myErrors = [];
+            if (!martialArt) {
                 errors.push("Please select a martial art");
             }
-            if (errors.length > 0) {
-                setErrors(errors);
+            if (myErrors.length > 0) {
+                setErrors(myErrors);
                 setValidated(false);
             } else {
                 setErrors([])
@@ -34,7 +34,7 @@ export default function MartialArt({martialArt, setMartialArt, martialArts, subm
                 )}
             </select>
             {
-                errors.includes("Please select a martail art") && submitClicked ? 
+                errors.includes("Please select a martial art") && submitClicked ? 
                 (
                     <p>
                         Please select a martial art
