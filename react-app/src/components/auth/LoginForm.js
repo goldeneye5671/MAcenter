@@ -39,7 +39,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div class="container">
+    <div className="container">
       <div className={'form-container'}>
       <form className={'form'} onSubmit={onLogin}>
       <h1 className={"form-header"}>Log In</h1>

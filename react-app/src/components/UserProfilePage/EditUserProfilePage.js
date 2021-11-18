@@ -116,7 +116,8 @@ export default function EditUserProfilePage({edit, setEdit}) {
                         <option>Select Studio</option>
                         {Object.values(studios).map(studio => (<option value={studio.id}>{studio.name}</option>))}
                     </select>
-                    <button onClick={submit}>Sign Up</button> 
+                    <button onClick={submit}>Update</button> 
+                    <button onClick={e => setEdit(!edit)}>Cancel</button>
                 </form>
         </div>
         </>,
