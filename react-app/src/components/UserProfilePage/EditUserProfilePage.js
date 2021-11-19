@@ -41,7 +41,6 @@ export default function EditUserProfilePage({edit, setEdit}) {
     const dispatch = useDispatch()
 
     function submit(e) {
-        console.log("clicked", submitClicked)
         e.preventDefault();
         setSubmitClicked(true);
         if (usernameValidated && emailValidated && bioValidated && signUpArtStudioSelectorValidated) {
@@ -57,7 +56,11 @@ export default function EditUserProfilePage({edit, setEdit}) {
             dispatch(updateUserAction(userId, updatedUserInfo))
             setEdit(!edit);
         } else {
-            console.error("There was an error")
+            console.error("There was an error in the edit form");
+            console.log(usernameValidated)
+            console.log(emailValidated)
+            console.log(bioValidated)
+            console.log(signUpArtStudioSelectorValidated)
         }
     }
 

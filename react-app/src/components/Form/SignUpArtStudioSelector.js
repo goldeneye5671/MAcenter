@@ -20,23 +20,33 @@ export default function SignUpArtStudioSelector({
     const [rankValidated, setRankValidated] = React.useState(false);
     const [studioValidated, setStudioValidated] = React.useState(false);
 
-    React.useState(
+    React.useEffect(
         () => {
-            console.log(submitClicked)
             if (
                 martialArtsValidated &&
                 rankValidated &&
                 studioValidated
             ) {
                 setValidated(true);
+                console.log("no error")
             } else {
-                setValidated(false)
+                setValidated(false);
+                console.error("There was an error in Sign Up")
+                console.log(martialArtsValidated)
+                console.log(rankValidated)
+                console.log(studioValidated)
             }
         },
         [
             studio,
             rank,
-            martialArt
+            martialArt,
+            martialArts,
+            studios,
+            martialArtsValidated,
+            studioValidated,
+            rankValidated,
+            setValidated
         ]
     )
 

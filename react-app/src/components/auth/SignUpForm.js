@@ -71,14 +71,7 @@ export default function SignUpForm() {
                 history.push('/')
               } else {
                 setErrors(otherErrs);
-                console.log(otherErrs)
               }
-        } else {
-            console.error("There is an error somewhere")
-            console.log("username", usernameValidated);
-            console.log("password", passwordValidated);
-            console.log("email", emailValidated);
-            console.log("bio", bioValidated)
         }
     }
 

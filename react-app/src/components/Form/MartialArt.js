@@ -36,7 +36,9 @@ export default function MartialArt({martialArt, setMartialArt, martialArts, subm
                 <option value={"null"}>Select Martial Art</option>
                 {
                     martialArts.map( 
-                        art => (<option value={art.id}>{art.name}</option>)
+                        art => {
+                            return (<option value={art.id}>{art.name}</option>)
+                        }
                     )
                 }
             </select>

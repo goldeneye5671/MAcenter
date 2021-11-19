@@ -12,11 +12,9 @@ export default function Rank({martialArts, martialArt, rank, setRank, submitClic
             }
             if (myErrors.length > 0) {
                 setErrors(myErrors);
-                console.log("Errors", myErrors)
                 setValidated(false);
             } else {
                 setErrors([])
-                console.log("Rank", rank)
                 setValidated(true)
             }
         },
@@ -35,7 +33,13 @@ export default function Rank({martialArts, martialArt, rank, setRank, submitClic
             <label>Rank</label>
             <select value={rank} onChange={e => setRank(e.target.value)}>
             <option value={"null"}>Select Rank</option>
-                {martialArts[martialArt]?.ranks?.map(rank => (<option value={rank.id}>{rank.name} Rank number {rank.number}</option>))}
+                {
+                    martialArts[martialArt - 1]?.ranks?.map(
+                        rank => {
+                            return <option value={rank.id}>{rank.name} Rank number {rank.number}</option>
+                        }
+                    )
+                }
             </select>
             {
                 (errors.length > 0 && submitClicked) && 

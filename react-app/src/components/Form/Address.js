@@ -50,8 +50,6 @@ export default function Address({address, setAddress, setValidated, submitClicke
                         )
                         const recievedAddress = await response.json();
 
-                        console.log(recievedAddress)
-
                         if (recievedAddress.addresses.length === 0 || recievedAddress.addresses.length > 1) {
                             myErrors.push("Address is invalid. Please re-enter the address")
 
@@ -80,7 +78,6 @@ export default function Address({address, setAddress, setValidated, submitClicke
                         }
                     }
                 }catch(e) {
-                    console.error(e)
                     errors.push("A connection issue has occurred. Please check your internet connection and refresh the page")
                     setValidated(false)
                     setErrors(myErrors);
@@ -89,7 +86,6 @@ export default function Address({address, setAddress, setValidated, submitClicke
             //check after the IIFE runs to see if there are any errors
             if (myErrors.length > 0) {
                 setErrors(myErrors);
-                console.error(myErrors)
                 setValidated(false);
             } else {
                 setAddress(`${street}, ${city}, ${state}, ${country}, ${zipcode}`);

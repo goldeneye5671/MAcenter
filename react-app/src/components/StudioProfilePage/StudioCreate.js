@@ -55,8 +55,6 @@ export default function StudioCreate() {
             }
             const studioInfo = await dispatch(createStudioAction(newStudio));
             history.push(`/studios/${studioInfo.studio.id}`)
-        } else {
-            console.error("Not all validators were flipped.", nameValidated, emailValidated, phoneValidated, martialArtValidated, bioValidated)
         }
     }
 
