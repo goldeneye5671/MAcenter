@@ -40,7 +40,6 @@ export default function SignUpForm() {
     const [emailValidated, setEmailValidated] = React.useState(false);
     const [passwordValidated, setPasswordValidated] = React.useState(false);
     const [bioValidated, setBioValidated] = React.useState(false);
-    const [artStudioSelector, setArtStudioSelector] = React.useState(false);
 
     const dispatch = useDispatch()
 
@@ -52,7 +51,6 @@ export default function SignUpForm() {
             emailValidated &&
             passwordValidated &&
             bioValidated &&
-
             errors.length === 0
         ) {
             const newUser = {
@@ -60,9 +58,6 @@ export default function SignUpForm() {
                 last_name,
                 email,
                 bio,
-                martial_art_id: martial_art,
-                rank_id: rank,
-                studio_id: studio,
                 password
               }
               // dispatch(updateUserAction(user.id, updatedUserInfo))
@@ -81,7 +76,7 @@ export default function SignUpForm() {
             dispatch(fetchAllStudiosAction())
             setLoaded(true);
 
-        })()
+        })();
     }, [dispatch, errors, loaded])
 
     return (
@@ -132,19 +127,6 @@ export default function SignUpForm() {
                         setBio={setBio}
                         submitClicked={submitClicked} 
                         setValidated={setBioValidated}
-                    />
-
-                    <SignUpArtStudioSelector 
-                        martialArts={martialArts}
-                        studios={studios}
-                        martialArt={martial_art}
-                        studio={studio}
-                        setMartialArt={set_martial_art}
-                        setStudio={set_studio}
-                        setRank={set_rank}
-                        rank={rank}
-                        submitClicked={submitClicked}
-                        setValidated={setArtStudioSelector}
                     />
 
                     <button onClick={submit}>Sign Up</button>

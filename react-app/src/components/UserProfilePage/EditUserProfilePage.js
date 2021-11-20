@@ -24,15 +24,11 @@ export default function EditUserProfilePage({edit, setEdit}) {
     const [last_name, set_last_name] = React.useState(user?.last_name);
     const [email, set_email] = React.useState(user?.email);
     const [bio, setBio] = React.useState(user?.bio);
-    const [martial_art, set_martial_art] = React.useState(user?.martial_art?.id);
-    const [rank, set_rank] = React.useState(user?.ranks?.id);
-    const [studio, set_studio] = React.useState(parseInt(Object.keys(user?.studio_names)[0]));
-
+   
     const [usernameValidated, setUsernameValidated] = React.useState(false)
     const [emailValidated, setEmailValidated] = React.useState(false)
     const [bioValidated, setBioValidated] = React.useState(false)
-    const [signUpArtStudioSelectorValidated, setSignUpStudioSelectorValidated] = React.useState(false);
-
+   
 
     const martialArts = useSelector(state => Object.values(state.martialArts))
     const studios = useSelector(state => Object.values(state.studios));
@@ -43,24 +39,15 @@ export default function EditUserProfilePage({edit, setEdit}) {
     function submit(e) {
         e.preventDefault();
         setSubmitClicked(true);
-        if (usernameValidated && emailValidated && bioValidated && signUpArtStudioSelectorValidated) {
+        if (usernameValidated && emailValidated && bioValidated) {
             const updatedUserInfo = {
                 first_name,
                 last_name,
                 email,
-                bio,
-                martial_art_id: martial_art,
-                rank_id: rank,
-                studio_id: parseInt(studio)
+                bio
             }
             dispatch(updateUserAction(userId, updatedUserInfo))
             setEdit(!edit);
-        } else {
-            console.error("There was an error in the edit form");
-            console.log(usernameValidated)
-            console.log(emailValidated)
-            console.log(bioValidated)
-            console.log(signUpArtStudioSelectorValidated)
         }
     }
 
@@ -98,19 +85,6 @@ export default function EditUserProfilePage({edit, setEdit}) {
                     setBio={setBio}
                     submitClicked={submitClicked} 
                     setValidated={setBioValidated}
-                />
-
-                <SignUpArtStudioSelector
-                    martialArts={martialArts}
-                    studios={studios}
-                    martialArt={martial_art}
-                    studio={studio}
-                    setMartialArt={set_martial_art}
-                    setStudio={set_studio}
-                    setRank={set_rank}
-                    rank={rank}
-                    submitClicked={submitClicked}
-                    setValidated={setSignUpStudioSelectorValidated}
                 />
 
                 <button onClick={submit}>Update</button> 

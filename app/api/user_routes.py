@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User, db, Studio
+from app.models import User, db, Studio, Martial_Art_Rank
 
 user_routes = Blueprint('users', __name__)
 
@@ -28,29 +28,78 @@ def user_profile(id):
         user = User.query.get(id)
         if (user):
             body = request.json
-            studio = Studio.query.get(body.get("studio_id"))
-            if (studio): 
-                user.first_name = body.get("first_name", user.first_name)
-                user.last_name = body.get("last_name", user.last_name)
-                user.email = body.get("email", user.email)
-                user.bio = body.get("bio", user.bio)
-                user.rank_id = body.get("rank_id", user.rank_id)
-                user.martial_art_id = body.get("martial_art_id", user.martial_art_id)
-                # user.studio_id = body.get("studio_id", user.studio_id)
-                user.studios=[studio]
-                db.session.commit()
-                return user.to_dict_with_studios()
-            else:
-                return {}, 404
+            user.first_name = body.get("first_name", user.first_name)
+            user.last_name = body.get("last_name", user.last_name)
+            user.email = body.get("email", user.email)
+            user.bio = body.get("bio", user.bio)
+            db.session.commit()
+            return user.to_dict_with_studios()
         else:
-            return {}
+            return {}, 404
     elif (request.method == "DELETE"):
         user = User.query.get(id)
         if (user):
             db.session.delete(user)
             db.session.commit()
-            return {"delete": "success"}
+            return {"delete": "success"}, 200
         else:
-            return {"delete": "user not found"}
+            return {"delete": "user not found"}, 404
 
-        
+
+@user_routes.route('/<int:id>/followed', methods=["PATCH", "DELETE"])
+def user_follow_unfollow_studio(id):
+    if (request.method == "PATCH"):
+        body = request.json
+        print(body)
+        user = User.query.get(id)
+        studio = Studio.query.get(body['studioId'])
+        if (user and studio):
+            user.studios.append(studio)
+            db.session.commit()
+            return user.to_dict_with_studios()
+        else:
+            if (user):
+                return {"error": "studio cant be found"}, 404
+            else:
+                return {"error": "user cant be found"}, 404
+    elif (request.method == "DELETE"):
+        body = request.json
+        user = User.query.get(id)
+        studio = Studio.query.get(body['studioId'])
+        if (user) :
+            user.studios.remove(studio)
+            db.session.commit()
+            return user.to_dict_with_studios(), 200
+        else:
+            return {"error": "user not found"}, 404
+
+
+@user_routes.route('/<int:id>/ranks', methods=["PATCH", "DELETE"])
+def user_add_remove_rank(id):
+    print("In the route")
+    if (request.method == "PATCH"):
+        print("patch")
+        body = request.json
+        print(body)
+        user = User.query.get(id)
+        rank = Martial_Art_Rank.query.get(body['rankId'])
+        if (user and rank): 
+            user.ranks.append(rank)
+            db.session.commit()
+            return user.to_dict_with_studios()
+        else:
+            if (user):
+                return {"error": "rank cant be found"}, 404
+            else:
+                return {"error": "user cant be found"}, 404
+    elif (request.method == "DELETE"):
+        print("delete")
+        body = request.json
+        user = User.query.get(id)
+        rank = Martial_Art_Rank.query.get(body['rankId'])
+        if (user) :
+            user.ranks.remove(rank)
+            db.session.commit()
+            return user.to_dict_with_studios(), 200
+        else:
+            return {"error": "user cant be found"}, 200

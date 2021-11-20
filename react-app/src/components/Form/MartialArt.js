@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function MartialArt({martialArt, setMartialArt, martialArts, submitClicked, setValidated}) {
+export default function MartialArt({martialArt, setMartialArt, martialArts, submitClicked, setValidated, shown}) {
     
     const [errors, setErrors] = React.useState([]);
 
@@ -8,11 +8,11 @@ export default function MartialArt({martialArt, setMartialArt, martialArts, subm
         () => {
             const myErrors = [];
 
-            
-            if (martialArt === "null") {
-                myErrors.push("Please select a martial art");
+            if (shown) {
+                if (martialArt === "null") {
+                    myErrors.push("Please select a martial art");
+                }
             }
-
             if (myErrors.length > 0) {
                 setErrors(myErrors);
                 setValidated(false);
@@ -25,7 +25,8 @@ export default function MartialArt({martialArt, setMartialArt, martialArts, subm
             martialArt,
             setMartialArt,
             setValidated,
-            submitClicked
+            submitClicked,
+            shown
         ]
     ) 
     

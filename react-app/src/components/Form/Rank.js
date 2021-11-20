@@ -1,15 +1,18 @@
 import React from 'react'
 
-export default function Rank({martialArts, martialArt, rank, setRank, submitClicked, setValidated}) {
+export default function Rank({martialArts, martialArt, rank, setRank, submitClicked, setValidated, shown}) {
     
     const [errors, setErrors] = React.useState([]);
     
     React.useEffect(
         () => {
             const myErrors = [];
-            if (rank === "null") {
-                myErrors.push("Please select a rank")   
+            if (shown) {
+                if (rank === "null") {
+                    myErrors.push("Please select a rank")   
+                }
             }
+
             if (myErrors.length > 0) {
                 setErrors(myErrors);
                 setValidated(false);
@@ -24,7 +27,8 @@ export default function Rank({martialArts, martialArt, rank, setRank, submitClic
             rank,
             setRank,
             submitClicked,
-            setValidated
+            setValidated,
+            shown
         ]
     )
 

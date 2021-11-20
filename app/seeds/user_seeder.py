@@ -10,8 +10,6 @@ def seed_users():
         email = "demo-lition@demo.com",
         hashed_password = generate_password_hash("password"),
         bio = "I like to break things!",
-        rank_id = 1,
-        martial_art_id = 1,
     )
 
     

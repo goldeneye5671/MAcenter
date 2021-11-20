@@ -1,4 +1,5 @@
 from .db import db
+from .rank_joins import rank_joins
 
 class Martial_Art_Rank(db.Model):
     __tablename__ = "martial_art_ranks"
@@ -11,7 +12,7 @@ class Martial_Art_Rank(db.Model):
     martial_art_ranks = db.relationship("Martial_Art", back_populates="ranks")
 
 
-    user = db.relationship("User", back_populates="rank")
+    user = db.relationship("User", secondary=rank_joins, back_populates="ranks")
 
 
     def to_dict(self):

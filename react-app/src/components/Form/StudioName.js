@@ -17,6 +17,8 @@ export default function StudioName({studioName, setStudioName, federationId, set
                 if (federationId.length === 0 || federationId.length >= 12) {
                     errors.push("Studio's federation ID must exist and be between 1 and 12 characters");
                 }
+            } else {
+                setFederationId("");
             }
 
             
@@ -33,7 +35,8 @@ export default function StudioName({studioName, setStudioName, federationId, set
             studioName,
             federationId,
             showFederationId,
-            setValidated
+            setValidated,
+            setFederationId
         ]
     );
 

@@ -1,17 +1,17 @@
 import React from 'react'
 
-export default function Studio({studios, studio, setStudio, submitClicked, setValidated}) {
+export default function Studio({studios, studio, setStudio, submitClicked, setValidated, shown}) {
     
     const [errors, setErrors] = React.useState([]);
     
     React.useEffect(
         () => {
             const myErrors = [];
-
-            if (studio === 'null') {
-                myErrors.push("Please select a studio")
+            if (shown) {
+                if (studio === 'null') {
+                    myErrors.push("Please select a studio")
+                }
             }
-
             if (myErrors.length > 0) {
                 setErrors(myErrors)
                 setValidated(false);
@@ -25,7 +25,8 @@ export default function Studio({studios, studio, setStudio, submitClicked, setVa
             studio,
             setStudio,
             submitClicked,
-            setValidated
+            setValidated,
+            shown
         ]
     )
 
