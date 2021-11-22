@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User, db, Studio, Martial_Art_Rank
+from app.models import User, db, Studio, Martial_Art_Rank, Martial_Art
 
 user_routes = Blueprint('users', __name__)
 
@@ -59,9 +59,9 @@ def user_follow_unfollow_studio(id):
             return user.to_dict_with_studios()
         else:
             if (user):
-                return {"error": "studio cant be found"}, 404
-            else:
                 return {"error": "user cant be found"}, 404
+            else:
+                return {"error": "studio cant be found"}, 404
     elif (request.method == "DELETE"):
         body = request.json
         user = User.query.get(id)
@@ -73,6 +73,35 @@ def user_follow_unfollow_studio(id):
         else:
             return {"error": "user not found"}, 404
 
+
+@user_routes.route('/<int:id>/martial-arts', methods=["PATCH", "DELETE"])
+def user_ma_follow_unfollow(id):
+    if (request.method == "PATCH"):
+        body = request.json
+        user = User.query.get(id)
+        ma = Martial_Art.query.get(body['maid'])
+        if (user and ma):
+            user.martial_arts.append(ma)
+            db.session.commit()
+            return user.to_dict_with_studios()
+        else:
+            if (user):
+                return {"error": "user cant be found"}, 404
+            else:
+                return {"error": "martial art cant be found"}, 404
+    elif (request.method == "DELETE"):
+        body = request.json
+        user = User.query.get(id)
+        ma = Martial_Art.query.get(body['maid'])
+        if (user and ma):
+            user.martial_arts.remove(ma)
+            db.session.commit()
+            return user.to_dict_with_studios()
+        else:
+            if (user):
+                return {"error": "user cant be found"}, 404
+            else:
+                return {"error": "martial art cant be found"}, 404
 
 @user_routes.route('/<int:id>/ranks', methods=["PATCH", "DELETE"])
 def user_add_remove_rank(id):
