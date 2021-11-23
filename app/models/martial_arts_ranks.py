@@ -19,5 +19,6 @@ class Martial_Art_Rank(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'rank_number': self.rank_number
+            'rank_number': self.rank_number,
+            "martial_art_id": self.martial_art_ranks.id
         }

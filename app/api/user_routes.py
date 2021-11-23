@@ -80,55 +80,37 @@ def user_ma_follow_unfollow(id):
         body = request.json
         user = User.query.get(id)
         ma = Martial_Art.query.get(body['maid'])
-        if (user and ma):
+        ma_rank = Martial_Art_Rank.query.get(body['ma_ranks'])
+        if (user and ma and ma_rank):
             user.martial_arts.append(ma)
+            user.ranks.append(ma_rank)
             db.session.commit()
             return user.to_dict_with_studios()
         else:
             if (user):
                 return {"error": "user cant be found"}, 404
-            else:
+            elif (ma):
                 return {"error": "martial art cant be found"}, 404
+            else:
+                return {"error": "rank cant be found"}
     elif (request.method == "DELETE"):
         body = request.json
         user = User.query.get(id)
         ma = Martial_Art.query.get(body['maid'])
+        # ma_rank = Martial_Art_Rank.query.get(body['ma_rank'])
         if (user and ma):
             user.martial_arts.remove(ma)
+            for rank in body['ma_ranks']:
+                rank_to_del = Martial_Art_Rank.query.get(rank)
+                if (rank_to_del) :
+                    user.ranks.remove(rank_to_del)
+                
             db.session.commit()
             return user.to_dict_with_studios()
         else:
             if (user):
                 return {"error": "user cant be found"}, 404
-            else:
+            elif (ma):
                 return {"error": "martial art cant be found"}, 404
-
-@user_routes.route('/<int:id>/ranks', methods=["PATCH", "DELETE"])
-def user_add_remove_rank(id):
-    print("In the route")
-    if (request.method == "PATCH"):
-        print("patch")
-        body = request.json
-        print(body)
-        user = User.query.get(id)
-        rank = Martial_Art_Rank.query.get(body['rankId'])
-        if (user and rank): 
-            user.ranks.append(rank)
-            db.session.commit()
-            return user.to_dict_with_studios()
-        else:
-            if (user):
-                return {"error": "rank cant be found"}, 404
             else:
-                return {"error": "user cant be found"}, 404
-    elif (request.method == "DELETE"):
-        print("delete")
-        body = request.json
-        user = User.query.get(id)
-        rank = Martial_Art_Rank.query.get(body['rankId'])
-        if (user) :
-            user.ranks.remove(rank)
-            db.session.commit()
-            return user.to_dict_with_studios(), 200
-        else:
-            return {"error": "user cant be found"}, 200
+                return {"error": "rank cant be found"}, 404

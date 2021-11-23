@@ -13,8 +13,9 @@ export default function BasicStudioInfo({owner, studio}) {
 
     React.useEffect(
         () => {
-            console.log(followed)
-            dispatch(fetchUserAction(user.id))
+            if (user) {
+                dispatch(fetchUserAction(user.id))
+            }
         }
     )
 
@@ -61,13 +62,16 @@ export default function BasicStudioInfo({owner, studio}) {
                                 <li>Martial Art: {studio?.martial_art?.name}</li>
                             </ul>
                             {
-                                followed ? (
-                                    <button onClick={followAndUnfollow}>unFollow</button>
-                                )
+                                user ? 
+                                    followed ? (
+                                        <button onClick={followAndUnfollow}>unFollow</button>
+                                    )
+                                    :
+                                    (
+                                        <button onClick={followAndUnfollow}> Follow</button>
+                                    )
                                 :
-                                (
-                                    <button onClick={followAndUnfollow}> Follow</button>
-                                )
+                                null
                             }
                         </>
                     )

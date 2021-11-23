@@ -80,6 +80,39 @@ export const unfollowUserAction = (followingInfo, userId) => async(dispatch) => 
     }
 }
 
+export const followUserMartialArtAction = (followingInfo, userId) => async(dispatch) => {
+    const response = await fetch(`/api/users/${userId}/martial-arts`, 
+    {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(followingInfo)
+    });
+
+    if (response.ok) {
+        const updatedUserInfo = await response.json();
+        await dispatch(updateUser(updatedUserInfo));
+    }
+}
+
+export const unfollowUserMartialArtAction = (followingInfo, userId) => async(dispatch) => {
+    console.log("User", userId)
+    const response = await fetch(`/api/users/${userId}/martial-arts`,
+    {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(followingInfo)
+    });
+
+    if (response.ok) {
+        const updatedUserInfo = await response.json();
+        await dispatch(updateUser(updatedUserInfo))
+    }
+}
+
 export const updateUserAction = (userId, user) => async(dispatch) => {
     const response = await fetch(`/api/users/${userId}`,
         {
