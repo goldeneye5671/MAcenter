@@ -2,6 +2,8 @@ from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from .studio_join import studio_joins
+from .martial_arts_joins import martial_art_joins
+from .rank_joins import rank_joins
 
 
 class User(db.Model, UserMixin):
@@ -19,12 +21,9 @@ class User(db.Model, UserMixin):
     
     bio = db.Column(db.Text, nullable=False)
     
-    rank_id = db.Column(db.Integer, db.ForeignKey("martial_art_ranks.id"),nullable=False)
-    rank = db.relationship("Martial_Art_Rank", back_populates="user")
-    
+    ranks = db.relationship("Martial_Art_Rank", secondary=rank_joins, back_populates="user")
 
-    martial_art_id = db.Column(db.Integer, db.ForeignKey("martial_arts.id"), nullable=False)
-    martial_art = db.relationship("Martial_Art", back_populates="user")
+    martial_arts = db.relationship("Martial_Art", secondary=martial_art_joins, back_populates="user")
 
     owned_studio = db.relationship("Studio", back_populates="owner")
 
@@ -53,9 +52,9 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'email': self.email,
             'bio': self.bio,
-            'martial_art': {'id': self.martial_art.to_dict()['id'], 'name': self.martial_art.to_dict()['name']},
-            'ranks': self.rank.to_dict(),
-            'studio_names': {studio.id : studio.to_dict() for studio in self.studios} ,
+            'martial_arts': {martial_art.id: martial_art.to_dict() for martial_art in self.martial_arts},
+            'ranks': {rank.id: rank.to_dict() for rank in self.ranks},
+            'followed_studios': {studio.id : studio.to_dict() for studio in self.studios},
             'photos': [photo.user_photos.to_dict() for photo in self.user_photos]
         }
 
@@ -66,8 +65,8 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'email': self.email,
             'bio': self.bio,
-            'martial_art': {'id': self.martial_art.to_dict()['id'], 'name': self.martial_art.to_dict()['name']},
-            'ranks': self.rank.to_dict(),
+            'martial_arts': {martial_art.id: martial_art.to_dict() for martial_art in self.martial_arts},
+            'ranks': {rank.id: rank.to_dict() for rank in self.ranks},
             # 'studio_names': {studio.id : studio.to_dict() for studio in self.studios} ,
             'photos': [photo.user_photos.to_dict() for photo in self.user_photos]
         }

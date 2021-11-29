@@ -5,6 +5,9 @@ import { useSelector } from 'react-redux'
 export default function MartialArtProfilePage({activeArt}) {
 
     const activeMartialArt = useSelector(state => state?.martialArts[activeArt])
+    const user = useSelector(state => state.session.user)
+    // const [isFollowing, setIsFollowing] = React.useState((user?.martial_arts[activeArt] === undefined));
+    
 
     return (
         <div className="martial-arts-profile-page">

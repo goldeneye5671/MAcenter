@@ -9,6 +9,7 @@ import ReactDOM from "react-dom"
 import UserName from '../Form/UserName';
 import Email from '../Form/Email';
 import Bio from '../Form/Bio';
+import SignUpArtStudioSelector from '../Form/SignUpArtStudioSelector';
 
 
 export default function EditUserProfilePage({edit, setEdit}) {
@@ -23,17 +24,14 @@ export default function EditUserProfilePage({edit, setEdit}) {
     const [last_name, set_last_name] = React.useState(user?.last_name);
     const [email, set_email] = React.useState(user?.email);
     const [bio, setBio] = React.useState(user?.bio);
-    const [martial_art, set_martial_art] = React.useState(user?.martial_art?.id);
-    const [rank, set_rank] = React.useState(user?.ranks?.id);
-    const [studio, set_studio] = React.useState(parseInt(Object.keys(user?.studio_names)[0]));
-
+   
     const [usernameValidated, setUsernameValidated] = React.useState(false)
     const [emailValidated, setEmailValidated] = React.useState(false)
     const [bioValidated, setBioValidated] = React.useState(false)
+   
 
-
-    const martialArts = useSelector(state => state.martialArts)
-    const studios = useSelector(state => state.studios);
+    const martialArts = useSelector(state => Object.values(state.martialArts))
+    const studios = useSelector(state => Object.values(state.studios));
 
 
     const dispatch = useDispatch()
@@ -46,10 +44,7 @@ export default function EditUserProfilePage({edit, setEdit}) {
                 first_name,
                 last_name,
                 email,
-                bio,
-                martial_art_id: martial_art,
-                rank_id: rank,
-                studio_id: parseInt(studio)
+                bio
             }
             dispatch(updateUserAction(userId, updatedUserInfo))
             setEdit(!edit);
@@ -92,33 +87,9 @@ export default function EditUserProfilePage({edit, setEdit}) {
                     setValidated={setBioValidated}
                 />
 
-                <div className={"fields-container"}>
-                    <div className={"field-container"}>
-                    <label>Martial Art</label>
-                        <select value={martial_art} onChange={e => set_martial_art(e.target.value)}>
-                            <option>Select Martial Art</option>
-                            {Object.values(martialArts).map( art => (<option value={art.id}>{art.name}</option>)
-                            )}
-                        </select>
-                    </div>
-
-                    <div className={"field-container"}>
-                    <label>Rank</label>
-                        <select value={rank} onChange={e => set_rank(e.target.value)}>
-                        <option>Select Rank</option>
-                            {martialArts[martial_art]?.ranks?.map(rank => (<option value={rank.id}>{rank.name}</option>))}
-                        </select>
-                    </div>
-                </div>
-
-                    <label>Studio</label>
-                    <select value={studio} onChange={e => set_studio(e.target.value)}>
-                        <option>Select Studio</option>
-                        {Object.values(studios).map(studio => (<option value={studio.id}>{studio.name}</option>))}
-                    </select>
-                    <button onClick={submit}>Update</button> 
-                    <button onClick={e => setEdit(!edit)}>Cancel</button>
-                </form>
+                <button onClick={submit}>Update</button> 
+                <button onClick={e => setEdit(!edit)}>Cancel</button>
+            </form>
         </div>
         </>,
         document.getElementById("portal")

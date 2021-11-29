@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: e4d63d258af0
+Revision ID: e318a5443087
 Revises: 
-Create Date: 2021-11-16 14:59:00.934406
+Create Date: 2021-11-19 13:33:20.213009
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e4d63d258af0'
+revision = 'e318a5443087'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -34,14 +34,6 @@ def upgrade():
     sa.Column('region', sa.String(length=50), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('martial_art_ranks',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=15), nullable=True),
-    sa.Column('rank_number', sa.Integer(), nullable=False),
-    sa.Column('martial_art_rank', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['martial_art_rank'], ['martial_arts.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('first_name', sa.String(length=50), nullable=False),
@@ -49,12 +41,23 @@ def upgrade():
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('bio', sa.Text(), nullable=False),
-    sa.Column('rank_id', sa.Integer(), nullable=False),
-    sa.Column('martial_art_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['martial_art_id'], ['martial_arts.id'], ),
-    sa.ForeignKeyConstraint(['rank_id'], ['martial_art_ranks.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
+    )
+    op.create_table('martial_art_joins',
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('martial_art_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['martial_art_id'], ['martial_arts.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('user_id', 'martial_art_id')
+    )
+    op.create_table('martial_art_ranks',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=15), nullable=True),
+    sa.Column('rank_number', sa.Integer(), nullable=False),
+    sa.Column('martial_art_rank', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['martial_art_rank'], ['martial_arts.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('studios',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -76,6 +79,13 @@ def upgrade():
     sa.Column('photo_url', sa.Text(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('rank_joins',
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('rank_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['rank_id'], ['martial_art_ranks.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('user_id', 'rank_id')
     )
     op.create_table('studio_events',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -135,10 +145,12 @@ def downgrade():
     op.drop_table('studio_photos')
     op.drop_table('studio_joins')
     op.drop_table('studio_events')
+    op.drop_table('rank_joins')
     op.drop_table('user_photos')
     op.drop_table('studios')
-    op.drop_table('users')
     op.drop_table('martial_art_ranks')
+    op.drop_table('martial_art_joins')
+    op.drop_table('users')
     op.drop_table('martial_arts')
     op.drop_table('following_joins')
     # ### end Alembic commands ###

@@ -28,6 +28,7 @@ const removeUser = (userId) => ({
     userId
 });
 
+
 //thunks
 
 export const fetchAllUsersAction = () => async(dispatch) => {
@@ -46,6 +47,72 @@ export const fetchUserAction = (userId) => async(dispatch) => {
     }
 }
 
+export const followUserAction = (followingInfo, userId) => async(dispatch) => {
+    console.log(followingInfo)
+    const response = await fetch(`/api/users/${userId}/followed`,
+        {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(followingInfo)
+        }
+    );
+    if (response.ok) {
+        const updatedUserInfo = await response.json();
+        await dispatch(updateUser(updatedUserInfo))
+    }
+}
+
+export const unfollowUserAction = (followingInfo, userId) => async(dispatch) => {
+    const response = await fetch(`/api/users/${userId}/followed`,
+        {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(followingInfo)
+        }
+    );
+    if (response.ok) {
+        const updatedUserInfo = await response.json();
+        await dispatch(updateUser(updatedUserInfo))
+    }
+}
+
+export const followUserMartialArtAction = (followingInfo, userId) => async(dispatch) => {
+    const response = await fetch(`/api/users/${userId}/martial-arts`, 
+    {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(followingInfo)
+    });
+
+    if (response.ok) {
+        const updatedUserInfo = await response.json();
+        await dispatch(updateUser(updatedUserInfo));
+    }
+}
+
+export const unfollowUserMartialArtAction = (followingInfo, userId) => async(dispatch) => {
+    console.log("User", userId)
+    const response = await fetch(`/api/users/${userId}/martial-arts`,
+    {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(followingInfo)
+    });
+
+    if (response.ok) {
+        const updatedUserInfo = await response.json();
+        await dispatch(updateUser(updatedUserInfo))
+    }
+}
+
 export const updateUserAction = (userId, user) => async(dispatch) => {
     const response = await fetch(`/api/users/${userId}`,
         {
@@ -61,6 +128,8 @@ export const updateUserAction = (userId, user) => async(dispatch) => {
         dispatch(updateUser(updatedUser));
     }
 }
+
+
 
 //reducer
 const initialState = {}

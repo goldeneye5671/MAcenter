@@ -114,6 +114,7 @@ export default function StudioUpdate({studio, edit, setEdit}) {
                 setMartialArt={set_martial_art}
                 martialArts={martialArts}
                 setValidated={setMartialArtValidated}
+                submitClicked={submitClicked}
             />
 
             <button onClick={submit}>Update Studio</button>

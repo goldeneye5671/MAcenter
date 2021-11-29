@@ -9,12 +9,16 @@ import UserName from '../Form/UserName';
 import Password from '../Form/Password';
 import Email from '../Form/Email';
 import Bio from '../Form/Bio';
+import MartialArt from '../Form/MartialArt';
+import Rank from '../Form/Rank';
+import Studio from '../Form/Studio';
+import SignUpArtStudioSelector from '../Form/SignUpArtStudioSelector';
 
 
 
 export default function SignUpForm() {
-    const martialArts = useSelector(state => state.martialArts)
-    const studios = useSelector(state => state.studios);
+    const martialArts = useSelector(state => Object.values(state.martialArts));
+    const studios = useSelector(state => Object.values(state.studios));
 
     const history = useHistory()
 
@@ -26,32 +30,34 @@ export default function SignUpForm() {
     const [last_name, set_last_name] = React.useState('');
     const [email, set_email] = React.useState('');
     const [bio, setBio] = React.useState('');
-    const [martial_art, set_martial_art] = React.useState();
-    const [rank, set_rank] = React.useState();
-    const [studio, set_studio] = React.useState();
+    const [martial_art, set_martial_art] = React.useState("null");
+    const [rank, set_rank] = React.useState("null");
+    const [studio, set_studio] = React.useState("null");
     const [password, set_password] = React.useState('');
     const [verify_password, set_verify_password] = React.useState('');
 
-    const [usernameValidated, setUsernameValidated] = React.useState(false)
-    const [emailValidated, setEmailValidated] = React.useState(false)
-    const [passwordValidated, setPasswordValidated] = React.useState(false)
-    const [bioValidated, setBioValidated] = React.useState(false)
+    const [usernameValidated, setUsernameValidated] = React.useState(false);
+    const [emailValidated, setEmailValidated] = React.useState(false);
+    const [passwordValidated, setPasswordValidated] = React.useState(false);
+    const [bioValidated, setBioValidated] = React.useState(false);
 
     const dispatch = useDispatch()
 
     async function submit(e) {
         e.preventDefault();
         setSubmitClicked(true);
-        
-        if (usernameValidated && emailValidated && passwordValidated && bioValidated && errors.length === 0) {
+        if (
+            usernameValidated &&
+            emailValidated &&
+            passwordValidated &&
+            bioValidated &&
+            errors.length === 0
+        ) {
             const newUser = {
                 first_name,
                 last_name,
                 email,
                 bio,
-                martial_art_id: martial_art,
-                rank_id: rank,
-                studio_id: studio,
                 password
               }
               // dispatch(updateUserAction(user.id, updatedUserInfo))
@@ -60,14 +66,7 @@ export default function SignUpForm() {
                 history.push('/')
               } else {
                 setErrors(otherErrs);
-                console.log(otherErrs)
               }
-        } else {
-            console.error("There is an error somewhere")
-            console.log("username", usernameValidated);
-            console.log("password", passwordValidated);
-            console.log("email", emailValidated);
-            console.log("bio", bioValidated)
         }
     }
 
@@ -77,7 +76,7 @@ export default function SignUpForm() {
             dispatch(fetchAllStudiosAction())
             setLoaded(true);
 
-        })()
+        })();
     }, [dispatch, errors, loaded])
 
     return (
@@ -130,29 +129,6 @@ export default function SignUpForm() {
                         setValidated={setBioValidated}
                     />
 
-                    <div className={"fields-container"}>
-                        <div className={"field-container"}>
-                        <label>Martial Art</label>
-                            <select value={martial_art} onChange={e => set_martial_art(e.target.value)}>
-                                <option>Select Martial Art</option>
-                                {Object.values(martialArts).map( art => (<option value={art.id}>{art.name}</option>)
-                                )}
-                            </select>
-                        </div>
-                        <div className={"field-container"}>
-                        <label>Rank</label>
-                            <select value={rank} onChange={e => set_rank(e.target.value)}>
-                            <option>Select Rank</option>
-                                {martialArts[martial_art]?.ranks?.map(rank => (<option value={rank.id}>{rank.name} Rank number {rank.number}</option>))}
-                            </select>
-                        </div>
-                    </div>
-
-                    <label>Studio</label>
-                    <select value={studio} onChange={e => set_studio(e.target.value)}>
-                        <option>Select Studio</option>
-                        {Object.values(studios).map(studio => (<option value={studio.id}>{studio.name}</option>))}
-                    </select>
                     <button onClick={submit}>Sign Up</button>
                 </form>
                 </div>
