@@ -20,7 +20,7 @@ export default function BasicStudioInfo({owner, studio}) {
     )
 
     function followAndUnfollow(){
-        console.log(followed)
+
         const followingInfo = {
             studioId: studio.id
         }

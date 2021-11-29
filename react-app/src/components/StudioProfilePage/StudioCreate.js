@@ -28,7 +28,7 @@ export default function StudioCreate() {
     const [phone_contact, set_phone_contact] = React.useState('');
     const [email_contact, set_email_contact] = React.useState('');
     const [studio_bio, set_studio_bio] = React.useState('');
-    const [martial_art, set_martial_art] = React.useState("0");
+    const [martial_art, set_martial_art] = React.useState("null");
     const [owner_id, set_owner_id] = React.useState(session.id);
 
     const [nameValidated, setNameValidated] = React.useState(false)
@@ -113,6 +113,7 @@ export default function StudioCreate() {
                 setMartialArt={set_martial_art}
                 martialArts={martialArts}
                 setValidated={setMartialArtValidated}
+                submitClicked={submitClicked}
             />
 
             <button onClick={submit}>Create Studio</button>

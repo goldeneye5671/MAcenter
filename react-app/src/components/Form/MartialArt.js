@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function MartialArt({martialArt, setMartialArt, martialArts, submitClicked, setValidated, shown}) {
+export default function MartialArt({martialArt, setMartialArt, martialArts, submitClicked, setValidated}) {
     
     const [errors, setErrors] = React.useState([]);
 
@@ -8,11 +8,10 @@ export default function MartialArt({martialArt, setMartialArt, martialArts, subm
         () => {
             const myErrors = [];
 
-            if (shown) {
-                if (martialArt === "null") {
-                    myErrors.push("Please select a martial art");
-                }
+            if (martialArt === "null") {
+                myErrors.push("Please select a martial art");
             }
+
             if (myErrors.length > 0) {
                 setErrors(myErrors);
                 setValidated(false);
@@ -20,13 +19,13 @@ export default function MartialArt({martialArt, setMartialArt, martialArts, subm
                 setErrors([])
                 setValidated(true);
             }
+            console.log("myerrors: ", myErrors)
         },
         [
             martialArt,
             setMartialArt,
             setValidated,
             submitClicked,
-            shown
         ]
     ) 
     
@@ -45,13 +44,14 @@ export default function MartialArt({martialArt, setMartialArt, martialArts, subm
             </select>
             {
                 errors.length > 0 && submitClicked ? 
-                    errors.map(
-                        error => {
+                errors.map(
+                    error => {
+                            console.log("in errors")
                             return <p>{error}</p>
                         }
                     )
                 :
-                null
+                console.log("Outside Errors: ", errors.length, submitClicked)
             }
 
         </div>
