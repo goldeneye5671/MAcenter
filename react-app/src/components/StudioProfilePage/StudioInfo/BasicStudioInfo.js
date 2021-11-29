@@ -26,11 +26,9 @@ export default function BasicStudioInfo({owner, studio}) {
         }
         if (followed) {
             dispatch(unfollowUserAction(followingInfo, user.id))
-            console.log("unfollowed clicked")
             setFollowed(false)
         } else {
             dispatch(followUserAction(followingInfo, user.id))
-            console.log("Followed Clicked")
             setFollowed(true)
         }
     }

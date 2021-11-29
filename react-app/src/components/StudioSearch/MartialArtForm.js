@@ -16,14 +16,12 @@ export default function MartialArtForm({user, martialArt, setIsEdit}) {
     function submit (e) {
         e.preventDefault()
         setSubmitClicked(true);
-        console.log("clicked")
         if (validated) {
             //will change the rank to whatever the rank is
             const followingInfo = {
                 ma_ranks: rank,
                 maid: martialArt.id
             }
-            console.log("User id:", user.id)
             dispatch(followUserMartialArtAction(followingInfo, user.id))
             setIsEdit(false);
         }
@@ -34,9 +32,6 @@ export default function MartialArtForm({user, martialArt, setIsEdit}) {
             const myErrors = []
             if (rank === "null") {
                 myErrors.push("Please select a rank")
-                console.log("There are errors")
-            } else {
-               console.log("There should be no errors") 
             }
 
             if (myErrors.length > 0) {

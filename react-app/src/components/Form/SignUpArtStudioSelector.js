@@ -47,20 +47,17 @@ export default function SignUpArtStudioSelector({
                 // no validators are checked and setValidated is true
                 if (showMartialArt && showStudio) {
                     if (martialArtsValidated && rankValidated && studioValidated) {
-                        console.log("both showMartialart and showStudio are true")
                         setValidated(true);
                     } else {
                         setValidated(false);
                     }
                 } else if (showMartialArt && !showStudio) {
                     if (martialArtsValidated) {
-                        console.log("Only showMartialArt is true")
                         setValidated(true);
                     } else {
                         setValidated(false);
                     }
                 } else if (!showMartialArt && !showStudio) {
-                    console.log("All show are false")
                     // setStudio("null");
                     // setMartialArt("null");
                     // setRank("null")

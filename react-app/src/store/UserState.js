@@ -48,7 +48,6 @@ export const fetchUserAction = (userId) => async(dispatch) => {
 }
 
 export const followUserAction = (followingInfo, userId) => async(dispatch) => {
-    console.log(followingInfo)
     const response = await fetch(`/api/users/${userId}/followed`,
         {
             method: "PATCH",
@@ -97,7 +96,6 @@ export const followUserMartialArtAction = (followingInfo, userId) => async(dispa
 }
 
 export const unfollowUserMartialArtAction = (followingInfo, userId) => async(dispatch) => {
-    console.log("User", userId)
     const response = await fetch(`/api/users/${userId}/martial-arts`,
     {
         method: "DELETE",

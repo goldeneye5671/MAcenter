@@ -19,7 +19,6 @@ export default function MartialArt({martialArt, setMartialArt, martialArts, subm
                 setErrors([])
                 setValidated(true);
             }
-            console.log("myerrors: ", myErrors)
         },
         [
             martialArt,
@@ -46,12 +45,11 @@ export default function MartialArt({martialArt, setMartialArt, martialArts, subm
                 errors.length > 0 && submitClicked ? 
                 errors.map(
                     error => {
-                            console.log("in errors")
                             return <p>{error}</p>
                         }
                     )
                 :
-                console.log("Outside Errors: ", errors.length, submitClicked)
+                null
             }
 
         </div>
