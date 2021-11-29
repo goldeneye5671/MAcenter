@@ -6,11 +6,11 @@ export default function Password({single, password, setPassword, verifyPassword,
 
     React.useEffect(
         () => {
-            const passwordRegex = /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/g;
+            const passwordRegex = /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*?_-]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/g;
             const errors = [];
             if (!single) {
                 if (!password.match(passwordRegex)){
-                    errors.push("Password not secure enough.\nMust contain at least one of the following:\nan uppercase letter\nlowercase letters\na number\na special character");
+                    errors.push("Password not secure enough.\nMust contain at least one of each of the following:\nan uppercase letter\nlowercase letters\na number\na special character");
                 }
 
                 if (password !== verifyPassword) {
