@@ -31,4 +31,4 @@ psycopg2 = "*"
 psycopg2-binary = "==2.8.6"
 
 [requires]
-python_version = "3.9"
+python_version = "3.9.7"
